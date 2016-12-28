@@ -1,0 +1,130 @@
+call plug#begin('~/.vim/plugged')
+
+Plug 'pangloss/vim-javascript'
+
+Plug 'chiel92/vim-autoformat'
+
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'rip-rip/clang_complete'
+
+Plug 'ap/vim-css-color'
+
+Plug 'c.vim'
+
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+Plug 'https://github.com/Yggdroot/indentLine.git'
+
+Plug 'https://github.com/scrooloose/nerdtree.git'
+
+Plug 'https://github.com/scrooloose/syntastic.git'
+
+Plug 'klen/python-mode'
+
+Plug 'marijnh/tern_for_vim'
+
+Plug 'chriskempson/base16-vim'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'shougo/neocomplete.vim'
+
+Plug 'vimwiki/vimwiki'
+
+cal plug#end()
+
+" Completion ar startup
+let g:neocomplete#enable_at_startup = 1
+
+" Set good line number
+set nu
+set relativenumber
+
+"syntax enable
+let base16colorspace=256
+set t_Co=256
+"set background=dark
+
+" Color scheme
+colorscheme base16-default-dark
+
+"let g:airline#extensions#tabline#enabled=1
+let g:airline1extensionstabline#left_sep = ' '
+let g:airline1extensionstabline#left_alt_sep = '|'
+set laststatus=2
+
+set tabstop=4 shiftwidth=4 expandtab
+set clipboard=unnamed,unnamedplus
+
+set nowrap
+
+"set changing mode fast
+set ttimeoutlen=0
+
+" Enable CursorLine
+"set cursorline
+
+" Default Colors for CursorLine
+"highlight  CursorLine ctermbg=None ctermfg=None cterm=None
+
+" Change Color when entering Insert Mode
+"autocmd InsertEnter * highlight  CursorLine ctermbg=None cterm=underline ctermfg=None
+"autocmd InsertEnter * highlight  CursorLine ctermbg=None cterm=underline ctermfg=None
+
+" Revert Color to default when leaving Insert Mode
+"autocmd InsertLeave * highlight  CursorLine ctermbg=None ctermfg=None cterm=None
+
+" for command mode
+nnoremap <S-Tab> <<
+
+" for insert mode
+nnoremap <S-Tab> <C-d>
+
+" python disable folding
+let g:pymode_folding = 0
+
+" colorize cusor for marching parenthesiss
+hi MatchParen cterm=none ctermbg=green ctermfg=blue
+
+" vimwiki
+set nocompatible
+filetype plugin on
+syntax on
+"let g:vimwiki_list = [{'auto_export': 1}]
+
+" Global Clipboard
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ neocomplete#start_manual_complete()
+  function! s:check_back_space() "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction"}}}
+
+let &t_SI = "\<Esc>]12;orange\x7"
+let &t_SR = "\<Esc>]12;white\x7"
+let &t_EI = "\<Esc>]12;white\x7"
+
+" Default setting for syntastic 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Default setting for syntastic 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

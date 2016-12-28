@@ -1,0 +1,16 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+
+# All new Path
+
+#PATH=~/Documents/Programs/nodejs/bin:$PATH
+PATH=~/Documents/Programs/anaconda3/bin:$PATH
+PATH=~/Documents/Programs/apache-maven-3.3.9/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre/
+export TERM=xterm-256color
+# Color theme for termina
+source "/home/nathaniel/Documents/Programs/terminal/base16-shell/scripts/base16-google-dark.sh"
+zsh
