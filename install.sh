@@ -1,3 +1,6 @@
-ln -s ./bash/bashrc ~/.bashrc
-ln -s ./tmux/.tmux.conf ~/.tmux.conf
-ln -s ./vim/vimrc ~/.vimrc
+rm ~/.bashrc
+rm ~/.tmux.conf
+rm ~/.vimrc
+ln -s ~/Documents/Github/Config/bash/bashrc ~/.bashrc
+ln -s ~/Documents/Github/Config/tmux/tmux.conf ~/.tmux.conf
+ln -s ~/Documents/Github/Config/vim/vimrc ~/.vimrc
