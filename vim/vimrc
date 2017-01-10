@@ -58,6 +58,10 @@ let g:airline1extensionstabline#left_sep = ' '
 let g:airline1extensionstabline#left_alt_sep = '|'
 set laststatus=2
 
+
+"C++ clang-rename
+noremap <leader>cr :pyf ~/Documents/Github/Config/vim/clang-rename.py<cr>
+
 set tabstop=4 shiftwidth=4 expandtab
 set clipboard=unnamed,unnamedplus
 
