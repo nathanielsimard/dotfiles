@@ -1,6 +1,7 @@
 
+
 '''
-Minimal clang-rename integration with Vim.
+hinimal clang-rename integration with Vim.
 
 Before installing make sure one of the following is satisfied:
 
