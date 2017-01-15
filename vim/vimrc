@@ -48,7 +48,7 @@ nnoremap <leader>l o<Esc>
 " Add empty line above
 nnoremap <leader>L O<Esc> 
 " Change word with paste
-nnoremap <leader>cp bhpldehyiw
+nnoremap <leader>cp viwpyiw
 " For windows
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>wh <C-w>h
