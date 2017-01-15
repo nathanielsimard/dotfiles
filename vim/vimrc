@@ -41,6 +41,12 @@ cal plug#end()
 " Completion ar startup
 let g:neocomplete#enable_at_startup = 1
 
+"GVIM
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+set guicursor+=n-v-c:blinkon0
+
 " Set good line number
 set nu
 set relativenumber
@@ -51,7 +57,7 @@ set t_Co=256
 "set background=dark
 
 " Color scheme
-colorscheme base16-default-dark
+colorscheme base16-brewer
 
 "let g:airline#extensions#tabline#enabled=1
 let g:airline1extensionstabline#left_sep = ' '
