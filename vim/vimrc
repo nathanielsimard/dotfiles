@@ -38,9 +38,6 @@ Plug 'vimwiki/vimwiki'
 
 cal plug#end()
 
-" Completion ar startup
-let g:neocomplete#enable_at_startup = 1
-
 " Remap Leater
 let mapleader = " "
 " Add empty line bellow
@@ -65,6 +62,11 @@ nnoremap <leader>wrl :vertical resize +5<Enter>
 nnoremap <leader>wrh :vertical resize -5<Enter>
 nnoremap <leader>wr<Right> :vertical resize +5<Enter>
 nnoremap <leader>wr<Left> :vertical resize -5<Enter>
+nnoremap <leader>wml <C-w>L 
+nnoremap <leader>wm<Right> <C-w>L
+"toggleMenuBar
+nnoremap <leader>mbo :set guioptions+=m<Enter>
+nnoremap <leader>mbf :set guioptions-=m<Enter>
 " NERDTree
 nnoremap <leader>nt :NERDTree<Enter>
 " Rename Python Mode
@@ -74,11 +76,12 @@ let g:pymode_rope_rename_module_bind = '<leader>pmr'
 noremap <leader>crr :pyf ~/Documents/Github/Config/vim/clang-rename.py<cr>
 
 "GVIM
+set guioptions-=m  "remove menubar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guicursor+=n-v-c:blinkon0
-
+set guifont=Source\ Code\ Pro\ 11
 " Set good line number
 set nu
 set relativenumber
