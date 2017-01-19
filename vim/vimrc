@@ -56,6 +56,7 @@ nnoremap <leader>w<Right> <C-w>l
 nnoremap <leader>w<Down> <C-w>j
 nnoremap <leader>w<Up> <C-w>k
 nnoremap <leader>wv <C-w>v
+nnoremap <leader>wb <C-w>S
 nnoremap <leader>wq :q<Enter>
 nnoremap <leader>sq :wq<Enter>
 nnoremap <leader>wrl :vertical resize +5<Enter>
@@ -69,9 +70,14 @@ nnoremap <leader>mbo :set guioptions+=m<Enter>
 nnoremap <leader>mbf :set guioptions-=m<Enter>
 " NERDTree
 nnoremap <leader>nt :NERDTree<Enter>
+let NERDTreeShowHidden=1
 " Rename Python Mode
 let g:pymode_rope_rename_bind = '<leader>pr'
 let g:pymode_rope_rename_module_bind = '<leader>pmr'
+let g:pymode_rope_goto_definition_bind = '<leader>pg'
+let g:pymode_python = 'python3'
+let g:pymode_rope_completion=0
+nnoremap <leader>pf :PymodeLintAuto<Enter>
 "C++ clang-rename
 noremap <leader>crr :pyf ~/Documents/Github/Config/vim/clang-rename.py<cr>
 
@@ -92,7 +98,7 @@ set t_Co=256
 "set background=dark
 
 " Color scheme
-colorscheme base16-brewer
+colorscheme base16-default-dark
 
 "let g:airline#extensions#tabline#enabled=1
 let g:airline1extensionstabline#left_sep = ' '
@@ -117,7 +123,7 @@ nnoremap <S-Tab> <C-d>
 
 " python disable folding
 let g:pymode_folding = 0
-let g:pymode_options_max_line_length = 160
+let g:pymode_options_max_line_length = 120
 
 " colorize cusor for marching parenthesiss
 hi MatchParen cterm=none ctermbg=green ctermfg=blue
