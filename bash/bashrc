@@ -8,7 +8,8 @@
 
 #PATH=~/Documents/Programs/nodejs/bin:$PATH
 #PATH=~/Documents/Programs/anaconda3/bin:$PATH
-PATH=~/Documents/Programs/apache-maven-3.3.9/bin:$PATH
+PATH=~/go/bin/gocode:$PATH
+export GOPATH=~/go
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre/
 export TERM=xterm-256color
 export CC=/usr/bin/gcc-5

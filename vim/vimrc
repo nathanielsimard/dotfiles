@@ -1,5 +1,17 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'davidhalter/jedi-vim'
+
+Plug 'morhetz/gruvbox'
+
+Plug 'tlhr/anderson.vim'
+
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'fatih/vim-go'
+
+Plug 'lervag/vimtex'
+
 Plug 'maksimr/vim-jsbeautify'
 
 Plug 'othree/html5.vim'
@@ -22,19 +34,13 @@ Plug 'https://github.com/scrooloose/nerdtree.git'
 
 Plug 'https://github.com/scrooloose/syntastic.git'
 
-Plug 'klen/python-mode'
-
 Plug 'marijnh/tern_for_vim'
 
 Plug 'chriskempson/base16-vim'
 
 Plug 'vim-airline/vim-airline'
 
-Plug 'vim-airline/vim-airline-themes'
-
 Plug 'Valloric/YouCompleteMe'
-
-Plug 'vimwiki/vimwiki'
 
 cal plug#end()
 
@@ -46,6 +52,7 @@ nnoremap <leader>l o<Esc>
 nnoremap <leader>L O<Esc> 
 " Change word with paste
 nnoremap <leader>cp viwpyiw
+
 " For windows
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>wh <C-w>h
@@ -65,19 +72,17 @@ nnoremap <leader>wr<Right> :vertical resize +5<Enter>
 nnoremap <leader>wr<Left> :vertical resize -5<Enter>
 nnoremap <leader>wml <C-w>L 
 nnoremap <leader>wm<Right> <C-w>L
-"toggleMenuBar
-nnoremap <leader>mbo :set guioptions+=m<Enter>
-nnoremap <leader>mbf :set guioptions-=m<Enter>
+nnoremap <leader>ww :bnext<Enter>
 " NERDTree
-nnoremap <leader>nt :NERDTree<Enter>
-let NERDTreeShowHidden=1
-" Rename Python Mode
-let g:pymode_rope_rename_bind = '<leader>pr'
-let g:pymode_rope_rename_module_bind = '<leader>pmr'
-let g:pymode_rope_goto_definition_bind = '<leader>pg'
-let g:pymode_python = 'python3'
-let g:pymode_rope_completion=0
-nnoremap <leader>pf :PymodeLintAuto<Enter>
+nnoremap <leader>nt :NERDTreeToggle<Enter>
+let g:jedi#goto_command = "<leader>pg"
+let g:jedi#goto_definitions_command = "<leader>pg"
+let g:jedi#documentation_command = "pd"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>pr"
+let g:jedi#force_py_version = 3
+
 "C++ clang-rename
 noremap <leader>crr :pyf ~/Documents/Github/Config/vim/clang-rename.py<cr>
 
@@ -87,7 +92,7 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guicursor+=n-v-c:blinkon0
-set guifont=Source\ Code\ Pro\ 11
+set guifont=Source\ Code\ Pro\ 10
 " Set good line number
 set nu
 set relativenumber
@@ -95,15 +100,16 @@ set relativenumber
 "syntax enable
 let base16colorspace=256
 set t_Co=256
-"set background=dark
 
 " Color scheme
-colorscheme base16-default-dark
+colorscheme gruvbox
+"let g:gruvbox_contrast_dark='hard'
+set background=dark  
 
 "let g:airline#extensions#tabline#enabled=1
-let g:airline1extensionstabline#left_sep = ' '
-let g:airline1extensionstabline#left_alt_sep = '|'
-set laststatus=2
+"#let g:airline1extensionstabline#left_sep = ' '
+"let g:airline1extensionstabline#left_alt_sep = '|'
+"set laststatus=2
 
 
 
@@ -121,12 +127,11 @@ nnoremap <S-Tab> <<
 " for insert mode
 nnoremap <S-Tab> <C-d>
 
-" python disable folding
-let g:pymode_folding = 0
-let g:pymode_options_max_line_length = 120
-
 " colorize cusor for marching parenthesiss
 hi MatchParen cterm=none ctermbg=green ctermfg=blue
+
+" Golang go
+let g:syntastic_go_checkers = ['go']
 
 " vimwiki
 set nocompatible

@@ -16,3 +16,6 @@
 # R0913 Too many arguments
 # R0904 Too many public methods
 disable=C0111
+[TYPECHECK]
+ignored-modules=cv2
+ignored-classes=cv2
