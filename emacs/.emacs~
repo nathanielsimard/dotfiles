@@ -177,7 +177,7 @@
     ("d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "5a39d2a29906ab273f7900a2ae843e9aa29ed5d205873e1199af4c9ec921aaab" default)))
  '(package-selected-packages
    (quote
-    (company-quickhelp noctilux-theme jbeans-theme blackboard-theme spaceline base16-theme neotree auto-complete powerline linum-relative use-package clues-theme))))
+    ("use-package" company-quickhelp noctilux-theme jbeans-theme blackboard-theme spaceline base16-theme neotree auto-complete powerline linum-relative use-package clues-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
