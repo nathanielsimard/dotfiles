@@ -17,14 +17,15 @@
 
 
 ;; Basic configuration files
-(load-file "~/Documents/projects/Config/emacs/utils/ui.el")
-(load-file "~/Documents/projects/Config/emacs/utils/evil.el")
-(load-file "~/Documents/projects/Config/emacs/utils/buffers.el")
-(load-file "~/Documents/projects/Config/emacs/utils/windows.el")
-(load-file "~/Documents/projects/Config/emacs/utils/autocomplete.el")
+(load-file "~/.emacs.d/utils/ui.el")
+(load-file "~/.emacs.d/utils/general.el")
+(load-file "~/.emacs.d/utils/evil.el")
+(load-file "~/.emacs.d/utils/buffers.el")
+(load-file "~/.emacs.d/utils/windows.el")
+(load-file "~/.emacs.d/utils/autocomplete.el")
 
 ;; Lang configuration files
-(load-file "~/Documents/projects/Config/emacs/lang/javascript.el")
+(load-file "~/.emacs.d/lang/javascript.el")
 
 ;;; init.el ends here
 (custom-set-variables
