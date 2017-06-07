@@ -18,8 +18,8 @@
 
 ;; Basic configuration files
 (load-file "~/.emacs.d/utils/ui.el")
-(load-file "~/.emacs.d/utils/general.el")
 (load-file "~/.emacs.d/utils/evil.el")
+(load-file "~/.emacs.d/utils/general.el")
 (load-file "~/.emacs.d/utils/buffers.el")
 (load-file "~/.emacs.d/utils/windows.el")
 (load-file "~/.emacs.d/utils/autocomplete.el")

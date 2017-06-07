@@ -5,13 +5,8 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(setq truncate-partial-width-windows t)
-(set-language-environment "UTF-8")
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-(setq tab-width 2)
 (setq scroll-conservatively 10000)
-(set-default-font "monospace 11")
+(add-to-list 'default-frame-alist '(font . "Source Code Pro-12"))
 
 (use-package linum
   :ensure t
@@ -33,6 +28,14 @@
   :demand t
 	:config
 	(dashboard-setup-startup-hook))
+
+(use-package highlight-indent-guides
+  :ensure t
+  :demand t
+  :init
+  (setq highlight-indent-guides-method 'character)
+  :config
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 
 (use-package powerline
   :ensure t
