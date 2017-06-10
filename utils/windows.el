@@ -8,7 +8,6 @@
 	"w q" 'evil-quit
 	"w j" 'windmove-down
 	"w k" 'windmove-up
-	"b b" 'buffer-menu
 	"w v" 'split-window-right
 	"w b" 'split-window-below)
 

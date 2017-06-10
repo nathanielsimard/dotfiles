@@ -48,7 +48,7 @@
                              (company-mode))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; This section use packages that are already loaded
+;; This section uses packages that are already loaded
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flycheck
@@ -63,7 +63,7 @@
   :config
   (add-hook 'js2-mode-hook (lambda ()
                              (let (messages-buffer)
-                               (message "Loading company-tern"))
+                               (message "Loading javascript keybindings"))
                              (evil-leader/set-key
                                "g" 'tern-find-definition
                                "r" 'tern-rename-variable

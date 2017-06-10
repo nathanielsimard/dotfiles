@@ -26,6 +26,7 @@
 
 ;; Lang configuration files
 (load-file "~/.emacs.d/lang/javascript.el")
+(load-file "~/.emacs.d/lang/c-c++.el")
 
 ;;; init.el ends here
 (custom-set-variables
@@ -35,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (use-package tern-auto-complete spaceline noctilux-theme neotree linum-relative js2-refactor jbeans-theme imenu-anywhere font-utils flycheck evil-leader dashboard darkmine-theme company-tern company-quickhelp clues-theme blackboard-theme base16-theme ample-theme all-the-icons))))
+    (helm company-rtags rtags cmake-ide use-package tern-auto-complete spaceline noctilux-theme neotree linum-relative js2-refactor jbeans-theme imenu-anywhere font-utils flycheck evil-leader dashboard darkmine-theme company-tern company-quickhelp clues-theme blackboard-theme base16-theme ample-theme all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

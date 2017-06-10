@@ -13,14 +13,13 @@
   :demand t
   :config
   (linum-mode t)
-  (linum-on))
+  (add-hook 'prog-mode-hook 'linum-on))
 
 (use-package linum-relative
   :ensure t
   :demand t
 	:config
 	(linum-relative-on)
-	(global-linum-mode t)
 	(column-number-mode t))
 
 (use-package dashboard

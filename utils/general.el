@@ -32,4 +32,17 @@
     "t n" 'multi-term
     "t t" 'such-emacs/term-toggle))
 
+(use-package helm
+  :init
+  (setq helm-split-window-in-side-p t)
+  :config
+  (helm-mode))
+
+(use-package evil-leader
+  :after helm
+  :config
+  (evil-leader/set-key
+    "b b" 'helm-mini))
+
+
 ;;; general.el ends here
