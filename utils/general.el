@@ -36,12 +36,24 @@
   :init
   (setq helm-split-window-in-side-p t)
   :config
+  (defun spacemacs//hide-cursor-in-helm-buffer ()
+    "Hide the cursor in helm buffers."
+    (with-helm-buffer
+      (setq cursor-in-non-selected-windows nil)))
+  (add-hook 'helm-after-initialize-hook 'spacemacs//hide-cursor-in-helm-buffer)
+  (define-key helm-map (kbd "M-j") 'helm-next-line)
+  (define-key helm-map (kbd "M-k") 'helm-previous-line)
+  (define-key helm-map (kbd "M-h") 'helm-next-source)
+  (define-key helm-map (kbd "M-S-h") 'describe-key)
+  (define-key helm-map (kbd "M-l") (kbd "RET"))
+  (define-key helm-map [escape] 'helm-keyboard-quit)
   (helm-mode))
 
 (use-package evil-leader
   :after helm
   :config
   (evil-leader/set-key
+    "b f" 'helm-find-files
     "b b" 'helm-mini))
 
 
