@@ -8,8 +8,8 @@
 (setq-default message-log-max 10)
 (setq-default truncate-lines t)
 (setq truncate-partial-width-windows t)
-(setq-default tab-width 2)
-(setq tab-width 2)
+(setq-default tab-width 4)
+(setq tab-width 4)
 (setq-default indent-tabs-mode nil)
 
 (use-package flycheck

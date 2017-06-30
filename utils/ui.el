@@ -40,16 +40,41 @@
   :ensure t
   :demand t
   :init
-  (setq powerline-height 20)
+  (setq powerline-height 16)
   (setq powerline-default-separator 'utf-8)
   :config
-  (require 'spaceline-config)
-  (spaceline-spacemacs-theme))
+  (powerline-center-evil-theme))
 
-(use-package noctilux-theme
+
+;(use-package noctilux-theme
+;(use-package nord-theme
+(use-package kaolin-theme
+;(use-package jbeans-theme
+;(use-package molokai-theme
+  :after powerline
   :ensure t
   :demand t
   :config
-  (load-theme 'noctilux t))
+;  (load-theme 'nord t))
+;  (load-theme 'molokai t))
+  (load-theme 'kaolin t))
+
+;;;
+;;;(use-package airline-themes
+ ;;; :after kaolin-theme
+  ;;;:ensure t
+;;;  :demand t
+ ;;; :init
+;;;  (setq powerline-utf-8-separator-left        #xe0b0
+;;;      powerline-utf-8-separator-right       #xe0b2
+;;;      airline-utf-glyph-separator-left      #xe0b0
+;;;      airline-utf-glyph-separator-right     #xe0b2
+;;;      airline-utf-glyph-subseparator-left   #xe0b1
+;;;      airline-utf-glyph-subseparator-right  #xe0b3
+;;;      airline-utf-glyph-branch              #xe0a0
+;;;      airline-utf-glyph-readonly            #xe0a2
+;;;      airline-utf-glyph-linenumber          #xe0a1)
+;;;  :config
+;;;  (load-theme 'airline-luna))
 
 ;;; ui.el ends here

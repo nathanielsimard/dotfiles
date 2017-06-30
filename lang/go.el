@@ -4,6 +4,9 @@
 
 (use-package go-mode
   :ensure t
+  :init
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
   :config
   (let (messages-buffer)
     (message "Config for go-mode"))
@@ -67,7 +70,7 @@
                                "g" 'godef-jump
                                "r" 'go-rename
                                "l" 'gofmt
-                               "t" 'go-test-current-file
+                               "tf" 'go-test-current-file
                                "d" 'godoc-at-point))))
 
 
