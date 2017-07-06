@@ -1,0 +1,51 @@
+let mapleader = " "
+
+set clipboard^=unnamedplus
+set nu
+set relativenumber
+
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>w<Left> <C-w>h
+nnoremap <leader>w<Right> <C-w>l
+nnoremap <leader>w<Down> <C-w>j
+nnoremap <leader>w<Up> <C-w>k
+nnoremap <leader>wv <C-w>v
+nnoremap <leader>wb <C-w>S
+nnoremap <leader>wq :q<Enter>
+nnoremap <leader>wrl :vertical resize +5<Enter>
+nnoremap <leader>wrh :vertical resize -5<Enter>
+nnoremap <leader>wrj :res +5<Enter>
+nnoremap <leader>wrk :res -5<Enter>
+nnoremap <leader>wr<Right> :vertical resize +5<Enter>
+nnoremap <leader>wr<Left> :vertical resize -5<Enter>
+nnoremap <leader>wml <C-w>L 
+nnoremap <leader>wm<Right> <C-w>L
+nnoremap <leader>ww :bnext<Enter>
+
+nnoremap / :action Find<CR>
+nnoremap <leader>ss :action Find<CR>
+nnoremap n :action FindNext<CR>
+nnoremap N :action FindPrevious<CR>
+nnoremap U :action $Redo<CR>
+nnoremap ; :action AceJumpAction<CR>
+nnoremap <leader>c :action GotoClass<CR>
+nnoremap <leader>f :action GotoFile<CR>
+nnoremap <leader>d :action CloseContent<CR>
+nnoremap <leader>bt :action FileStructurePopup<CR>
+
+map <leader>g :action GotoDeclaration<CR>
+"map <leader>c :action $Copy<CR>
+"map <leader>d :action EditorDuplicate<CR>
+map <leader>h :action TypeHierarchy<CR>
+map <leader>u :action FindUsages<CR>
+map <leader>p :action ParameterInfo<CR>
+map <leader>d :action GuiDesigner.QuickJavadoc<CR>
+map <leader>t :action Vcs.UpdateProject<CR>
+map <leader>S :action GotoSuperMethod<CR>
+map <leader>l :action ReformatCode<CR>
+map <leader>r :action RenameElement<CR>
+"map <leader>v :action $Paste<CR>
+map <leader>w :action EditorSelectWord<CR>
