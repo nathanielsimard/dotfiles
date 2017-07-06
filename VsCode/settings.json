@@ -1,0 +1,58 @@
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [{
+        "before": ["j", "j"],
+        "after": ["<Esc>"]
+    }],
+    "vim.otherModesKeyBindingsNonRecursive": [{
+        "before": ["<leader>", "w", "q"],
+        "commands": [{
+            "command": ":wq"
+        }]
+    }, {
+        "before": ["<leader>", "w", "v"],
+        "commands": [{
+            "command": "workbench.action.splitEditor"
+        }]
+    }, {
+        "before": ["<leader>", "w", "h"],
+        "commands": [{
+            "command": "workbench.action.focusPreviousGroup"
+        }]
+    }, {
+        "before": ["<leader>", "w", "l"],
+        "commands": [{
+            "command": "workbench.action.focusNextGroup"
+        }]
+    }, {
+        "before": ["<leader>", "b", "t"],
+        "commands": [{
+            "command": "workbench.view.explorer"
+        }]
+    }, {
+        "before": ["<leader>", "f", "f"],
+        "commands": [{
+            "command": "workbench.action.quickOpen"
+        }]
+    }],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.minimap.enabled": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "workbench.sideBar.location": "left",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "window.zoomLevel": 0,
+    "window.menuBarVisibility": "toggle",
+    "extensions.ignoreRecommendations": true
+}
