@@ -30,14 +30,79 @@
             "command": "workbench.action.focusNextGroup"
         }]
     }, {
-        "before": ["<leader>", "b", "t"],
+        "before": ["<leader>", "t", "e"],
         "commands": [{
             "command": "workbench.view.explorer"
+        }]
+    }, {
+        "before": ["<leader>", "t", "s"],
+        "commands": [{
+            "command": "workbench.action.toggleSidebarVisibility"
+        }]
+    }, {
+        "before": ["<leader>", "t", "t"],
+        "commands": [{
+            "command": "workbench.action.terminal.toggleTerminal"
+        }]
+    }, {
+        "before": ["<leader>", "b", "b"],
+        "commands": [{
+            "command": "workbench.action.navigateBack"
+        }]
+    }, {
+        "before": ["<leader>", "b", "p"],
+        "commands": [{
+            "command": "workbench.action.navigateForward"
+        }]
+    }, {
+        "before": ["<leader>", "b", "l"],
+        "commands": [{
+            "command": "workbench.action.nextEditor"
+        }]
+    }, {
+        "before": ["<leader>", "b", "h"],
+        "commands": [{
+            "command": "workbench.action.previousEditor"
+        }]
+    }, {
+        "before": ["<leader>", "t", "t"],
+        "commands": [{
+            "command": "workbench.action.terminal.toggleTerminal"
         }]
     }, {
         "before": ["<leader>", "f", "f"],
         "commands": [{
             "command": "workbench.action.quickOpen"
+        }]
+    }, {
+       "before": ["<leader>", "<leader>"],
+        "commands": [{
+            "command": "editor.action.quickFix"
+        }]
+    }, {
+       "before": ["<leader>", "l", "g"],
+        "commands": [{
+            "command": "editor.action.goToDeclaration"
+        }]
+    }, {
+        "before": ["<leader>", "l", "r"],
+        "commands": [{
+            "command": "editor.action.rename"
+        }]
+    }, {
+        "before": ["<leader>", "l", "f"],
+        "commands": [{
+            "command": "editor.action.formatDocument"
+        }]
+    }, {
+        "before": ["<leader>", "l", "d"],
+        "commands": [{
+            "command": "editor.action.previewDeclaration"
+        }]
+    }, {
+        "before": ["<leader>", "l", "u"],
+        "commands": [{
+            "command": "editor.action.referenceSearch.trigger"
         }]
     }],
     "vim.leader": "<space>",
@@ -45,6 +110,7 @@
         "<C-a>": false,
         "<C-f>": false
     },
+
     "editor.scrollbar.horizontal": "hidden",
     "editor.scrollbar.vertical": "hidden",
     "editor.minimap.enabled": false,
