@@ -1,0 +1,2 @@
+export WINDOWS=/mnt/c/Users/ksyir
+alias win="cd $WINDOWS"
