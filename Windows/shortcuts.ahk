@@ -18,4 +18,4 @@ Esc::CapsLock                                                                   
 <!w:: sendevent {F11}                                                                   ; Full screen
 <!q:: sendevent {LAlt down}{F4 down}{LAlt up}{F4 up}                                    ; Close window
 
-<^!t:: run "C:\WINDOWS\system32\bash.exe"                                               ; Lauch terminal
+<^!t:: run "C:\Users\ksyir\Documents\Programs\cmder_mini\Cmder.exe"                     ; Lauch terminal
