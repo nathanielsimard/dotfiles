@@ -1,2 +1,4 @@
 export WINDOWS=/mnt/c/Users/ksyir
 alias win="cd $WINDOWS"
+PATH=$PATH:/mnt/c/Go/bin/
+alias go="go.exe"
