@@ -5,6 +5,7 @@
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
+    "editor.lineNumbers": "relative",
     "vim.insertModeKeyBindings": [{
         "before": ["j", "j"],
         "after": ["<Esc>"]
