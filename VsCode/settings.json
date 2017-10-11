@@ -71,6 +71,11 @@
             "command": "workbench.action.terminal.toggleTerminal"
         }]
     }, {
+        "before": ["<leader>", "t", "p"],
+        "commands": [{
+            "command": "workbench.actions.view.problems"
+        }]
+    }, {
         "before": ["<leader>", "f", "f"],
         "commands": [{
             "command": "workbench.action.quickOpen"
