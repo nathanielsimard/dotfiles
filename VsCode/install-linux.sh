@@ -1,2 +1,2 @@
-cp keybindings.json ~/.vscode/
-cp settings.json ~/.vscode/
+cp keybindings.json ~/.config/Code/User/
+cp settings.json ~/.config/Code/User/
