@@ -1,1 +1,1 @@
-intel_gpu_top
+sudo intel_gpu_top
