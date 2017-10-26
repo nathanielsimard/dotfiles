@@ -257,6 +257,18 @@
                     "command": "editor.action.referenceSearch.trigger"
                 }
             ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "t"
+            ],
+            "commands": [
+                {
+                    "command": "go.test.cursor"
+                }
+            ]
         }
     ],
     "vim.leader": "<space>",
