@@ -1,7 +1,7 @@
 {
     "workbench.colorTheme": "One Monokai",
-    "vim.disableAnnoyingNeovimMessage": true,
     "vim.easymotion": true,
+    "vim.enableNeovim": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
@@ -286,5 +286,5 @@
     "window.zoomLevel": 0,
     "files.eol": "\n",
     "window.menuBarVisibility": "toggle",
-    "extensions.ignoreRecommendations": true
+    "C_Cpp.intelliSenseEngine": "Default"
 }
