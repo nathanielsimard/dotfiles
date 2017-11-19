@@ -1,4 +1,7 @@
 {
+    "editor.fontFamily": "Source Code Pro for Powerline",
+    "editor.fontWeight": "400",
+    "editor.fontSize": 15,
     "workbench.colorTheme": "One Monokai",
     "vim.easymotion": true,
     "vim.enableNeovim": true,
