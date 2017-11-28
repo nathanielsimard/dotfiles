@@ -1,3 +1,19 @@
+# Conda related stuff
+#export PATH="/home/nathaniel/anaconda2/bin:$PATH"
+#export GIO_EXTRA_MODULES=/usr/lib/x86_64-linux-gnu/gio/modules/
+
+# enable bash completion in interactive shells
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+alias cls='printf "\033c"'
+cls
+
 shopt -s histappend
 shopt -s checkwinsize
 
@@ -7,7 +23,7 @@ HISTFILESIZE=2000
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
-alias la='ls -A'
+alias la='ls -la'
 alias l='ls -CF'
 alias ..='cd ..'
 
@@ -20,9 +36,6 @@ jstest () {
 }
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-source git-completion.bash
-source git-prompt.sh
 
 RESTORE='[0m'
 
