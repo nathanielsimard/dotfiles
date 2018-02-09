@@ -4,8 +4,6 @@
     "editor.fontSize": 15,
     "vim.easymotion": true,
     "vim.enableNeovim": true,
-    "python.pythonPath": "/home/nathaniel/miniconda3/bin/python",
-    "python.formatting.provider": "yapf",
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
@@ -280,8 +278,7 @@
         "<C-a>": false,
         "<C-f>": false
     },
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.verticalScrollbarSize": 0,
     "editor.minimap.enabled": false,
     "editor.hideCursorInOverviewRuler": true,
     "workbench.sideBar.location": "left",
