@@ -1,12 +1,12 @@
 #!/bin/bash
 
+cd ../terminal
+. install.sh
+
 cd git
 . install.sh
 
 cd ../jet_brains
-. install.sh
-
-cd ../terminal
 . install.sh
 
 cd ../tmux
