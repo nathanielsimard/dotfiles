@@ -1,15 +1,13 @@
-# Conda related stuff
-#export PATH="/home/nathaniel/anaconda2/bin:$PATH"
-#export GIO_EXTRA_MODULES=/usr/lib/x86_64-linux-gnu/gio/modules/
+# Enable bash completion in interactive shells
 
-# enable bash completion in interactive shells
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+source ~/.git-prompt.sh
+
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
 fi
+
 
 alias cls='printf "\033c"'
 cls
@@ -21,6 +19,8 @@ HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# Alias
+
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -la'
@@ -31,13 +31,11 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-jstest () {
-    npm test "$(pwd)"'/'"$1"
-}
-
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 RESTORE='[0m'
+
+# Colors
 
 RED='[00;31m'
 RED1='[38;5;197m'

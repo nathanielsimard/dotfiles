@@ -1,1 +1,0 @@
-sudo intel_gpu_top
