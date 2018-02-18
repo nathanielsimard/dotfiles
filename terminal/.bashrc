@@ -8,9 +8,19 @@ elif [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
+export PATH=$PATH:~/.cargo/bin
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-alias cls='printf "\033c"'
-cls
+# Alias
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -la'
+alias l='ls -CF'
+alias ..='cd ..'
 
 shopt -s histappend
 shopt -s checkwinsize
@@ -18,21 +28,6 @@ shopt -s checkwinsize
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-# Alias
-
-alias ls='ls --color=auto'
-alias ll='ls -alF'
-alias la='ls -la'
-alias l='ls -CF'
-alias ..='cd ..'
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 RESTORE='[0m'
 
 # Colors

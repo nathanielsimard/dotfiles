@@ -2,6 +2,8 @@
     "editor.fontFamily": "Source Code Pro for Powerline",
     "editor.fontWeight": "400",
     "editor.fontSize": 15,
+    "editor.detectIndentation": true,
+    "explorer.openEditors.visible": 0,
     "vim.easymotion": true,
     "vim.enableNeovim": true,
     "vim.incsearch": true,
