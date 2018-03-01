@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd ../terminal
+cd terminal
 . install.sh
 
-cd git
+cd ../git
 . install.sh
 
 cd ../jet_brains
