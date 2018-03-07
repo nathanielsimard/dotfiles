@@ -8,7 +8,7 @@
     "vim.enableNeovim": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": true,
+    "vim.useCtrlKeys": false,
     "vim.hlsearch": true,
     "editor.lineNumbers": "relative",
     "vim.insertModeKeyBindings": [
