@@ -8,11 +8,11 @@ elif [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-export PATH=$PATH:~/.cargo/bin
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Alias
 
+alias code='code-oss'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
