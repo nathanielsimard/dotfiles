@@ -12,3 +12,11 @@ then
 fi
 
 cp .bashrc ~/
+
+if [ -e ~/.bash_profile ]
+then
+    mkdir -p ~/.config.old
+    mv ~/.bash_profile ~/.config.old/
+fi
+
+cp .bash_profile ~/

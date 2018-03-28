@@ -1,27 +1,53 @@
 {
+    // Editor settings
+    "editor.scrollbar.verticalScrollbarSize": 0,
+    "editor.minimap.enabled": false,
     "editor.fontFamily": "Source Code Pro for Powerline",
-    "editor.fontWeight": "400",
-    "editor.fontSize": 15,
+    "editor.fontWeight": "600",
+    "editor.fontSize": 16,
     "editor.detectIndentation": true,
-    "explorer.openEditors.visible": 0,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.lineNumbers": "relative",
+    // Workbench settings
+    "workbench.sideBar.location": "left",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    // Theme settings
+    "workbench.colorTheme": "Material Theme",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#00BCD4",
+        "list.activeSelectionForeground": "#00BCD4",
+        "list.inactiveSelectionForeground": "#00BCD4",
+        "list.highlightForeground": "#00BCD4",
+        "scrollbarSlider.activeBackground": "#00BCD450",
+        "editorSuggestWidget.highlightForeground": "#00BCD4",
+        "textLink.foreground": "#00BCD4",
+        "progressBar.background": "#00BCD4",
+        "pickerGroup.foreground": "#00BCD4",
+        "tab.activeBorder": "#00BCD4",
+        "notificationLink.foreground": "#00BCD4"
+    },
+    "materialTheme.cache.workbench.settings": {
+        "accent": "Cyan",
+        "themeColours": "Darker High Contrast",
+        "accentPrevious": "Blue"
+    },
+    // Vin settings
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-w>": false,
+        "<C-tab>": false,
+        "<C-f>": false
+    },
     "vim.easymotion": true,
     "vim.enableNeovim": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
-    "editor.lineNumbers": "relative",
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "j",
-                "j"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
-    ],
+    // Vim keybindings
     "vim.otherModesKeyBindingsNonRecursive": [
         {
             "before": [
@@ -275,19 +301,9 @@
             ]
         }
     ],
-    "vim.leader": "<space>",
-    "vim.handleKeys": {
-        "<C-a>": false,
-        "<C-f>": false
-    },
-    "editor.scrollbar.verticalScrollbarSize": 0,
-    "editor.minimap.enabled": false,
-    "editor.hideCursorInOverviewRuler": true,
-    "workbench.sideBar.location": "left",
-    "workbench.statusBar.visible": true,
-    "workbench.activityBar.visible": true,
+    // Other settings
     "window.zoomLevel": 0,
+    "explorer.openEditors.visible": 0,
     "files.eol": "\n",
-    "window.menuBarVisibility": "toggle",
-    "C_Cpp.intelliSenseEngine": "Default"
+    "window.menuBarVisibility": "toggle"
 }
