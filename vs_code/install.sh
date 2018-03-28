@@ -14,3 +14,5 @@ code-oss --install-extension bungcip.better-toml
 code-oss --install-extension foxundermoon.shell-format
 code-oss --install-extension truman.autocomplate-shell
 code-oss --install-extension formulahendry.code-runner
+code-oss --install-extension PeterJausovec.vscode-docker
+
