@@ -15,10 +15,4 @@ cd ../tmux
 cd ../vs_code
 . install.sh
 
-cd ../touchpad
-. install.sh
-
-cd ../plasma
-. install.sh
-
 echo "All your old config are in the directory ~/.config.old"
