@@ -4,3 +4,6 @@
 
 cd ../plasma
 . install.sh
+
+cd ../touchpad
+. install.sh
