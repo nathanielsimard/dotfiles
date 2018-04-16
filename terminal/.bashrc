@@ -28,10 +28,10 @@ shopt -s checkwinsize
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-RESTORE='[0m'
 
 # Colors
 
+RESTORE='[0m'
 RED='[00;31m'
 RED1='[38;5;197m'
 GREEN='[00;32m'
