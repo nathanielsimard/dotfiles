@@ -2,8 +2,8 @@
     // Editor settings
     "editor.scrollbar.verticalScrollbarSize": 0,
     "editor.minimap.enabled": false,
-    "editor.fontFamily": "Source Code Pro for Powerline",
-    "editor.fontWeight": "600",
+    "editor.fontFamily": "monospace",
+    "editor.fontWeight": "500",
     "editor.fontSize": 16,
     "editor.detectIndentation": true,
     "editor.hideCursorInOverviewRuler": true,
