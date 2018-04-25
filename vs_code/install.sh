@@ -1,10 +1,6 @@
 #!/bin/bash
 
-echo "Installing vs code config"
-
-cp keybindings.json ~/.config/Code/User/
-cp settings.json ~/.config/Code/User/
-
+echo "Installing extensions"
 # General
 code --install-extension vscodevim.vim
 code --install-extension DavidAnson.vscode-markdownlint
@@ -23,3 +19,7 @@ code --install-extension ms-python.python
 
 # Java
 code --install-extension vscjava.vscode-java-pack
+
+echo "Installing Vs Code config"
+cp keybindings.json ~/.config/Code/User/
+cp settings.json ~/.config/Code/User/
