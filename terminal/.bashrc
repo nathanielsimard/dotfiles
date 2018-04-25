@@ -9,7 +9,7 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export PATH="$HOME/miniconda3/bin:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Alias
 
@@ -43,6 +43,7 @@ BLUE1='[38;5;33m'
 ORANGE='[38;5;208m'
 PURPLE='[00;35m'
 CYAN='[00;36m'
+CYAN1='[38;5;080m'
 LIGHTGRAY='[00;37m'
 LRED='[01;31m'
 LGREEN='[01;32m'
@@ -53,7 +54,7 @@ LCYAN='[01;36m'
 WHITE='[01;37m'
 
 PS1='┌['
-PS1+='\[\e${CYAN}\]'
+PS1+='\[\e${CYAN1}\]'
 PS1+='\u' # User
 PS1+='\[\e${RESTORE}\]'
 PS1+=']-['
@@ -61,7 +62,8 @@ PS1+='\[\e${ORANGE}\]'
 PS1+='\w' # Path
 PS1+='\[\e${RESTORE}\]'
 PS1+=']'
-PS1+='$(__git_ps1 "-[\[\e${BLUE1}\]%s\e\[${RESTORE}\]]")' # Git
+PS1+='$(if [[ $VIRTUAL_ENV != "" ]] ; then echo "-[\[\e${BLUE1}\]${VIRTUAL_ENV##*/}\e\[${RESTORE}\]]"; fi )' # Python Virtual Env
+PS1+='$(__git_ps1 "-[\[\e${RED1}\]%s\e\[${RESTORE}\]]")' # Git
 PS1+='\n└['
 PS1+='\[\e${GREEN1}\]'
 PS1+='\$'
