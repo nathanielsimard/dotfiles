@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. install-base.sh
-
-cd ../fedora
+cd fedora
 . install.sh
+
+cd ..
+. install-base.sh
