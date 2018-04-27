@@ -14,6 +14,9 @@ sudo dnf install -y \
     https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
     https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+echo "Enable Dot Net Core"
+sudo dnf copr -y enable @dotnet-sig/dotnet
+
 echo "Enable Flathub"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -42,6 +45,8 @@ sudo dnf install -y \
     code \
     neovim \
     chrome-gnome-shell \
+    dotnet \
+    java-openjdk \
     gnome-tweak-tool
 
 echo "Installing basic flatpak"
