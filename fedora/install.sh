@@ -46,8 +46,14 @@ sudo dnf install -y \
     neovim \
     chrome-gnome-shell \
     dotnet \
+    docker \
+    docker-compose \
     java-openjdk \
     gnome-tweak-tool
+
+echo "Setup docker group"
+sudo groupadd docker
+sudo gpasswd -a $USER docker
 
 echo "Installing basic flatpak"
 flatpak install -y flathub \
