@@ -66,5 +66,4 @@ firefox \
     https://extensions.gnome.org/extension/15/alternatetab/ \
     https://extensions.gnome.org/extension/1112/screenshot-tool/ \
     https://extensions.gnome.org/extension/355/status-area-horizontal-spacing/ \
-    https://extensions.gnome.org/extension/1031/topicons/ \
-    https://extensions.gnome.org/extension/843/bumblebee-indicator/
+    https://extensions.gnome.org/extension/1031/topicons/
