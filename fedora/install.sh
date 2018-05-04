@@ -48,7 +48,8 @@ sudo dnf install -y \
     dotnet \
     docker \
     docker-compose \
-    java-openjdk \
+    java-1.8.0-openjdk \
+    java-1.8.0-openjdk-devel \
     gnome-tweak-tool
 
 echo "Setup docker group"
