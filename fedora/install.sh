@@ -72,4 +72,5 @@ firefox \
     https://extensions.gnome.org/extension/15/alternatetab/ \
     https://extensions.gnome.org/extension/1112/screenshot-tool/ \
     https://extensions.gnome.org/extension/355/status-area-horizontal-spacing/ \
+    https://github.com/martin31821/cpupower \
     https://extensions.gnome.org/extension/1031/topicons/
