@@ -62,7 +62,7 @@ flatpak install -y flathub \
     com.valvesoftware.Steam \
     com.slack.Slack
 
-echo "Installing extensions"
+echo "Installing extensions and Jetbrains Toolbox"
 firefox \
     https://extensions.gnome.org/extension/517/caffeine/ \
     https://extensions.gnome.org/extension/1253/extended-gestures/ \
@@ -74,4 +74,5 @@ firefox \
     https://extensions.gnome.org/extension/1112/screenshot-tool/ \
     https://extensions.gnome.org/extension/355/status-area-horizontal-spacing/ \
     https://github.com/martin31821/cpupower \
-    https://extensions.gnome.org/extension/1031/topicons/
+    https://extensions.gnome.org/extension/495/topicons/ \
+    https://www.jetbrains.com/toolbox/app/

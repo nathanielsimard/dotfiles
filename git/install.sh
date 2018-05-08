@@ -8,12 +8,3 @@ if [ -e ~/.gitconfig ]; then
 fi
 
 cp .gitconfig ~/
-
-echo "What is your name ?"
-read name
-
-echo "What is your email ?"
-read email
-
-git config --global user.name "$name"
-git config --global user.email "$email"

@@ -13,7 +13,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Alias
 
-alias fedora-clean-old-kernels='sudo dnf remove $(dnf repoquery --installonly --latest-limit=-2)'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
