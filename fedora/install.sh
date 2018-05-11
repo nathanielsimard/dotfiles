@@ -18,7 +18,7 @@ echo "Enable Dot Net Core"
 sudo dnf copr -y enable @dotnet-sig/dotnet
 
 echo "Enable Flathub"
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 echo "Installing codecs"
 sudo dnf install -y \
@@ -43,6 +43,7 @@ echo "Installing basic software"
 sudo dnf install -y \
     neofetch \
     code \
+    htop \
     neovim \
     chrome-gnome-shell \
     dotnet \
@@ -73,6 +74,5 @@ firefox \
     https://extensions.gnome.org/extension/15/alternatetab/ \
     https://extensions.gnome.org/extension/1112/screenshot-tool/ \
     https://extensions.gnome.org/extension/355/status-area-horizontal-spacing/ \
-    https://github.com/martin31821/cpupower \
     https://extensions.gnome.org/extension/495/topicons/ \
     https://www.jetbrains.com/toolbox/app/
