@@ -17,6 +17,9 @@ sudo dnf install -y \
 echo "Enable Dot Net Core"
 sudo dnf copr -y enable @dotnet-sig/dotnet
 
+ecno "Enable Themes"
+sudo dnf copr -y enable tcg/themes
+
 echo "Enable Flathub"
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -42,6 +45,7 @@ sudo dnf install -y \
 echo "Installing basic software"
 sudo dnf install -y \
     neofetch \
+    materia-theme \
     code \
     htop \
     neovim \
@@ -69,7 +73,7 @@ firefox \
     https://extensions.gnome.org/extension/1253/extended-gestures/ \
     https://extensions.gnome.org/extension/1125/github-notifications/ \
     https://extensions.gnome.org/extension/1319/gsconnect/ \
-    https://extensions.gnome.org/extension/118/no-topleft-hot-corner/ \
+    https://extensions.gnome.org/extension/358/activities-configurator/ \
     https://extensions.gnome.org/extension/600/launch-new-instance/ \
     https://extensions.gnome.org/extension/15/alternatetab/ \
     https://extensions.gnome.org/extension/1112/screenshot-tool/ \
