@@ -17,7 +17,7 @@ sudo dnf install -y \
 echo "Enable Dot Net Core"
 sudo dnf copr -y enable @dotnet-sig/dotnet
 
-ecno "Enable Themes"
+echo "Enable Themes"
 sudo dnf copr -y enable tcg/themes
 
 echo "Enable Flathub"
