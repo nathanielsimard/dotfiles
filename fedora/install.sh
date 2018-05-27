@@ -47,6 +47,8 @@ sudo dnf install -y \
     neofetch \
     materia-theme \
     code \
+    guake \
+    gnome-shell-extension-pomodoro \
     htop \
     neovim \
     chrome-gnome-shell \
@@ -75,6 +77,7 @@ firefox \
     https://extensions.gnome.org/extension/1319/gsconnect/ \
     https://extensions.gnome.org/extension/358/activities-configurator/ \
     https://extensions.gnome.org/extension/600/launch-new-instance/ \
+    https://extensions.gnome.org/extension/1267/no-title-bar/ \
     https://extensions.gnome.org/extension/15/alternatetab/ \
     https://extensions.gnome.org/extension/1112/screenshot-tool/ \
     https://extensions.gnome.org/extension/355/status-area-horizontal-spacing/ \
