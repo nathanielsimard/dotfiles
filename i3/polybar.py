@@ -11,7 +11,7 @@ def screens():
     return [l.split()[0] for l in output if " connected " in l]
 
 
-os.system("killall polybar")
+o = os.system("killall polybar")
 for screen in screens():
     command = "MONITOR=" + screen + " polybar mybar &"
     os.system(command)
