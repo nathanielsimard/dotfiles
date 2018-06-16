@@ -13,5 +13,15 @@ def screens():
 
 o = os.system("killall polybar")
 for screen in screens():
-    command = "MONITOR=" + screen + " polybar mybar &"
+    scale = "1"
+    try:
+        scale = os.environ["GTK_SCALE"]
+    except:
+        pass
+    height = 20
+    dpi = 96
+    if scale == "2":
+        height *= 2
+        dpi *= 2
+    command = "MONITOR=" + screen + " HEIGHT=" + str(height) + " DPI=" + str(dpi) + " polybar mybar &"
     os.system(command)
