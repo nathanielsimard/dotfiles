@@ -128,17 +128,16 @@ mode "$keyboard_layout" {
         bindsym Escape mode "default"
 }
 
+
 bindsym $mod+space mode "$keyboard_layout"
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym $mod+a exec --no-startup-id rofi -show drun
-bindsym Mod1+Tab exec --no-startup-id rofi -show window
-bindsym Mod1+a exec --no-startup-id ~/.config/i3/add-workspace.sh;exec --no-startup-id rofi -show drun
-bindsym $mod+Mod1+l exec --no-startup-id i3lock -i ~/Picture/trees_green_fog_forest_shroud_top_view_118416_3840x2160.png
-bindsym Mod1+d exec --no-startup-id ~/.config/i3/display.py
 
-exec --no-startup-id ~/.config/i3/display.py
-exec --no-startup-id compton -b --backend glx --no-fading-openclose
-exec --no-startup-id setxkbmap -option caps:escape
-exec --no-startup-id feh --bg-scale ~/Picture/trees_green_fog_forest_shroud_top_view_118416_3840x2160.jpg
-exec --no-startup-id nm-applet
+set $desktop ~/.config/i3/desktop/desktop.py
+
+bindsym $mod+a exec --no-startup-id $desktop --rofi
+bindsym Mod1+a exec --no-startup-id $desktop --add-workspace --rofi
+bindsym $mod+Mod1+l exec --no-startup-id $desktop --lock-screen
+bindsym Mod1+d exec --no-startup-id $desktop --screen-layout-setup
+
+exec --no-startup-id $desktop --screen-layout-setup --keyboard-setup --start-compositor --wallpaper --network-setup
