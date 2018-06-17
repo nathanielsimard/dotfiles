@@ -34,10 +34,15 @@ def main():
         default=False,
         help='Start or restart Polybar')
     parser.add_argument(
-        '--rofi',
+        '--applications',
         action='store_true',
         default=False,
-        help='Start or Restart Rofi')
+        help='Start rofi for searching applications')
+    parser.add_argument(
+        '--command',
+        action='store_true',
+        default=False,
+        help='Start rofi for running commands')
     parser.add_argument(
         '--add-workspace',
         action='store_true',
@@ -77,8 +82,10 @@ def main():
         workspace.add()
     if args.polybar:
         polybar.start_polybar()
-    if args.rofi:
-        rofi.start()
+    if args.applications:
+        rofi.applications()
+    if args.command:
+        rofi.command()
     if args.lock_screen:
         display.lock_screen()
     if args.wallpaper:

@@ -135,8 +135,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 
 set $desktop ~/.config/i3/desktop/desktop.py
 
-bindsym $mod+a exec --no-startup-id $desktop --rofi
-bindsym Mod1+a exec --no-startup-id $desktop --add-workspace --rofi
+bindsym $mod+a exec --no-startup-id $desktop --applications
+bindsym Mod1+F2 exec --no-startup-id $desktop --command
+bindsym Mod1+a exec --no-startup-id $desktop --add-workspace --applications
 bindsym $mod+Mod1+l exec --no-startup-id $desktop --lock-screen
 bindsym Mod1+d exec --no-startup-id $desktop --screen-layout-setup
 
