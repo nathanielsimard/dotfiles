@@ -19,6 +19,7 @@ def setup_screen_layout():
     if (screen_layout_name in screen_layout_names):
         print("Execute saved layout setting ...")
         os.system(screen_layout_full_name)
+        os.system("xrandr --dpi " + display.get_screen_dpi())
         polybar.start_polybar()
     else:
         print("Prompt layout setting ...")

@@ -24,10 +24,10 @@ def lock_screen():
 
 def get_scaling_factor():
     try:
-        return os.environ['GTK_FACTOR']
+        return int(os.environ['GTK_SCALE'])
     except:
-        return "1"
+        return 1
 
 
 def get_screen_dpi():
-    return get_scaling_factor() * DEFAULT_DPI
+    return str(get_scaling_factor() * DEFAULT_DPI)
