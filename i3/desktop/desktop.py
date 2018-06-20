@@ -49,6 +49,11 @@ def main():
         default=False,
         help='Add a workspace')
     parser.add_argument(
+        '--move-window-to-new-workspace',
+        action='store_true',
+        default=False,
+        help='Add a workspace')
+    parser.add_argument(
         '--lock-screen',
         action='store_true',
         default=False,
@@ -92,6 +97,8 @@ def main():
         wallpaper.apply()
     if args.network_setup:
         network.start_applet()    
+    if args.move_window_to_new_workspace:
+        workspace.move_window_to_new_workspace()
 
 
 if __name__ == "__main__":

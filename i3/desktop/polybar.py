@@ -1,19 +1,12 @@
 import subprocess
+import display
 import os
-
-
-def screens():
-    output = [
-        l for l in subprocess.check_output(["xrandr"]).decode("utf-8")
-        .splitlines()
-    ]
-    return [l.split()[0] for l in output if " connected " in l]
 
 
 def start_polybar():
     os.system("killall polybar")
     os.system("while pgrep -x polybar >/dev/null; do sleep 1; done")
-    for screen in screens():
+    for screen in display.screens():
         print(screen)
         scale = "1"
         try:
