@@ -3,10 +3,9 @@
 echo "Installing extensions"
 # General
 code --install-extension vscodevim.vim
+code --install-extension hoovercj.vscode-settings-cycler
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension PeterJausovec.vscode-docker
-code --install-extension foxundermoon.shell-format
-code --install-extension truman.autocomplate-shell
 code --install-extension Equinusocio.vsc-material-theme
 code --install-extension PKief.material-icon-theme
 
