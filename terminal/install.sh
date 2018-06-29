@@ -11,6 +11,7 @@ if [ -e ~/.bashrc ]; then
 fi
 
 cp .bashrc ~/
+cp .inputrc ~/
 
 if [ -e ~/.bash_profile ]; then
 	mkdir -p ~/.config.old
