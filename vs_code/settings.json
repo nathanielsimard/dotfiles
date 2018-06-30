@@ -48,7 +48,7 @@
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
     // Vim keybindings
-    "vim.otherModesKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
                 "<leader>",
@@ -305,5 +305,19 @@
     "window.zoomLevel": 0,
     "explorer.openEditors.visible": 0,
     "files.eol": "\n",
-    "window.menuBarVisibility": "toggle"
+    "settings.cycle": [
+        {
+            "id": "zen",
+            "values": [
+                {
+                    "window.menuBarVisibility": "hidden",
+                    "workbench.activityBar.visible": false,
+                },
+                {
+                    "window.menuBarVisibility": "default",
+                    "workbench.activityBar.visible": true,
+                }
+            ]
+        }
+    ],
 }
