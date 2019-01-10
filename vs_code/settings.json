@@ -3,6 +3,7 @@
     "editor.scrollbar.verticalScrollbarSize": 0,
     "editor.minimap.enabled": false,
     "editor.fontFamily": "monospace",
+    "keyboard.dispatch": "keyCode",
     "editor.fontWeight": "500",
     "editor.fontSize": 16,
     "editor.detectIndentation": true,
@@ -320,4 +321,8 @@
             ]
         }
     ],
+    "window.menuBarVisibility": "default",
+    "terminal.integrated.rendererType": "dom",
+    "window.titleBarStyle": "custom",
+    "go.testOnSave": true,
 }
