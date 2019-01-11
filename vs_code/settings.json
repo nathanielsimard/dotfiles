@@ -2,7 +2,7 @@
     // Editor settings
     "editor.scrollbar.verticalScrollbarSize": 0,
     "editor.minimap.enabled": false,
-    "editor.fontFamily": "monospace",
+    "editor.fontFamily": "'Noto Mono', 'Ubuntu Mono', 'DejaVu Sans Mono'",
     "keyboard.dispatch": "keyCode",
     "editor.fontWeight": "500",
     "editor.fontSize": 16,
@@ -119,18 +119,6 @@
             "commands": [
                 {
                     "command": "workbench.action.toggleSidebarVisibility"
-                }
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "t",
-                "t"
-            ],
-            "commands": [
-                {
-                    "command": "workbench.action.terminal.toggleTerminal"
                 }
             ]
         },
