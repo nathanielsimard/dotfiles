@@ -25,6 +25,14 @@
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
+        "key": "ctrl+k",
+        "command": "editor.action.marker.prevInFiles"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "editor.action.marker.nextInFiles"
+    },
+    {
         "key": "alt+m",
         "command": "settings.cycle.zen",
     }

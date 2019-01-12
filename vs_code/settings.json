@@ -1,19 +1,26 @@
 {
-    // Editor settings
+    // Compatibility Settings
+    "terminal.integrated.rendererType": "dom",
+    "files.eol": "\n",
+    "keyboard.dispatch": "keyCode",
+    // Editor Settings
     "editor.scrollbar.verticalScrollbarSize": 0,
     "editor.minimap.enabled": false,
     "editor.fontFamily": "'Noto Mono', 'Ubuntu Mono', 'DejaVu Sans Mono'",
-    "keyboard.dispatch": "keyCode",
     "editor.fontWeight": "500",
     "editor.fontSize": 16,
     "editor.detectIndentation": true,
     "editor.hideCursorInOverviewRuler": true,
     "editor.lineNumbers": "relative",
-    // Workbench settings
+    // Window Settings
+    "window.menuBarVisibility": "default",
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 0,
+    // Workbench Settings
     "workbench.sideBar.location": "left",
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
-    // Theme settings
+    // Theme Settings
     "workbench.colorTheme": "Material Theme",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorCustomizations": {
@@ -34,7 +41,7 @@
         "themeColours": "Darker High Contrast",
         "accentPrevious": "Blue"
     },
-    // Vin settings
+    // Vim Settings
     "vim.leader": "<space>",
     "vim.handleKeys": {
         "<C-a>": false,
@@ -48,7 +55,7 @@
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
-    // Vim keybindings
+    // Vim Keybindings
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
@@ -203,6 +210,9 @@
             "commands": [
                 {
                     "command": "workbench.actions.view.problems"
+                },
+                {
+                    "command": "workbench.action.focusFirstEditorGroup"
                 }
             ]
         },
@@ -302,27 +312,13 @@
             ]
         }
     ],
-    // Other settings
-    "window.zoomLevel": 0,
-    "explorer.openEditors.visible": 0,
-    "files.eol": "\n",
-    "settings.cycle": [
-        {
-            "id": "zen",
-            "values": [
-                {
-                    "window.menuBarVisibility": "hidden",
-                    "workbench.activityBar.visible": false,
-                },
-                {
-                    "window.menuBarVisibility": "default",
-                    "workbench.activityBar.visible": true,
-                }
-            ]
-        }
-    ],
-    "window.menuBarVisibility": "default",
-    "terminal.integrated.rendererType": "dom",
-    "window.titleBarStyle": "custom",
+    // Golang Setting
     "go.testOnSave": true,
+    // Python Settings
+    "autoDocstring.docstringFormat": "sphinx",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.mypyEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pydocstyleEnabled": true,
 }
