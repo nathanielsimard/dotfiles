@@ -4,7 +4,7 @@
     "files.eol": "\n",
     "keyboard.dispatch": "keyCode",
     // Editor Settings
-    "editor.scrollbar.verticalScrollbarSize": 0,
+    "editor.scrollbar.verticalScrollbarSize": 10,
     "editor.minimap.enabled": false,
     "editor.fontFamily": "'Noto Mono', 'Ubuntu Mono', 'DejaVu Sans Mono'",
     "editor.fontWeight": "500",
@@ -21,40 +21,22 @@
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
     // Theme Settings
-    "workbench.colorTheme": "Material Theme",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorCustomizations": {
-        "activityBarBadge.background": "#00BCD4",
-        "list.activeSelectionForeground": "#00BCD4",
-        "list.inactiveSelectionForeground": "#00BCD4",
-        "list.highlightForeground": "#00BCD4",
-        "scrollbarSlider.activeBackground": "#00BCD450",
-        "editorSuggestWidget.highlightForeground": "#00BCD4",
-        "textLink.foreground": "#00BCD4",
-        "progressBar.background": "#00BCD4",
-        "pickerGroup.foreground": "#00BCD4",
-        "tab.activeBorder": "#00BCD4",
-        "notificationLink.foreground": "#00BCD4"
-    },
-    "materialTheme.cache.workbench.settings": {
-        "accent": "Cyan",
-        "themeColours": "Darker High Contrast",
-        "accentPrevious": "Blue"
-    },
+    "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
     // Vim Settings
     "vim.leader": "<space>",
-    "vim.handleKeys": {
-        "<C-a>": false,
-        "<C-w>": false,
-        "<C-tab>": false,
-        "<C-f>": false
-    },
     "vim.easymotion": true,
     "vim.enableNeovim": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-w>": false,
+        "<C-tab>": false,
+        "<C-f>": false
+    },
     // Vim Keybindings
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -312,13 +294,18 @@
             ]
         }
     ],
-    // Golang Setting
+    // Go Settings
     "go.testOnSave": true,
     // Python Settings
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+        "editor.formatOnSave": true,
+    },
     "autoDocstring.docstringFormat": "sphinx",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
-    "python.linting.mypyEnabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.pydocstyleEnabled": true,
 }
