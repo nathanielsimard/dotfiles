@@ -1,4 +1,0 @@
-## Up Arrow
-"\e[A":history-search-backward
-## Down Arrow
-"\e[B":history-search-backward

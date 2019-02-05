@@ -26,7 +26,7 @@
     // Vim Settings
     "vim.leader": "<space>",
     "vim.easymotion": true,
-    "vim.enableNeovim": true,
+    "vim.enableNeovim": false,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
