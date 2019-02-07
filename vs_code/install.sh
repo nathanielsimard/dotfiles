@@ -9,6 +9,7 @@ code --install-extension PeterJausovec.vscode-docker
 code --install-extension Equinusocio.vsc-material-theme
 code --install-extension PKief.material-icon-theme
 code --install-extension streetsidesoftware.code-spell-checkerl 
+code --install-extension hoovercj.vscode-settings-cycler
 
 # LaTex
 code --install-extension James-Yu.latex-workshop

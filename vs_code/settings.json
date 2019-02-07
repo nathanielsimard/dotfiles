@@ -23,6 +23,33 @@
     // Theme Settings
     "workbench.colorTheme": "Material Theme Darker High Contrast",
     "workbench.iconTheme": "eq-material-theme-icons-darker",
+    // Setting Cyles
+    "settings.cycle": [
+        {
+            "id": "zen",
+            "values": [
+                {
+                    "window.menuBarVisibility": "hidden",
+                    "workbench.activityBar.visible": false,
+                },
+                {
+                    "window.menuBarVisibility": "default",
+                    "workbench.activityBar.visible": true,
+                }
+            ]
+        },
+        {
+            "id": "codeLens",
+            "values": [
+                {
+                    "editor.codeLens": true,
+                },
+                {
+                    "editor.codeLens": false,
+                }
+            ]
+        },
+    ],
     // Vim Settings
     "vim.leader": "<space>",
     "vim.easymotion": true,
@@ -195,6 +222,18 @@
                 },
                 {
                     "command": "workbench.action.focusFirstEditorGroup"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t",
+                "l",
+            ],
+            "commands": [
+                {
+                    "command": "settings.cycle.codeLens",
                 }
             ]
         },
