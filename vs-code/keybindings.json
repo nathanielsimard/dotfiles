@@ -35,5 +35,15 @@
     {
         "key": "alt+m",
         "command": "settings.cycle.zen",
+    },
+    {
+        "key": "tab",
+        "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "shift+tab",
+        "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
     }
 ]
