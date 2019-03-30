@@ -12,3 +12,6 @@
 	helper = cache --timeout 28800
 [core]
 	editor = nvim
+[user]
+	email = nathaniel.simard.42@gmail.com
+	name = nathaniel

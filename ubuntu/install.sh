@@ -10,6 +10,7 @@ sudo apt install plymouth-theme-ubuntu-gnome-logo \
                  chrome-gnome-shell \
                  gnome-tweaks \
                  htop \
+                 tilix \
 
 sudo update-alternatives --config gdm3.css
 sudo update-alternatives --config default.plymouth
