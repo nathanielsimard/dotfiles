@@ -68,18 +68,3 @@ flatpak install -y flathub \
     com.spotify.Client \
     com.valvesoftware.Steam \
     com.slack.Slack
-
-echo "Installing extensions and Jetbrains Toolbox"
-firefox \
-    https://extensions.gnome.org/extension/517/caffeine/ \
-    https://extensions.gnome.org/extension/1253/extended-gestures/ \
-    https://extensions.gnome.org/extension/1125/github-notifications/ \
-    https://extensions.gnome.org/extension/1319/gsconnect/ \
-    https://extensions.gnome.org/extension/358/activities-configurator/ \
-    https://extensions.gnome.org/extension/600/launch-new-instance/ \
-    https://extensions.gnome.org/extension/1267/no-title-bar/ \
-    https://extensions.gnome.org/extension/15/alternatetab/ \
-    https://extensions.gnome.org/extension/1112/screenshot-tool/ \
-    https://extensions.gnome.org/extension/355/status-area-horizontal-spacing/ \
-    https://extensions.gnome.org/extension/495/topicons/ \
-    https://www.jetbrains.com/toolbox/app/
