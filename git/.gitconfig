@@ -4,6 +4,7 @@
 	co = commit
 	aa = add --all
 	rh = reset --hard
+	pp = pull -p
 	update = pull --rebase
 	rewrite = commit --amend --no-edit
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
