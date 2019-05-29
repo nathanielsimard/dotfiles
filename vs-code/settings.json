@@ -17,6 +17,7 @@
     "window.titleBarStyle": "custom",
     "window.zoomLevel": 0,
     // Workbench Settings
+    "workbench.editor.enablePreview": false,
     "workbench.sideBar.location": "left",
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
