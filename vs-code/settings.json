@@ -54,6 +54,7 @@
     ],
     // Vim Settings
     "vim.leader": "<space>",
+    "vim.debug.silent": true,
     "vim.easymotion": true,
     "vim.enableNeovim": false,
     "vim.incsearch": true,
@@ -342,11 +343,6 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": true,
         },
-        "editor.formatOnSave": true,
-    },
-    "autoDocstring.docstringFormat": "sphinx",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.pydocstyleEnabled": true,
+        "editor.formatOnSave": true
+    }
 }
