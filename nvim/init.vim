@@ -21,6 +21,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'mileszs/ack.vim'
 
 """ Language Server Protocal Support
 Plug 'autozimu/LanguageClient-neovim', {
@@ -71,7 +72,7 @@ set hidden
 let g:LanguageClient_serverCommands = {
     \ 'python': ['python', '-m', 'pyls'],
     \ 'tex': ['~/.local/bin/tex-lsp'],
-    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript': ['javascript-typescript-stdio', '-l', '/tmp/javascript-typescript-stdio.log'],
     \ }
 let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_diagnosticsEnable=0
@@ -126,38 +127,56 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <leader>tt :split<CR><C-W>j:terminal<CR>a
 
 """ Buffer Settings
-function! GoToBuffer()                                                                                                                                                                                                                                                        
-  let curline = getline('.')                                                                                                                                                                                                                                                  
-  call inputsave()                                                                                                                                                                                                                                                            
-  let buffer_number = input('[GO TO BUFFER] Buffer number: ')                                                                                                                                                                                                                 
-  call inputrestore()                                                                                                                                                                                                                                                         
-  let vim_command = "b".buffer_number                                                                                                                                                                                                                                         
-  execute vim_command                                                                                                                                                                                                                                                         
-endfunction                                                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                              
-function! DeleteBuffer()                                                                                                                                                                                                                                                      
-  let curline = getline('.')                                                                                                                                                                                                                                                  
-  call inputsave()                                                                                                                                                                                                                                                            
-  let buffer_number = input('[DELETE BUFFER] Buffer number: ')                                                                                                                                                                                                                
-  call inputrestore()                                                                                                                                                                                                                                                         
-  let vim_command = buffer_number."bd"                                                                                                                                                                                                                                        
-  execute vim_command                                                                                                                                                                                                                                                         
-endfunction                                                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                              
-function! DeleteAllBuffers()                                                                                                                                                                                                                                                  
-    execute "%bd | e#"                                                                                                                                                                                                                                                        
-endfunction                                                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                              
+function! GoToBuffer()
+  let curline = getline('.')
+  call inputsave()
+  let buffer_number = input('[GO TO BUFFER] Buffer number: ')
+  call inputrestore()
+  let vim_command = "b".buffer_number
+  execute vim_command
+endfunction
+
+function! DeleteBuffer()
+  let curline = getline('.')
+  call inputsave()
+  let buffer_number = input('[DELETE BUFFER] Buffer number: ')
+  call inputrestore()
+  let vim_command = buffer_number."bd"
+  execute vim_command
+endfunction
+
+function! DeleteAllBuffers()
+    execute "%bd | e#"
+endfunction
+
+function! FindInBuffer()
+  let curline = getline('.')
+  call inputsave()
+  let pattern = input('[FIND IN BUFFERS] Pattern : ')
+  call inputrestore()
+  let vim_command = "Ack ".pattern
+  execute vim_command
+endfunction
+
 """ Buffer Keybindings
 nnoremap <leader>bg :call GoToBuffer()<CR>
 nnoremap <leader>bd :call DeleteBuffer()<CR>
 nnoremap <leader>bD :call DeleteAllBuffers()<CR>
+nnoremap <leader>bf :call FindInBuffer()<CR>
 nnoremap <leader>bb :buffers<CR>:buffer<CR>
 nnoremap <leader>be :e<CR>
 nnoremap <leader>bl :bn<CR>
 nnoremap <leader>bk :bn<CR>
 nnoremap <leader>bh :bp<CR>
 nnoremap <leader>bj :bp<CR>
+
+""" Tab Keybindings (Views)
+nnoremap <leader>vn :tabnew<CR>
+nnoremap <leader>vl :tabnext<CR>
+nnoremap <leader>vk :tabnext<CR>
+nnoremap <leader>vh :tabprevious<CR>
+nnoremap <leader>vj :tabprevious<CR>
+nnoremap <leader>vd :tabclose<CR>
 
 """ Python Keybindings
 autocmd FileType python nnoremap <silent> <leader>lf :Black<CR>
