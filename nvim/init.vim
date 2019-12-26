@@ -31,6 +31,9 @@ Plug 'autozimu/LanguageClient-neovim', {
 
 call plug#end()
 
+""" Imports
+source ~/.config/nvim/menu.vim
+
 """ Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
 set nu
@@ -171,13 +174,23 @@ nnoremap <leader>bh :bp<CR>
 nnoremap <leader>bj :bp<CR>
 
 """ Tab Keybindings (Views)
-nnoremap <leader>vn :tabnew<CR>
-nnoremap <leader>vl :tabnext<CR>
-nnoremap <leader>vk :tabnext<CR>
-nnoremap <leader>vh :tabprevious<CR>
-nnoremap <leader>vj :tabprevious<CR>
-nnoremap <leader>vd :tabclose<CR>
+let g:keybinding#tab = g:CategoryKeybinding.new("g:keybinding#tab", "v", "View")
+call g:keybinding#tab.add(g:BasicKeybinding.new("n", "Create View", "tabnew"))
+call g:keybinding#tab.add(g:BasicKeybinding.new("l", "Next View", "tabnext"))
+call g:keybinding#tab.add(g:BasicKeybinding.new("k", "Next View", "tabnext"))
+call g:keybinding#tab.add(g:BasicKeybinding.new("h", "Previous View", "tabprevious"))
+call g:keybinding#tab.add(g:BasicKeybinding.new("j", "Previous View", "tabprevious"))
+call g:keybinding#tab.add(g:BasicKeybinding.new("d", "Close View", "tabclose"))
+call g:keybinding#root.add(g:keybinding#tab)
 
-""" Python Keybindings
-autocmd FileType python nnoremap <silent> <leader>lf :Black<CR>
-autocmd FileType python nnoremap <silent> <leader>lp :Pydocstring<CR>
+let g:keybinding#python = g:CategoryKeybinding.new("g:keybinding#python", "l", "Python")
+call g:keybinding#python.add(g:BasicKeybinding.new("f", "Format Document", "Black"))
+call g:keybinding#python.add(g:BasicKeybinding.new("p", "Generate Pydocstring", "Pydocstring"))
+call g:keybinding#python.add(g:BasicKeybinding.new("d", "Show Documentation", "call LanguageClient#textDocument_hover()"))
+call g:keybinding#python.add(g:BasicKeybinding.new("g", "GoTo Definition", "call LanguageClient#textDocument_definition()"))
+call g:keybinding#python.add(g:BasicKeybinding.new("r", "Raname", "call LanguageClient#textDocument_rename()"))
+call g:keybinding#python.add(g:BasicKeybinding.new("h", "Find References", "call LanguageClient_textDocument_references()"))
+call g:keybinding#python.add(g:BasicKeybinding.new("c", "Highlight References", "call LanguageClient#textDocument_documentHighlight()"))
+call g:keybinding#major.add("python", g:keybinding#python)
+
+call ResetKeybindings()
