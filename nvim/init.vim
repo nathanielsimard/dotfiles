@@ -36,7 +36,7 @@ source ~/.config/nvim/menu.vim
 
 """ Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
-set nu
+set number
 set relativenumber
 set nowrap
 let mapleader = ' '
@@ -76,21 +76,21 @@ let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_diagnosticsEnable=0
 
 """ FZF Keybindings
-let g:keybinding#file = g:CategoryKeybinding.new("g:keybinding#file", "f", "File")
-call g:keybinding#file.add(g:BasicKeybinding.new("f", "Fuzzy Find",  "FZF"))
+let g:keybinding#file = g:CategoryKeybinding.new('g:keybinding#file', 'f', 'File')
+call g:keybinding#file.add(g:BasicKeybinding.new('f', 'Fuzzy Find',  'FZF'))
 call g:keybinding#root.add(g:keybinding#file)
 
 """ Test Settings
-let test#strategy = "neovim"
+let test#strategy = 'neovim'
 let g:test#preserve_screen = 1
 
 """ Test Keybindings
-let g:keybinding#test = g:CategoryKeybinding.new("g:keybinding#test", "t", "Test")
-call g:keybinding#test.add(g:BasicKeybinding.new("n", "Test Nearest",  "TestNearest"))
-call g:keybinding#test.add(g:BasicKeybinding.new("f","Test File", "TestFile"))
-call g:keybinding#test.add(g:BasicKeybinding.new("s", "Test Suite", "TestSuite"))
-call g:keybinding#test.add(g:BasicKeybinding.new("l", "Test Last", "TestLast"))
-call g:keybinding#test.add(g:BasicKeybinding.new("v", "Test Visit", "TestVisit"))
+let g:keybinding#test = g:CategoryKeybinding.new('g:keybinding#test', 't', 'Test')
+call g:keybinding#test.add(g:BasicKeybinding.new('n', 'Test Nearest',  'TestNearest'))
+call g:keybinding#test.add(g:BasicKeybinding.new('f','Test File', 'TestFile'))
+call g:keybinding#test.add(g:BasicKeybinding.new('s', 'Test Suite', 'TestSuite'))
+call g:keybinding#test.add(g:BasicKeybinding.new('l', 'Test Last', 'TestLast'))
+call g:keybinding#test.add(g:BasicKeybinding.new('v', 'Test Visit', 'TestVisit'))
 call g:keybinding#root.add(g:keybinding#test)
 
 """ Window Navigation Keybindings
@@ -106,7 +106,7 @@ function! VerticalSplit()
 endfunction
 
 let g:terminal#id = 0
-let g:terminal#name = "myterminal"
+let g:terminal#name = 'myterminal'
 function! OpenTerminal()
     let l:bufexists = bufexists(g:terminal#name)
     if l:bufexists == 1
@@ -117,7 +117,7 @@ function! OpenTerminal()
             split
             wincmd J
             echo g:terminal#name
-            execute "buffer ".g:terminal#name
+            execute 'buffer '.g:terminal#name
             let g:terminal#id = win_getid()
         endif
     else
@@ -127,27 +127,27 @@ function! OpenTerminal()
         wincmd J
         setlocal norelativenumber
         setlocal nonumber
-        execute "file ".g:terminal#name
+        execute 'file '.g:terminal#name
         let g:terminal#id = win_getid()
     endif
     startinsert
 endfunction
 
 """ Window Keybindings
-let g:keybinding#window = g:CategoryKeybinding.new("g:keybinding#window", "w", "Window")
-call g:keybinding#window.add(g:BasicKeybinding.new("q", "Quit Window", "q"))
-call g:keybinding#window.add(g:BasicKeybinding.new("L", "Resize +Vertical", "vertical resize +5"))
-call g:keybinding#window.add(g:BasicKeybinding.new("H", "Resize -Vertical", "vertical resize -5"))
-call g:keybinding#window.add(g:BasicKeybinding.new("J", "Resize +Horizontal", "res +5"))
-call g:keybinding#window.add(g:BasicKeybinding.new("K", "Resize -Horizontal", "res -5"))
-call g:keybinding#window.add(g:BasicKeybinding.new("h", "Focus Left", "wincmd h"))
-call g:keybinding#window.add(g:BasicKeybinding.new("j", "Focus Down",  "wincmd j"))
-call g:keybinding#window.add(g:BasicKeybinding.new("k", "Focus Top",  "wincmd k"))
-call g:keybinding#window.add(g:BasicKeybinding.new("l", "Focus Right",  "wincmd l"))
-call g:keybinding#window.add(g:BasicKeybinding.new("v", "Split Vertical",  "call VerticalSplit()"))
-call g:keybinding#window.add(g:BasicKeybinding.new("b", "Split Horizontal",  "call HorizontalSplit()"))
-call g:keybinding#window.add(g:BasicKeybinding.new("t", "Open Terminal",  "call OpenTerminal()"))
-call g:keybinding#window.add(g:BasicKeybinding.new("e", "Open Explorer",  "NERDTreeFocus"))
+let g:keybinding#window = g:CategoryKeybinding.new('g:keybinding#window', 'w', 'Window')
+call g:keybinding#window.add(g:BasicKeybinding.new('q', 'Quit Window', 'q'))
+call g:keybinding#window.add(g:BasicKeybinding.new('L', 'Resize +Vertical', 'vertical resize +5'))
+call g:keybinding#window.add(g:BasicKeybinding.new('H', 'Resize -Vertical', 'vertical resize -5'))
+call g:keybinding#window.add(g:BasicKeybinding.new('J', 'Resize +Horizontal', 'res +5'))
+call g:keybinding#window.add(g:BasicKeybinding.new('K', 'Resize -Horizontal', 'res -5'))
+call g:keybinding#window.add(g:BasicKeybinding.new('h', 'Focus Left', 'wincmd h'))
+call g:keybinding#window.add(g:BasicKeybinding.new('j', 'Focus Down',  'wincmd j'))
+call g:keybinding#window.add(g:BasicKeybinding.new('k', 'Focus Top',  'wincmd k'))
+call g:keybinding#window.add(g:BasicKeybinding.new('l', 'Focus Right',  'wincmd l'))
+call g:keybinding#window.add(g:BasicKeybinding.new('v', 'Split Vertical',  'call VerticalSplit()'))
+call g:keybinding#window.add(g:BasicKeybinding.new('b', 'Split Horizontal',  'call HorizontalSplit()'))
+call g:keybinding#window.add(g:BasicKeybinding.new('t', 'Open Terminal',  'call OpenTerminal()'))
+call g:keybinding#window.add(g:BasicKeybinding.new('e', 'Open Explorer',  'NERDTreeFocus'))
 call g:keybinding#root.add(g:keybinding#window)
 
 """ Terminal Keybindings
@@ -159,7 +159,7 @@ function! GoToBuffer()
   call inputsave()
   let buffer_number = input('[GO TO BUFFER] Buffer number: ')
   call inputrestore()
-  let vim_command = "b".buffer_number
+  let vim_command = 'b'.buffer_number
   execute vim_command
 endfunction
 
@@ -168,12 +168,12 @@ function! DeleteBuffer()
   call inputsave()
   let buffer_number = input('[DELETE BUFFER] Buffer number: ')
   call inputrestore()
-  let vim_command = buffer_number."bd"
+  let vim_command = buffer_number.'bd'
   execute vim_command
 endfunction
 
 function! DeleteAllBuffers()
-    execute "%bd | e#"
+    execute '%bd | e#'
 endfunction
 
 function! FindInBuffer()
@@ -181,69 +181,70 @@ function! FindInBuffer()
   call inputsave()
   let pattern = input('[FIND IN BUFFERS] Pattern : ')
   call inputrestore()
-  let vim_command = "Ack ".pattern
+  let vim_command = 'Ack '.pattern
   execute vim_command
 endfunction
 
 """ Buffer Keybindings
-let g:keybinding#buffer = g:CategoryKeybinding.new("g:keybinding#buffer", "b", "Buffer")
-call g:keybinding#buffer.add(g:BasicKeybinding.new("g", "GoTo Buffer", "call GoToBuffer()"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("d", "Delete Buffer", "call DeleteBuffer()"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("D", "Delete All Buffers", "call DeleteAllBuffers()"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("f", "Find In Buffer", "call FindInBuffer()"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("b", "List All Buffers", "buffers"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("e", "New Buffer", "e"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("l", "Next Buffer", "bn"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("k", "Next Buffer", "bn"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("h", "Previous Buffer", "bp"))
-call g:keybinding#buffer.add(g:BasicKeybinding.new("j", "Previous Buffer", "bp"))
+let g:keybinding#buffer = g:CategoryKeybinding.new('g:keybinding#buffer', 'b', 'Buffer')
+call g:keybinding#buffer.add(g:BasicKeybinding.new('g', 'GoTo Buffer', 'call GoToBuffer()'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('d', 'Delete Buffer', 'call DeleteBuffer()'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('D', 'Delete All Buffers', 'call DeleteAllBuffers()'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('f', 'Find In Buffer', 'call FindInBuffer()'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('b', 'List All Buffers', 'buffers'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('e', 'New Buffer', 'e'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('l', 'Next Buffer', 'bn'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('k', 'Next Buffer', 'bn'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('h', 'Previous Buffer', 'bp'))
+call g:keybinding#buffer.add(g:BasicKeybinding.new('j', 'Previous Buffer', 'bp'))
 call g:keybinding#root.add(g:keybinding#buffer)
 
 """ Tab Keybindings (Views)
-let g:keybinding#tab = g:CategoryKeybinding.new("g:keybinding#tab", "v", "View")
-call g:keybinding#tab.add(g:BasicKeybinding.new("n", "Create View", "tabnew"))
-call g:keybinding#tab.add(g:BasicKeybinding.new("l", "Next View", "tabnext"))
-call g:keybinding#tab.add(g:BasicKeybinding.new("k", "Next View", "tabnext"))
-call g:keybinding#tab.add(g:BasicKeybinding.new("h", "Previous View", "tabprevious"))
-call g:keybinding#tab.add(g:BasicKeybinding.new("j", "Previous View", "tabprevious"))
-call g:keybinding#tab.add(g:BasicKeybinding.new("d", "Close View", "tabclose"))
+let g:keybinding#tab = g:CategoryKeybinding.new('g:keybinding#tab', 'v', 'View')
+call g:keybinding#tab.add(g:BasicKeybinding.new('n', 'Create View', 'tabnew'))
+call g:keybinding#tab.add(g:BasicKeybinding.new('l', 'Next View', 'tabnext'))
+call g:keybinding#tab.add(g:BasicKeybinding.new('k', 'Next View', 'tabnext'))
+call g:keybinding#tab.add(g:BasicKeybinding.new('h', 'Previous View', 'tabprevious'))
+call g:keybinding#tab.add(g:BasicKeybinding.new('j', 'Previous View', 'tabprevious'))
+call g:keybinding#tab.add(g:BasicKeybinding.new('d', 'Close View', 'tabclose'))
 call g:keybinding#root.add(g:keybinding#tab)
 
 """ Python Settings
 let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
-let g:keybinding#python = g:CategoryKeybinding.new("g:keybinding#python", "l", "Python")
-call g:keybinding#python.add(g:BasicKeybinding.new("f", "Format Document", "Black"))
-call g:keybinding#python.add(g:BasicKeybinding.new("p", "Generate Pydocstring", "Pydocstring"))
-call g:keybinding#python.add(g:BasicKeybinding.new("d", "Show Documentation", "call LanguageClient#textDocument_hover()"))
-call g:keybinding#python.add(g:BasicKeybinding.new("g", "GoTo Definition", "call LanguageClient#textDocument_definition()"))
-call g:keybinding#python.add(g:BasicKeybinding.new("r", "Raname", "call LanguageClient#textDocument_rename()"))
-call g:keybinding#python.add(g:BasicKeybinding.new("h", "Find References", "call LanguageClient_textDocument_references()"))
-call g:keybinding#python.add(g:BasicKeybinding.new("c", "Highlight References", "call LanguageClient#textDocument_documentHighlight()"))
-call g:keybinding#python.add(g:BasicKeybinding.new("e", "Next Error", "lnext"))
-call g:keybinding#python.add(g:BasicKeybinding.new("E", "Previous Error", "lprev"))
-call g:keybinding#major.add("python", g:keybinding#python)
+let g:keybinding#python = g:CategoryKeybinding.new('g:keybinding#python', 'l', 'Python')
+call g:keybinding#python.add(g:BasicKeybinding.new('f', 'Format Document', 'Black'))
+call g:keybinding#python.add(g:BasicKeybinding.new('p', 'Generate Pydocstring', 'Pydocstring'))
+call g:keybinding#python.add(g:BasicKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
+call g:keybinding#python.add(g:BasicKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
+call g:keybinding#python.add(g:BasicKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+call g:keybinding#python.add(g:BasicKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
+call g:keybinding#python.add(g:BasicKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+call g:keybinding#python.add(g:BasicKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#python.add(g:BasicKeybinding.new('E', 'Previous Error', 'lprev'))
+call g:keybinding#major.add('python', g:keybinding#python)
 
 """ LaTeX Settings
-let g:keybinding#tex = g:CategoryKeybinding.new("g:keybinding#tex", "l", "LaTeX")
-call g:keybinding#tex.add(g:BasicKeybinding.new("d", "Show Documentation", "call LanguageClient#textDocument_hover()"))
-call g:keybinding#tex.add(g:BasicKeybinding.new("g", "GoTo Definition", "call LanguageClient#textDocument_definition()"))
-call g:keybinding#tex.add(g:BasicKeybinding.new("r", "Raname", "call LanguageClient#textDocument_rename()"))
-call g:keybinding#tex.add(g:BasicKeybinding.new("h", "Find References", "call LanguageClient_textDocument_references()"))
-call g:keybinding#tex.add(g:BasicKeybinding.new("c", "Highlight References", "call LanguageClient#textDocument_documentHighlight()"))
-call g:keybinding#tex.add(g:BasicKeybinding.new("e", "Next Error", "lnext"))
-call g:keybinding#tex.add(g:BasicKeybinding.new("E", "Previous Error", "lprev"))
-call g:keybinding#major.add("LaTeX", g:keybinding#tex)
+let g:keybinding#tex = g:CategoryKeybinding.new('g:keybinding#tex', 'l', 'LaTeX')
+call g:keybinding#tex.add(g:BasicKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
+call g:keybinding#tex.add(g:BasicKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
+call g:keybinding#tex.add(g:BasicKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+call g:keybinding#tex.add(g:BasicKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
+call g:keybinding#tex.add(g:BasicKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+call g:keybinding#tex.add(g:BasicKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#tex.add(g:BasicKeybinding.new('E', 'Previous Error', 'lprev'))
+call g:keybinding#major.add('LaTeX', g:keybinding#tex)
 
 """ Javascript Settings
-let g:keybinding#js = g:CategoryKeybinding.new("g:keybinding#js", "l", "Javascript")
-call g:keybinding#js.add(g:BasicKeybinding.new("d", "Show Documentation", "call LanguageClient#textDocument_hover()"))
-call g:keybinding#js.add(g:BasicKeybinding.new("g", "GoTo Definition", "call LanguageClient#textDocument_definition()"))
-call g:keybinding#js.add(g:BasicKeybinding.new("r", "Raname", "call LanguageClient#textDocument_rename()"))
-call g:keybinding#js.add(g:BasicKeybinding.new("h", "Find References", "call LanguageClient_textDocument_references()"))
-call g:keybinding#js.add(g:BasicKeybinding.new("c", "Highlight References", "call LanguageClient#textDocument_documentHighlight()"))
-call g:keybinding#js.add(g:BasicKeybinding.new("e", "Next Error", "lnext"))
-call g:keybinding#js.add(g:BasicKeybinding.new("E", "Previous Error", "lprev"))
-call g:keybinding#major.add("javascript", g:keybinding#js)
+let g:keybinding#js = g:CategoryKeybinding.new('g:keybinding#js', 'l', 'Javascript')
+call g:keybinding#js.add(g:BasicKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
+call g:keybinding#js.add(g:BasicKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
+call g:keybinding#js.add(g:BasicKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+call g:keybinding#js.add(g:BasicKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
+call g:keybinding#js.add(g:BasicKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+call g:keybinding#js.add(g:BasicKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#js.add(g:BasicKeybinding.new('E', 'Previous Error', 'lprev'))
+call g:keybinding#major.add('javascript', g:keybinding#js)
 
-call ResetKeybindings()
+let g:show_help = 1
+nnoremap <leader> :call g:keybinding#root.execute()<CR>
