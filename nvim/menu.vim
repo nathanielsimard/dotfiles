@@ -18,9 +18,7 @@ function g:BasicKeybinding.new(key, description, command)
 endfunction
 
 function g:BasicKeybinding.execute()
-    nmapclear
-    nnoremap <leader> :call ShowKeybindings()<CR>
-    bd
+    call ExitKeybindings()
     execute self.command
 endfunction
 
@@ -40,14 +38,17 @@ function g:CategoryKeybinding.execute()
     let l:keys = []
     let l:descriptions = []
     let l:index = 0
+
     for keybinding in self.keybindings
         call add(l:keys, keybinding.key)
         call add(l:descriptions, keybinding.description)
 
-        execute "nnoremap ".keybinding.key." :call "self.path.".keybindings[".l:index."].execute()<CR>"
+        execute "nnoremap <silent>".keybinding.key." :call "self.path.".keybindings[".l:index."].execute()<CR>"
         let l:index = l:index + 1
     endfor
-    call s:show_help_windows(self.description, l:keys, l:descriptions)
+    if g:show_help == 1
+        call s:show_help_windows(self.description, l:keys, l:descriptions)
+    endif
 endfunction
 
 let g:FileTypeKeybinding={}
@@ -177,22 +178,20 @@ function! s:show_help_windows(title, keys, comments)
 endfunction
 
 function s:create_suchhelp_split(number_of_lines)
-    try
-        bdelete __SUCH_HELP__
-    catch
-    endtry
-    execute a:number_of_lines."split __SUCH_HELP__"
+    call SUCHVim_toggle_help_filetype()
+    split __SUCH_HELP__
+    wincmd J
     normal! ggdG
     setlocal filetype=suchhelp
     setlocal buftype=nofile
+    setlocal norelativenumber
+    setlocal nonumber
 endfunction
 
 function! SUCHVim_toggle_help_filetype()
     if bufwinnr("__SUCH_HELP__") > 0
+        wincmd p
         bdelete __SUCH_HELP__
-    else
-        let my_filetype = &filetype
-        call SUCHVim_show_help_tag(my_filetype)
     endif
 endfunction
 
@@ -214,20 +213,22 @@ function! ShowKeybindings()
 endfunction
 
 function! ExitKeybindings()
-    bd
+    let l:current_buffer_number = bufnr('%')
     call ResetKeybindings()
+    call SUCHVim_toggle_help_filetype()
 endfunction
 
 let g:current_buffer_type = ""
+let g:show_help = 0
 function! UpdateBufferType() 
     let l:current_buffer_type = &ft
-    if l:current_buffer_type == "suchhelp"
-    else
+    if l:current_buffer_type != "suchhelp"
         let g:current_buffer_type = l:current_buffer_type
     endif
 endfunction
 
-autocmd FileType * call UpdateBufferType()
+autocmd WinEnter * call UpdateBufferType()
 function! ResetKeybindings()
+    nmapclear
     nnoremap <leader> :call ShowKeybindings()<CR>
 endfunction
