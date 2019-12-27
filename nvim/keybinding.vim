@@ -1,3 +1,8 @@
+" Keybinding Menu State
+"
+" INACTIVE: The user is not navigating the keybindings.
+" SHOWING: The user is navigating the keybindings with a visible menu.
+" HIDING: The user is navigating the keybindings with an invisible menu.
 let s:INACTIVE='inactive'
 let s:SHOWING='showing'
 let s:HIDING='hiding'
@@ -5,14 +10,14 @@ let s:HIDING='hiding'
 let s:keybinding_state=s:INACTIVE
 let s:timer_id=-1
 
-function g:keybinding#show_menu(description, keybindings)
+function s:show_menu(description, keybindings)
     if g:keybinding#show == 1
         call menu#open(a:description, values(a:keybindings))
         redraw
     endif
 endfunction
 
-function g:keybinding#close_menu()
+function s:close_menu()
     let s:keybinding_state=s:INACTIVE
     call menu#close()
 endfunction
@@ -30,7 +35,7 @@ function g:Keybinding.new(key, description)
 endfunction
 
 function g:Keybinding.execute()
-    echo 'Not Implemented'
+    throw 'Not Implemented'
 endfunction
 
 " Command Keybinding Class
@@ -45,7 +50,7 @@ function g:CommandKeybinding.new(key, description, command)
 endfunction
 
 function g:CommandKeybinding.execute()
-    call g:keybinding#close_menu()
+    call s:close_menu()
     execute self.command
 endfunction
 
@@ -71,7 +76,7 @@ endfunction
 
 function g:CategoryKeybinding.execute()
     if s:keybinding_state == s:SHOWING
-        call g:keybinding#show_menu(self.description, self.keybindings)
+        call s:show_menu(self.description, self.keybindings)
     else
         let s:keybinding_state = s:HIDING
         let g:timer_id = timer_start(g:keybinding#wait_time, self.show_menu_after_timer)
@@ -79,23 +84,26 @@ function g:CategoryKeybinding.execute()
 
     try
         call self.execute_keybinding()
-    catch
-        """ Catch User Interuption
+    catch 
+        if match(v:exception, s:USER_INTERUPTION) < 0 " Not USER_INTERUPTION exception
+            throw v:exception
+        endif
+
+        call s:close_menu()
     endtry
 endfunction
 
 function g:CategoryKeybinding.show_menu_after_timer(timer_id)
     if g:timer_id == a:timer_id && s:keybinding_state == s:HIDING
         let s:keybinding_state = s:SHOWING
-        call g:keybinding#show_menu(self.description, self.keybindings)
+        call s:show_menu(self.description, self.keybindings)
     endif
 endfunction
 
 function g:CategoryKeybinding.read_user()
     let l:user_input = getchar()
     if l:user_input == 27 "Escape caracter number
-        call g:keybinding#close_menu()
-        throw 'User Interuption'
+        throw s:USER_INTERUPTION
     endif
 
     return nr2char(l:user_input)
@@ -116,6 +124,7 @@ endfunction
 " When this keybinding is activated, it will select which of 
 "   its keybindings to execute depending of the current buffer
 "   filetype.
+let s:USER_INTERUPTION='User Interuption'
 let g:FileTypeKeybinding={}
 function g:FileTypeKeybinding.new(key, description)
     let l:newMajorModeKeybinding = g:Keybinding.new(a:key, a:description)
@@ -141,7 +150,7 @@ function g:FileTypeKeybinding.execute()
     if has_key(self.keybindings, l:current_buffer_type)
         call self.keybindings[l:current_buffer_type].execute()
     else
-        call g:keybinding#close_menu()
+        call s:close_menu()
         echo "No major mode for filetype '".l:current_buffer_type."'"
     endif
 endfunction
