@@ -1,3 +1,22 @@
+let s:INACTIVE='inactive'
+let s:SHOWING='showing'
+let s:HIDING='hiding'
+
+let s:keybinding_state=s:INACTIVE
+let s:timer_id=-1
+
+function g:keybinding#show_menu(description, keybindings)
+    if g:keybinding#show == 1
+        call menu#open(a:description, values(a:keybindings))
+        redraw
+    endif
+endfunction
+
+function g:keybinding#close_menu()
+    let s:keybinding_state=s:INACTIVE
+    call menu#close()
+endfunction
+
 " Basic Keybinding Class (Abstract)
 " Each keybinding has a key and a description.
 "
@@ -26,7 +45,7 @@ function g:CommandKeybinding.new(key, description, command)
 endfunction
 
 function g:CommandKeybinding.execute()
-    call menu#close()
+    call g:keybinding#close_menu()
     execute self.command
 endfunction
 
@@ -51,9 +70,11 @@ function g:CategoryKeybinding.add(keybinding)
 endfunction
 
 function g:CategoryKeybinding.execute()
-    if g:keybinding#show == 1
-        call menu#open(self.description, values(self.keybindings))
-        redraw
+    if s:keybinding_state == s:SHOWING
+        call g:keybinding#show_menu(self.description, self.keybindings)
+    else
+        let s:keybinding_state = s:HIDING
+        let g:timer_id = timer_start(g:keybinding#wait_time, self.show_menu_after_timer)
     endif
 
     try
@@ -63,10 +84,17 @@ function g:CategoryKeybinding.execute()
     endtry
 endfunction
 
+function g:CategoryKeybinding.show_menu_after_timer(timer_id)
+    if g:timer_id == a:timer_id && s:keybinding_state == s:HIDING
+        let s:keybinding_state = s:SHOWING
+        call g:keybinding#show_menu(self.description, self.keybindings)
+    endif
+endfunction
+
 function g:CategoryKeybinding.read_user()
     let l:user_input = getchar()
     if l:user_input == 27 "Escape caracter number
-        call menu#close()
+        call g:keybinding#close_menu()
         throw 'User Interuption'
     endif
 
@@ -100,7 +128,7 @@ function g:FileTypeKeybinding.add(filetype, keybinding)
 endfunction
 
 function g:FileTypeKeybinding.execute()
-    if g:keybinding#show == 1
+    if g:keybinding#show == 1 && s:keybinding_state == s:SHOWING
         " Select the buffer type of the previous window
         " because the current one is keybinding menu.
         wincmd p
@@ -109,15 +137,19 @@ function g:FileTypeKeybinding.execute()
     else
         let l:current_buffer_type = &filetype
     endif
+
     if has_key(self.keybindings, l:current_buffer_type)
         call self.keybindings[l:current_buffer_type].execute()
     else
+        call g:keybinding#close_menu()
         echo "No major mode for filetype '".l:current_buffer_type."'"
     endif
 endfunction
 
 " Basic Keybinding Configuration 
 let g:keybinding#show = 0
+let g:keybinding#wait_time = 1000
 let g:keybinding#root = g:CategoryKeybinding.new('no important', 'Keybinding Menu')
 let g:keybinding#major = g:FileTypeKeybinding.new('l', 'Language Specific')
 call g:keybinding#root.add(g:keybinding#major)
+

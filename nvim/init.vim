@@ -244,4 +244,4 @@ call g:keybinding#js.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev')
 call g:keybinding#major.add('javascript', g:keybinding#js)
 
 let g:keybinding#show = 1
-nnoremap <leader> :call g:keybinding#root.execute()<CR>
+nnoremap <silent> <leader> :call g:keybinding#root.execute()<CR>

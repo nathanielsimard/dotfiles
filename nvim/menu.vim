@@ -43,7 +43,7 @@ function! menu#close()
     endif
 endfunction
 
-function s:create_window()
+    function s:create_window()
     call menu#close()
     execute 'split '.s:MENU_NAME
     wincmd J
@@ -91,3 +91,4 @@ function s:longuest_keybinding(keybindings)
 
     return l:current_length
 endfunction
+
