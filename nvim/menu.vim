@@ -5,7 +5,8 @@ let s:MENU_NAME = 'keybinding-menu'
 function! menu#open(title, keybindings)
     call s:create_window()
 
-    let l:tag_length = s:longuest_keybinding(a:keybindings) + 4 "The [ ]  and space after and before
+    let l:default_padding = 20
+    let l:tag_length = s:longuest_keybinding(a:keybindings) + l:default_padding
     let l:number_keybindings_per_line = s:number_keybindings_per_line(l:tag_length)
     let l:additional_padding = s:text_padding(l:tag_length, len(a:keybindings), l:number_keybindings_per_line)
     let l:tag_length = l:tag_length + l:additional_padding 
@@ -46,7 +47,7 @@ function s:create_window()
     call menu#close()
     execute 'split '.s:MENU_NAME
     wincmd J
-    setlocal filetype=menu
+    setlocal filetype=keybindingMenu
     setlocal buftype=nofile
     setlocal norelativenumber
     setlocal nonumber
@@ -58,7 +59,7 @@ function s:text_padding(tag_length, number_keybindings, number_keybindings_per_l
         let l:number_keybindings_per_line = a:number_keybindings
     endif
 
-    return float2nr(floor((winwidth(0) - a:tag_length * l:number_keybindings_per_line) / l:number_keybindings_per_line)) - 1
+    return float2nr(floor((winwidth(0) - a:tag_length * l:number_keybindings_per_line) / l:number_keybindings_per_line))
 endfunction
 
 function s:create_keybinding_text(keybinding, tag_length)
