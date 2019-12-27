@@ -105,10 +105,31 @@ function! VerticalSplit()
     wincmd l
 endfunction
 
+let g:terminal#id = 0
+let g:terminal#name = "myterminal"
 function! OpenTerminal()
-    split
-    wincmd j
-    terminal
+    let l:bufexists = bufexists(g:terminal#name)
+    if l:bufexists == 1
+        call win_gotoid(g:terminal#id)
+        let l:terminal_id = win_getid()
+
+        if l:terminal_id != g:terminal#id
+            split
+            wincmd J
+            echo g:terminal#name
+            execute "buffer ".g:terminal#name
+            let g:terminal#id = win_getid()
+        endif
+    else
+        split
+        wincmd j
+        terminal
+        wincmd J
+        setlocal norelativenumber
+        setlocal nonumber
+        execute "file ".g:terminal#name
+        let g:terminal#id = win_getid()
+    endif
     startinsert
 endfunction
 
