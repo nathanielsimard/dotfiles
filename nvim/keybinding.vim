@@ -7,20 +7,78 @@ let s:INACTIVE='inactive'
 let s:SHOWING='showing'
 let s:HIDING='hiding'
 
-let s:keybinding_state=s:INACTIVE
-let s:timer_id=-1
+" Menu Class
+let g:Menu={}
+function g:Menu.new()
+    let l:newMenu = copy(self)
+    let l:newMenu.timer_id = -1
+    let l:newMenu.keybinding_state = s:INACTIVE
+    let l:newMenu.description = ''
+    let l:newMenu.keybindings = {}
 
-function s:show_menu(description, keybindings)
+    return l:newMenu
+endfunction
+
+function g:Menu.show(description, keybindings)
+    let self.description = a:description
+    let self.keybindings = a:keybindings
+
+    if self.keybinding_state == s:SHOWING
+        call self.show_directly()
+    else
+        let self.keybinding_state = s:HIDING
+        let self.timer_id = timer_start(g:keybinding#wait_time, self.show_after_timer)
+    endif
+
+    try
+        call self.execute_keybinding()
+    catch 
+        if match(v:exception, s:USER_INTERUPTION) < 0 " Not USER_INTERUPTION exception
+            throw v:exception
+        endif
+
+        call self.close()
+    endtry
+endfunction
+
+function g:Menu.close()
+    let self.keybinding_state = s:INACTIVE
+    call menu#close()
+endfunction
+
+function g:Menu.show_directly()
     if g:keybinding#show == 1
-        call menu#open(a:description, values(a:keybindings))
+        call menu#open(self.description, values(self.keybindings))
         redraw
     endif
 endfunction
 
-function s:close_menu()
-    let s:keybinding_state=s:INACTIVE
-    call menu#close()
+function g:Menu.show_after_timer(timer_id)
+    if self.timer_id == a:timer_id && self.keybinding_state == s:HIDING
+        let self.keybinding_state = s:SHOWING
+        call self.show_directly()
+    endif
 endfunction
+
+function g:Menu.execute_keybinding()
+    let l:user_input = self.read_user()
+    while !has_key(self.keybindings, l:user_input)
+        let l:user_input = self.read_user()
+    endwhile
+
+    call self.keybindings[l:user_input].execute()
+endfunction
+
+function g:Menu.read_user()
+    let l:user_input = getchar()
+    if l:user_input == 27 "Escape caracter number
+        throw s:USER_INTERUPTION
+    endif
+
+    return nr2char(l:user_input)
+endfunction
+
+let s:MENU = g:Menu.new()
 
 " Basic Keybinding Class (Abstract)
 " Each keybinding has a key and a description.
@@ -50,7 +108,7 @@ function g:CommandKeybinding.new(key, description, command)
 endfunction
 
 function g:CommandKeybinding.execute()
-    call s:close_menu()
+    call s:MENU.close()
     execute self.command
 endfunction
 
@@ -63,59 +121,15 @@ let g:CategoryKeybinding={}
 function g:CategoryKeybinding.new(key, description)
     let l:newCategoryKeybinding = g:Keybinding.new(a:key, a:description)
     let l:newCategoryKeybinding.keybindings = {}
-    let l:newCategoryKeybinding.keys = []
-    let l:newCategoryKeybinding.descriptions = []
     return extend(l:newCategoryKeybinding, copy(self))
 endfunction
 
 function g:CategoryKeybinding.add(keybinding)
-    call add(self.keys, a:keybinding.key)
-    call add(self.descriptions, a:keybinding.description)
     let self.keybindings[a:keybinding.key] = a:keybinding
 endfunction
 
 function g:CategoryKeybinding.execute()
-    if s:keybinding_state == s:SHOWING
-        call s:show_menu(self.description, self.keybindings)
-    else
-        let s:keybinding_state = s:HIDING
-        let g:timer_id = timer_start(g:keybinding#wait_time, self.show_menu_after_timer)
-    endif
-
-    try
-        call self.execute_keybinding()
-    catch 
-        if match(v:exception, s:USER_INTERUPTION) < 0 " Not USER_INTERUPTION exception
-            throw v:exception
-        endif
-
-        call s:close_menu()
-    endtry
-endfunction
-
-function g:CategoryKeybinding.show_menu_after_timer(timer_id)
-    if g:timer_id == a:timer_id && s:keybinding_state == s:HIDING
-        let s:keybinding_state = s:SHOWING
-        call s:show_menu(self.description, self.keybindings)
-    endif
-endfunction
-
-function g:CategoryKeybinding.read_user()
-    let l:user_input = getchar()
-    if l:user_input == 27 "Escape caracter number
-        throw s:USER_INTERUPTION
-    endif
-
-    return nr2char(l:user_input)
-endfunction
-
-function g:CategoryKeybinding.execute_keybinding()
-    let l:user_input = self.read_user()
-    while !has_key(self.keybindings, l:user_input)
-        let l:user_input = self.read_user()
-    endwhile
-
-    call self.keybindings[l:user_input].execute()
+    call s:MENU.show(self.description, self.keybindings)
 endfunction
 
 " File Type Keybinding Class
@@ -128,18 +142,27 @@ let s:USER_INTERUPTION='User Interuption'
 let g:FileTypeKeybinding={}
 function g:FileTypeKeybinding.new(key, description)
     let l:newMajorModeKeybinding = g:Keybinding.new(a:key, a:description)
-    let l:newMajorModeKeybinding.keybindings = {}
+    let l:newMajorModeKeybinding.keybindings_group = {}
+    let l:newMajorModeKeybinding.defaults = {}
     return extend(l:newMajorModeKeybinding, copy(self))
 endfunction
 
+function g:FileTypeKeybinding.default(keybinding)
+    let self.defaults[a:keybinding.key] = a:keybinding
+endfunction
+
 function g:FileTypeKeybinding.add(filetype, keybinding)
-    let self.keybindings[a:filetype] = a:keybinding
+    if !has_key(self.keybindings_group, a:filetype)
+        let self.keybindings_group[a:filetype] = {}
+    endif
+
+    let self.keybindings_group[a:filetype][a:keybinding.key] = a:keybinding
 endfunction
 
 function g:FileTypeKeybinding.execute()
-    if g:keybinding#show == 1 && s:keybinding_state == s:SHOWING
+    if g:keybinding#show == 1 && s:MENU.keybinding_state == s:SHOWING
         " Select the buffer type of the previous window
-        " because the current one is keybinding menu.
+        " because the current one is the keybinding menu.
         wincmd p
         let l:current_buffer_type = &filetype
         wincmd p
@@ -147,11 +170,15 @@ function g:FileTypeKeybinding.execute()
         let l:current_buffer_type = &filetype
     endif
 
-    if has_key(self.keybindings, l:current_buffer_type)
-        call self.keybindings[l:current_buffer_type].execute()
+    let l:keybindings = copy(self.defaults)
+    if has_key(self.keybindings_group, l:current_buffer_type)
+        let l:keybindings = extend(l:keybindings, self.keybindings_group[l:current_buffer_type])
+        call s:MENU.show(self.description, l:keybindings)
+    elseif l:keybindings !=# {}
+        call s:MENU.show(self.description, l:keybindings)
     else
-        call s:close_menu()
-        echo "No major mode for filetype '".l:current_buffer_type."'"
+        call s:MENU.close()
+        echo '['.self.description."] No keybindings for filetype '".l:current_buffer_type."'"
     endif
 endfunction
 

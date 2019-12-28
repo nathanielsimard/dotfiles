@@ -79,12 +79,12 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_diagnosticsEnable=0
 
-function s:Keybinding_lsp(category_keybinding)
-    call a:category_keybinding.add(g:CommandKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
-    call a:category_keybinding.add(g:CommandKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
-    call a:category_keybinding.add(g:CommandKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
-    call a:category_keybinding.add(g:CommandKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
-    call a:category_keybinding.add(g:CommandKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+function s:Keybinding_lsp(filetype)
+    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
+    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
+    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
+    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
 endfunction
 
 """ FZF Keybindings
@@ -228,28 +228,22 @@ call g:keybinding#root.add(g:keybinding#tab)
 """ Python Settings
 let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
-let g:keybinding#python = g:CategoryKeybinding.new('l', 'Python')
-call g:keybinding#python.add(g:CommandKeybinding.new('f', 'Format Document', 'Black'))
-call g:keybinding#python.add(g:CommandKeybinding.new('p', 'Generate Pydocstring', 'Pydocstring'))
-call s:Keybinding_lsp(g:keybinding#python)
-call g:keybinding#python.add(g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#python.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
-call g:keybinding#major.add('python', g:keybinding#python)
+call s:Keybinding_lsp('python')
+call g:keybinding#major.add('python', g:CommandKeybinding.new('f', 'Format Document', 'Black'))
+call g:keybinding#major.add('python', g:CommandKeybinding.new('p', 'Generate Pydocstring', 'Pydocstring'))
+call g:keybinding#major.add('python', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#major.add('python', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
 """ LaTeX Settings
-let g:keybinding#tex = g:CategoryKeybinding.new('l', 'LaTeX')
-call s:Keybinding_lsp(g:keybinding#tex)
-call g:keybinding#tex.add(g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#tex.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
-call g:keybinding#major.add('LaTeX', g:keybinding#tex)
+call s:Keybinding_lsp('tex')
+call g:keybinding#major.add('tex', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#major.add('tex', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
 
 """ Javascript Settings
-let g:keybinding#js = g:CategoryKeybinding.new('l', 'Javascript')
-call s:Keybinding_lsp(g:keybinding#js)
-call g:keybinding#js.add(g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#js.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
-call g:keybinding#major.add('javascript', g:keybinding#js)
+call s:Keybinding_lsp('javascript')
+call g:keybinding#major.add('javascript', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#major.add('javascript', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
 let g:keybinding#show = 1
 nnoremap <silent> <leader> :call g:keybinding#root.execute()<CR>
