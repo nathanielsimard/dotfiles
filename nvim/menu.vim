@@ -12,7 +12,7 @@ function! menu#open(title, keybindings)
     let l:current_line_number = 1
     let l:current_tag_inline = 0
     let l:current_line_text = ''
-    let l:text = []
+    let l:text = [s:title_text(a:title)]
 
     for keybinding in a:keybindings
         if l:current_tag_inline == l:number_keybindings_per_line
@@ -122,6 +122,22 @@ function s:FloatingWindow.open()
     setlocal buftype=nofile
     setlocal norelativenumber
     setlocal nonumber
+endfunction
+
+function s:title_text(title)
+    let l:text = ''
+    let l:number_padding = float2nr(floor((&columns - len(a:title) - 4) / 2))
+    let l:current_padding = l:number_padding
+    while l:current_padding > 0
+        let l:text = l:text.'-'
+        let l:current_padding = l:current_padding - 1
+    endwhile
+
+    let l:text = l:text.'< '.a:title.' >'.l:text
+    if (l:number_padding * 2) < &columns
+        let l:text = l:text.'-'
+    endif
+    return l:text
 endfunction
 
 function s:text_padding(tag_length, number_keybindings, number_keybindings_per_line)

@@ -137,7 +137,6 @@ function! OpenTerminal()
         split
         wincmd j
         terminal
-        wincmd J
         setlocal norelativenumber
         setlocal nonumber
         execute 'file '.g:terminal#name

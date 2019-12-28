@@ -157,7 +157,7 @@ endfunction
 
 " Basic Keybinding Configuration 
 let g:keybinding#show = 0
-let g:keybinding#wait_time = 1000
+let g:keybinding#wait_time = 300
 let g:keybinding#root = g:CategoryKeybinding.new('no important', 'Keybinding Menu')
 let g:keybinding#major = g:FileTypeKeybinding.new('l', 'Language Specific')
 call g:keybinding#root.add(g:keybinding#major)
