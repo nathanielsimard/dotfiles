@@ -36,7 +36,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 call plug#end()
 
 """ Imports
-source ~/.config/nvim/menu.vim
+source ~/.config/nvim/keybinding.vim
 
 """ Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
@@ -69,6 +69,9 @@ let g:neomake_open_list = 1
 let g:neomake_check_on_open = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
 
+call g:keybinding#major.add(g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#major.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
+
 """ Language Server Settings
 set hidden
 let g:LanguageClient_serverCommands = {
@@ -80,11 +83,11 @@ let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_diagnosticsEnable=0
 
 function s:Keybinding_lsp(filetype)
-    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
-    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
-    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
-    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
-    call g:keybinding#major.add(a:filetype, g:CommandKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
+    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
+    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
+    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
 endfunction
 
 """ FZF Keybindings
@@ -229,21 +232,18 @@ call g:keybinding#root.add(g:keybinding#tab)
 let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
 call s:Keybinding_lsp('python')
-call g:keybinding#major.add('python', g:CommandKeybinding.new('f', 'Format Document', 'Black'))
-call g:keybinding#major.add('python', g:CommandKeybinding.new('p', 'Generate Pydocstring', 'Pydocstring'))
-call g:keybinding#major.add('python', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#major.add('python', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
+call g:keybinding#major.add_filetype('python', g:CommandKeybinding.new('f', 'Format Document', 'Black'))
+call g:keybinding#major.add_filetype('python', g:CommandKeybinding.new('p', 'Generate Pydocstring', 'Pydocstring'))
 
 """ LaTeX Settings
 call s:Keybinding_lsp('tex')
-call g:keybinding#major.add('tex', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#major.add('tex', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
+call g:keybinding#major.add_filetype('tex', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#major.add_filetype('tex', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
 
 """ Javascript Settings
 call s:Keybinding_lsp('javascript')
-call g:keybinding#major.add('javascript', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#major.add('javascript', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
+call g:keybinding#major.add_filetype('javascript', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call g:keybinding#major.add_filetype('javascript', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
-let g:keybinding#show = 1
 nnoremap <silent> <leader> :call g:keybinding#root.execute()<CR>

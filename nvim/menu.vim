@@ -1,20 +1,111 @@
-source ~/.config/nvim/keybinding.vim
+" Menu Options
 let g:menu#type='floating'
-let s:current_window = {}
+let g:menu#show = 1
+let g:menu#delay = 300
 
-function! menu#open(title, keybindings)
+" Global Menu State
+"
+" INACTIVE: The user is not navigating the keybindings.
+" SHOWING: The user is navigating the keybindings with a visible menu.
+" HIDING: The user is navigating the keybindings with an invisible menu.
+let g:menu#STATE_INACTIVE='inactive'
+let g:menu#STATE_SHOWING='showing'
+let g:menu#STATE_HIDING='hiding'
+
+" User can interup the menu with <ESC>
+let s:UserInteruptionException='User Interuption Exception'
+
+" Menu Class
+let g:Menu={}
+function g:Menu.new()
+    let l:newMenu = copy(self)
+    let l:newMenu.timer_id = -1
+    let l:newMenu.state = g:menu#STATE_INACTIVE
+    let l:newMenu.current_window = {}
+    let l:newMenu.title = ''
+    let l:newMenu.keybindings = {}
+    return l:newMenu
+endfunction
+
+function g:Menu.show(description, keybindings)
+    let self.title = a:description
+    let self.keybindings = a:keybindings
+
+    if self.state == g:menu#STATE_SHOWING
+        call self.draw()
+    else
+        let self.state = g:menu#STATE_HIDING
+        let self.timer_id = timer_start(g:menu#delay, self.show_after_timer)
+    endif
+
+    try
+        call self.execute_keybinding()
+    catch 
+        if match(v:exception, s:UserInteruptionException) < 0 " Not USER_INTERUPTION exception
+            throw v:exception
+        endif
+
+        call self.close()
+    endtry
+endfunction
+
+function g:Menu.close()
+    if self.current_window !=# {}
+        call self.current_window.close()
+    endif
+
+    let self.state = g:menu#STATE_INACTIVE
+    let self.current_window = {}
+endfunction
+
+function g:Menu.show_after_timer(timer_id)
+    if self.timer_id == a:timer_id && self.state == g:menu#STATE_HIDING
+        let self.state = g:menu#STATE_SHOWING
+        call self.draw()
+    endif
+endfunction
+
+function g:Menu.execute_keybinding()
+    let l:user_input = self.read_user()
+    while !has_key(self.keybindings, l:user_input)
+        let l:user_input = self.read_user()
+    endwhile
+
+    let l:keybinding = self.keybindings[l:user_input]
+    try
+        call l:keybinding.execute()
+    catch
+        echo '['.l:keybinding.description.'] Failed : '.v:exception
+    endtry
+endfunction
+
+function g:Menu.read_user()
+    let l:user_input = getchar()
+    if l:user_input == 27 "Escape caracter number
+        throw s:UserInteruptionException
+    endif
+
+    return nr2char(l:user_input)
+endfunction
+
+function g:Menu.draw()
+    if g:menu#show !=# 1
+        return
+    endif
+
+    let l:keybindings = values(self.keybindings)
     let l:default_padding = 20
-    let l:tag_length = s:longuest_keybinding(a:keybindings) + l:default_padding
+    let l:tag_length = s:longuest_keybinding(l:keybindings) + l:default_padding
     let l:number_keybindings_per_line = s:number_keybindings_per_line(l:tag_length)
-    let l:additional_padding = s:text_padding(l:tag_length, len(a:keybindings), l:number_keybindings_per_line)
+    let l:additional_padding = s:text_padding(l:tag_length, len(l:keybindings), l:number_keybindings_per_line)
     let l:tag_length = l:tag_length + l:additional_padding 
 
     let l:current_line_number = 1
     let l:current_tag_inline = 0
     let l:current_line_text = ''
-    let l:text = [s:title_text(a:title)]
+    let l:text = [s:title_text(self.title)]
 
-    for keybinding in a:keybindings
+    for keybinding in l:keybindings
         if l:current_tag_inline == l:number_keybindings_per_line
             call add(l:text, l:current_line_text)
 
@@ -32,20 +123,14 @@ function! menu#open(title, keybindings)
         call add(l:text, l:current_line_text)
     endif
 
-    call menu#close()
+    call self.close()
     if g:menu#type ==# 'floating'
-        let s:current_window = s:FloatingWindow.new(l:text)
+        let self.current_window = s:FloatingWindow.new(l:text)
     else
-        let s:current_window = s:BufferWindow.new(l:text)
+        let self.current_window = s:BufferWindow.new(l:text)
     endif
-    call s:current_window.open()
-endfunction
-
-function! menu#close()
-    if s:current_window !=# {}
-        call s:current_window.close()
-    endif
-    let s:current_window = {}
+    call self.current_window.open()
+    redraw
 endfunction
 
 " Window Class (Abstract)
