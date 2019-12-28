@@ -1,4 +1,8 @@
 call plug#begin()
+""" UI
+Plug 'mhinz/vim-startify'
+Plug 'majutsushi/tagbar'
+
 """ Linting and Test
 Plug 'neomake/neomake'
 Plug 'janko/vim-test'
@@ -115,6 +119,7 @@ endfunction
 
 let g:terminal#id = 0
 let g:terminal#name = 'myterminal'
+
 function! OpenTerminal()
     let l:bufexists = bufexists(g:terminal#name)
     if l:bufexists == 1
@@ -141,6 +146,9 @@ function! OpenTerminal()
     startinsert
 endfunction
 
+""" Tagbar Settings
+let g:tagbar_map_showproto='a'
+
 """ Window Keybindings
 let g:keybinding#window = g:CategoryKeybinding.new('w', 'Window')
 call g:keybinding#window.add(g:CommandKeybinding.new('q', 'Quit Window', 'q'))
@@ -156,6 +164,7 @@ call g:keybinding#window.add(g:CommandKeybinding.new('v', 'Split Vertical',  'ca
 call g:keybinding#window.add(g:CommandKeybinding.new('b', 'Split Horizontal',  'call HorizontalSplit()'))
 call g:keybinding#window.add(g:CommandKeybinding.new('t', 'Open Terminal',  'call OpenTerminal()'))
 call g:keybinding#window.add(g:CommandKeybinding.new('e', 'Open Explorer',  'NERDTreeFocus'))
+call g:keybinding#window.add(g:CommandKeybinding.new('c', 'Toggle CTags',  'TagbarToggle'))
 call g:keybinding#root.add(g:keybinding#window)
 
 """ Terminal Keybindings
