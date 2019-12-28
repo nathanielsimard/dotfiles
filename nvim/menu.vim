@@ -27,8 +27,8 @@ function g:Menu.new()
     return l:newMenu
 endfunction
 
-function g:Menu.show(description, keybindings)
-    let self.title = a:description
+function g:Menu.show(title, keybindings)
+    let self.title = a:title
     let self.keybindings = a:keybindings
 
     if self.state == g:menu#STATE_SHOWING
@@ -50,13 +50,17 @@ function g:Menu.show(description, keybindings)
 endfunction
 
 function g:Menu.close()
+    let self.state = g:menu#STATE_INACTIVE
+    call self.close_window()
+endfunction
+
+function g:Menu.close_window()
     if self.current_window !=# {}
         call self.current_window.close()
+        let self.current_window = {}
     endif
-
-    let self.state = g:menu#STATE_INACTIVE
-    let self.current_window = {}
 endfunction
+
 
 function g:Menu.show_after_timer(timer_id)
     if self.timer_id == a:timer_id && self.state == g:menu#STATE_HIDING
@@ -93,7 +97,7 @@ function g:Menu.draw()
         return
     endif
 
-    let l:keybindings = values(self.keybindings)
+    let l:keybindings = s:sort_keybindings(self.keybindings)
     let l:default_padding = 20
     let l:tag_length = s:longuest_keybinding(l:keybindings) + l:default_padding
     let l:number_keybindings_per_line = s:number_keybindings_per_line(l:tag_length)
@@ -123,7 +127,7 @@ function g:Menu.draw()
         call add(l:text, l:current_line_text)
     endif
 
-    call self.close()
+    call self.close_window()
     if g:menu#type ==# 'floating'
         let self.current_window = s:FloatingWindow.new(l:text)
     else
@@ -264,3 +268,18 @@ function s:longuest_keybinding(keybindings)
     return l:current_length
 endfunction
 
+function s:sort_keybindings(keybindings)
+    let l:keybindings = values(a:keybindings)
+    let l:keybindings_command = []
+    let l:keybindings_category = []
+
+    for keybinding in l:keybindings
+        if keybinding.description[0] ==# '+'
+            call add(keybindings_category, keybinding)
+        else
+            call add(keybindings_command, keybinding)
+        endif
+    endfor
+
+    return l:keybindings_command + l:keybindings_category
+endfunction

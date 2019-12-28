@@ -37,7 +37,7 @@ endfunction
 " A keybinding which will give access to other keybindings.
 let g:CategoryKeybinding={}
 function g:CategoryKeybinding.new(key, description)
-    let l:newCategoryKeybinding = g:Keybinding.new(a:key, a:description)
+    let l:newCategoryKeybinding = g:Keybinding.new(a:key, '+'.a:description)
     let l:newCategoryKeybinding.keybindings = {}
     return extend(l:newCategoryKeybinding, copy(self))
 endfunction
@@ -46,8 +46,12 @@ function g:CategoryKeybinding.add(keybinding)
     let self.keybindings[a:keybinding.key] = a:keybinding
 endfunction
 
+function g:CategoryKeybinding.title()
+    return self.description[1:]
+endfunction
+
 function g:CategoryKeybinding.execute()
-    call s:MENU.show(self.description, self.keybindings)
+    call s:MENU.show(self.title(), self.keybindings)
 endfunction
 
 " File Type Keybinding Class
@@ -84,7 +88,7 @@ function g:FileTypeKeybinding.execute()
         echo '['.self.description."] No keybindings for filetype '".l:current_filetype."'"
     endif
 
-    call s:MENU.show(self.description, l:keybindings)
+    call s:MENU.show(self.title(), l:keybindings)
 endfunction
 
 function g:FileTypeKeybinding.current_filetype()
@@ -99,9 +103,4 @@ function g:FileTypeKeybinding.current_filetype()
         return &filetype
     endif
 endfunction
-
-" Basic Keybinding Configuration 
-let g:keybinding#root = g:CategoryKeybinding.new('no important', 'Keybinding Menu')
-let g:keybinding#major = g:FileTypeKeybinding.new('l', 'Language Specific')
-call g:keybinding#root.add(g:keybinding#major)
 

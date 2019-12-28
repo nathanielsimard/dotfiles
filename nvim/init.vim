@@ -35,8 +35,37 @@ Plug 'autozimu/LanguageClient-neovim', {
 
 call plug#end()
 
-""" Imports
+" Imports
 source ~/.config/nvim/keybinding.vim
+
+" Root Keybindings
+let g:keybindings_root = g:CategoryKeybinding.new('no important', 'Keybinding Menu')
+
+" File Type Keybindings
+let s:keybindings_refactor = g:FileTypeKeybinding.new('r', 'Refactor')
+let s:keybindings_goto = g:FileTypeKeybinding.new('g', 'Go To')
+let s:keybindings_error = g:FileTypeKeybinding.new('e', 'Error')
+let s:keybindings_help = g:FileTypeKeybinding.new('h', 'Help')
+let s:keybindings_test = g:FileTypeKeybinding.new('t', 'Testing')
+let s:keybindings_generate = g:FileTypeKeybinding.new('c', 'Code Generation')
+
+call g:keybindings_root.add(s:keybindings_refactor)
+call g:keybindings_root.add(s:keybindings_goto)
+call g:keybindings_root.add(s:keybindings_error)
+call g:keybindings_root.add(s:keybindings_help)
+call g:keybindings_root.add(s:keybindings_test)
+call g:keybindings_root.add(s:keybindings_generate)
+
+" Category Keybindings
+let s:keybindings_buffer = g:CategoryKeybinding.new('b', 'Buffer')
+let s:keybindings_window = g:CategoryKeybinding.new('w', 'Window')
+let s:keybindings_view = g:CategoryKeybinding.new('v', 'View')
+let s:keybindings_file = g:CategoryKeybinding.new('f', 'File')
+
+call g:keybindings_root.add(s:keybindings_buffer)
+call g:keybindings_root.add(s:keybindings_window)
+call g:keybindings_root.add(s:keybindings_view)
+call g:keybindings_root.add(s:keybindings_file)
 
 """ Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
@@ -68,45 +97,57 @@ call neomake#configure#automake('w')
 let g:neomake_open_list = 1
 let g:neomake_check_on_open = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
-
-call g:keybinding#major.add(g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#major.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
+call s:keybindings_error.add(g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
+call s:keybindings_error.add(g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
 """ Language Server Settings
 set hidden
 let g:LanguageClient_serverCommands = {
     \ 'python': ['python', '-m', 'pyls'],
     \ 'tex': ['~/.local/bin/tex-lsp'],
-    \ 'javascript': ['javascript-typescript-stdio', '-l', '/tmp/javascript-typescript-stdio.log'],
+    \ 'javascript': ['javascript-typescript-stdio'],
     \ }
 let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_diagnosticsEnable=0
+call LanguageClient#setLoggingLevel('ERROR')
 
 function s:Keybinding_lsp(filetype)
-    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
-    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('g', 'GoTo Definition', 'call LanguageClient#textDocument_definition()'))
-    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
-    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('h', 'Find References', 'call LanguageClient_textDocument_references()'))
-    call g:keybinding#major.add_filetype(a:filetype, g:CommandKeybinding.new('c', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('d', 'Show Documentation', 'call LanguageClient#textDocument_hover()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('l', 'LSP Options', 'call LanguageClient_contextMenu()()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('s', 'Document Symbol', 'call LanguageClient#textDocument_documentSymbol()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('r', 'List References', 'call LanguageClient#textDocument_references()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('a', 'Code Action', 'call LanguageClient#textDocument_codeAction()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('c', 'Code Action', 'call LanguageClient#textDocument_completion()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('r', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()'))
+    call s:keybindings_help.add_filetype(a:filetype, g:CommandKeybinding.new('e', 'Explain Error', 'call LanguageClient#explainErrorAtPoint()'))
+
+    call s:keybindings_goto.add_filetype(a:filetype, g:CommandKeybinding.new('d', 'Definition', 'call LanguageClient#textDocument_definition()'))
+    call s:keybindings_goto.add_filetype(a:filetype, g:CommandKeybinding.new('i', 'Implementation', 'call LanguageClient#textDocument_implementation()'))
+    call s:keybindings_goto.add_filetype(a:filetype, g:CommandKeybinding.new('r', 'References', 'call LanguageClient#textDocument_references()'))
+
+    call s:keybindings_refactor.add_filetype(a:filetype, g:CommandKeybinding.new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+    call s:keybindings_refactor.add_filetype(a:filetype, g:CommandKeybinding.new('f', 'Format', 'call LanguageClient#textDocument_formatting()'))
+    call s:keybindings_refactor.add_filetype(a:filetype, g:CommandKeybinding.new('F', 'Range Format', 'call LanguageClient#textDocument_rangeFormatting()'))
+
+    call s:keybindings_error.add_filetype(a:filetype, g:CommandKeybinding.new('l', 'List', 'call LanguageClient#setDiagnosticsList()'))
 endfunction
 
 """ FZF Keybindings
-let g:keybinding#file = g:CategoryKeybinding.new('f', 'File')
-call g:keybinding#file.add(g:CommandKeybinding.new('f', 'Fuzzy Find',  'FZF'))
-call g:keybinding#root.add(g:keybinding#file)
+call s:keybindings_file.add(g:CommandKeybinding.new('f', 'Find',  'FZF'))
+call s:keybindings_file.add(g:CommandKeybinding.new('t', 'Focus Tree',  'NERDTreeFocus'))
+call s:keybindings_file.add(g:CommandKeybinding.new('c', 'Close Tree',  'NERDTreeClose'))
+call s:keybindings_file.add(g:CommandKeybinding.new('r', 'Refresh Tree',  'NERDTreeRefreshRoot'))
 
 """ Test Settings
 let test#strategy = 'neovim'
 let g:test#preserve_screen = 1
 
 """ Test Keybindings
-let g:keybinding#test = g:CategoryKeybinding.new('t', 'Test')
-call g:keybinding#test.add(g:CommandKeybinding.new('n', 'Test Nearest',  'TestNearest'))
-call g:keybinding#test.add(g:CommandKeybinding.new('f','Test File', 'TestFile'))
-call g:keybinding#test.add(g:CommandKeybinding.new('s', 'Test Suite', 'TestSuite'))
-call g:keybinding#test.add(g:CommandKeybinding.new('l', 'Test Last', 'TestLast'))
-call g:keybinding#test.add(g:CommandKeybinding.new('v', 'Test Visit', 'TestVisit'))
-call g:keybinding#root.add(g:keybinding#test)
+call s:keybindings_test.add(g:CommandKeybinding.new('n', 'Test Nearest',  'TestNearest'))
+call s:keybindings_test.add(g:CommandKeybinding.new('f','Test File', 'TestFile'))
+call s:keybindings_test.add(g:CommandKeybinding.new('s', 'Test Suite', 'TestSuite'))
+call s:keybindings_test.add(g:CommandKeybinding.new('l', 'Test Last', 'TestLast'))
+call s:keybindings_test.add(g:CommandKeybinding.new('v', 'Test Visit', 'TestVisit'))
 
 """ Window Navigation Keybindings
 
@@ -152,22 +193,17 @@ endfunction
 let g:tagbar_map_showproto='a'
 
 """ Window Keybindings
-let g:keybinding#window = g:CategoryKeybinding.new('w', 'Window')
-call g:keybinding#window.add(g:CommandKeybinding.new('q', 'Quit Window', 'q'))
-call g:keybinding#window.add(g:CommandKeybinding.new('L', 'Resize +Vertical', 'vertical resize +5'))
-call g:keybinding#window.add(g:CommandKeybinding.new('H', 'Resize -Vertical', 'vertical resize -5'))
-call g:keybinding#window.add(g:CommandKeybinding.new('J', 'Resize +Horizontal', 'res +5'))
-call g:keybinding#window.add(g:CommandKeybinding.new('K', 'Resize -Horizontal', 'res -5'))
-call g:keybinding#window.add(g:CommandKeybinding.new('h', 'Focus Left', 'wincmd h'))
-call g:keybinding#window.add(g:CommandKeybinding.new('j', 'Focus Down',  'wincmd j'))
-call g:keybinding#window.add(g:CommandKeybinding.new('k', 'Focus Top',  'wincmd k'))
-call g:keybinding#window.add(g:CommandKeybinding.new('l', 'Focus Right',  'wincmd l'))
-call g:keybinding#window.add(g:CommandKeybinding.new('v', 'Split Vertical',  'call VerticalSplit()'))
-call g:keybinding#window.add(g:CommandKeybinding.new('b', 'Split Horizontal',  'call HorizontalSplit()'))
-call g:keybinding#window.add(g:CommandKeybinding.new('t', 'Open Terminal',  'call OpenTerminal()'))
-call g:keybinding#window.add(g:CommandKeybinding.new('e', 'Open Explorer',  'NERDTreeFocus'))
-call g:keybinding#window.add(g:CommandKeybinding.new('c', 'Toggle CTags',  'TagbarToggle'))
-call g:keybinding#root.add(g:keybinding#window)
+call s:keybindings_window.add(g:CommandKeybinding.new('q', 'Quit Window', 'q'))
+call s:keybindings_window.add(g:CommandKeybinding.new('L', 'Add Vertical Space', 'vertical resize +5'))
+call s:keybindings_window.add(g:CommandKeybinding.new('H', 'Remove Vertical Space', 'vertical resize -5'))
+call s:keybindings_window.add(g:CommandKeybinding.new('J', 'Add Horizontal Space', 'res +5'))
+call s:keybindings_window.add(g:CommandKeybinding.new('K', 'Remove Horizontal Space', 'res -5'))
+call s:keybindings_window.add(g:CommandKeybinding.new('h', 'Focus Left', 'wincmd h'))
+call s:keybindings_window.add(g:CommandKeybinding.new('j', 'Focus Down',  'wincmd j'))
+call s:keybindings_window.add(g:CommandKeybinding.new('k', 'Focus Top',  'wincmd k'))
+call s:keybindings_window.add(g:CommandKeybinding.new('l', 'Focus Right',  'wincmd l'))
+call s:keybindings_window.add(g:CommandKeybinding.new('v', 'Split Vertical',  'call VerticalSplit()'))
+call s:keybindings_window.add(g:CommandKeybinding.new('b', 'Split Horizontal',  'call HorizontalSplit()'))
 
 """ Terminal Keybindings
 tnoremap <Esc> <C-\><C-n>
@@ -205,45 +241,41 @@ function! FindInBuffer()
 endfunction
 
 """ Buffer Keybindings
-let g:keybinding#buffer = g:CategoryKeybinding.new('b', 'Buffer')
-call g:keybinding#buffer.add(g:CommandKeybinding.new('g', 'GoTo Buffer', 'call GoToBuffer()'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('d', 'Delete Buffer', 'call DeleteBuffer()'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('D', 'Delete All Buffers', 'call DeleteAllBuffers()'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('f', 'Find In Buffer', 'call FindInBuffer()'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('b', 'List All Buffers', 'buffers'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('e', 'New Buffer', 'e'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('l', 'Next Buffer', 'bn'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('k', 'Next Buffer', 'bn'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('h', 'Previous Buffer', 'bp'))
-call g:keybinding#buffer.add(g:CommandKeybinding.new('j', 'Previous Buffer', 'bp'))
-call g:keybinding#root.add(g:keybinding#buffer)
+call s:keybindings_buffer.add(g:CommandKeybinding.new('g', 'GoTo Buffer', 'call GoToBuffer()'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('d', 'Delete Buffer', 'call DeleteBuffer()'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('D', 'Delete All Buffers', 'call DeleteAllBuffers()'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('f', 'Find In Buffer', 'call FindInBuffer()'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('b', 'List All Buffers', 'buffers'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('e', 'New Buffer', 'e'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('l', 'Next Buffer', 'bn'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('k', 'Next Buffer', 'bn'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('h', 'Previous Buffer', 'bp'))
+call s:keybindings_buffer.add(g:CommandKeybinding.new('j', 'Previous Buffer', 'bp'))
 
 """ Tab Keybindings (Views)
-let g:keybinding#tab = g:CategoryKeybinding.new('v', 'View')
-call g:keybinding#tab.add(g:CommandKeybinding.new('n', 'Create View', 'tabnew'))
-call g:keybinding#tab.add(g:CommandKeybinding.new('l', 'Next View', 'tabnext'))
-call g:keybinding#tab.add(g:CommandKeybinding.new('k', 'Next View', 'tabnext'))
-call g:keybinding#tab.add(g:CommandKeybinding.new('h', 'Previous View', 'tabprevious'))
-call g:keybinding#tab.add(g:CommandKeybinding.new('j', 'Previous View', 'tabprevious'))
-call g:keybinding#tab.add(g:CommandKeybinding.new('d', 'Close View', 'tabclose'))
-call g:keybinding#root.add(g:keybinding#tab)
+call s:keybindings_view.add(g:CommandKeybinding.new('n', 'Create View', 'tabnew'))
+call s:keybindings_view.add(g:CommandKeybinding.new('l', 'Next View', 'tabnext'))
+call s:keybindings_view.add(g:CommandKeybinding.new('k', 'Next View', 'tabnext'))
+call s:keybindings_view.add(g:CommandKeybinding.new('h', 'Previous View', 'tabprevious'))
+call s:keybindings_view.add(g:CommandKeybinding.new('j', 'Previous View', 'tabprevious'))
+call s:keybindings_view.add(g:CommandKeybinding.new('d', 'Close View', 'tabclose'))
+
+""" Simple Keybindings
+call g:keybindings_root.add(g:CommandKeybinding.new('Q', 'Quit', 'qa'))
+call g:keybindings_root.add(g:CommandKeybinding.new("'", 'Terminal', 'call OpenTerminal()'))
+call g:keybindings_root.add(g:CommandKeybinding.new('c', 'Toggle CTags',  'TagbarToggle'))
 
 """ Python Settings
 let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
 call s:Keybinding_lsp('python')
-call g:keybinding#major.add_filetype('python', g:CommandKeybinding.new('f', 'Format Document', 'Black'))
-call g:keybinding#major.add_filetype('python', g:CommandKeybinding.new('p', 'Generate Pydocstring', 'Pydocstring'))
+call s:keybindings_refactor.add_filetype('python', g:CommandKeybinding.new('f', 'Format Document', 'Black'))
+call s:keybindings_generate.add_filetype('python', g:CommandKeybinding.new('p', 'Pydocstring', 'Pydocstring'))
 
 """ LaTeX Settings
 call s:Keybinding_lsp('tex')
-call g:keybinding#major.add_filetype('tex', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#major.add_filetype('tex', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
-
 
 """ Javascript Settings
 call s:Keybinding_lsp('javascript')
-call g:keybinding#major.add_filetype('javascript', g:CommandKeybinding.new('e', 'Next Error', 'lnext'))
-call g:keybinding#major.add_filetype('javascript', g:CommandKeybinding.new('E', 'Previous Error', 'lprev'))
 
-nnoremap <silent> <leader> :call g:keybinding#root.execute()<CR>
+nnoremap <silent> <leader> :call g:keybindings_root.execute()<CR>
