@@ -3,7 +3,7 @@ let g:Plugin={}
 function g:Plugin.new(name, ...)
     let l:newPlugin = copy(self)
     let l:newPlugin.name = a:name
-    if a:0 > 1
+    if a:0 ==# 1
         let l:newPlugin.opts = a:1
     else
         let l:newPlugin.opts = {}
