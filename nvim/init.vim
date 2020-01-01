@@ -34,6 +34,7 @@ call g:keybindings_root.add(g:keybindings_file)
 " Basic Plugins
 call g:Editor.add_layer( g:SimpleLayer.new('~/.config/nvim/basic.vim', [
             \g:Plugin.new('scrooloose/nerdtree'),
+            \g:Plugin.new('nathanielsimard/vmenu'),
             \g:Plugin.new('vim-airline/vim-airline'),
             \g:Plugin.new('vim-airline/vim-airline-themes'),
             \g:Plugin.new('junegunn/fzf'),

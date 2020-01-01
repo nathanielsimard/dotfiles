@@ -1,4 +1,3 @@
-
 let g:Plugin={}
 function g:Plugin.new(name, ...)
     let l:newPlugin = copy(self)
