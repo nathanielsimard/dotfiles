@@ -15,9 +15,9 @@ function! Keybinding_lsp(filetype)
     call g:keybindings_goto.add_filetype(a:filetype, vmenu#keybinding#command#new('r', 'References', 'call LanguageClient#textDocument_references()'))
     call g:keybindings_goto.add_filetype(a:filetype, vmenu#keybinding#command#new('s', 'Symbol', 'call LanguageClient#textDocument_documentSymbol()'))
 
-    call g:keybindings_refactor.add_filetype(a:filetype, vmenu#keybinding#command#new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
-    call g:keybindings_refactor.add_filetype(a:filetype, vmenu#keybinding#command#new('f', 'Format', 'call LanguageClient#textDocument_formatting()'))
-    call g:keybindings_refactor.add_filetype(a:filetype, vmenu#keybinding#command#new('F', 'Range Format', 'call LanguageClient#textDocument_rangeFormatting()'))
+    call g:keybindings_refactor_run.add_filetype(a:filetype, vmenu#keybinding#command#new('r', 'Raname', 'call LanguageClient#textDocument_rename()'))
+    call g:keybindings_refactor_run.add_filetype(a:filetype, vmenu#keybinding#command#new('f', 'Format', 'call LanguageClient#textDocument_formatting()'))
+    call g:keybindings_refactor_run.add_filetype(a:filetype, vmenu#keybinding#command#new('F', 'Range Format', 'call LanguageClient#textDocument_rangeFormatting()'))
 endfunction
 
 let g:LanguageClient_serverCommands = {}
@@ -35,10 +35,9 @@ let g:deoplete#enable_at_startup = 1
 
 """ Neomake Settings
 call neomake#configure#automake('w')
-let g:neomake_open_list = 1
 let g:neomake_check_on_open = 1
-call g:keybindings_error.add(vmenu#keybinding#command#new('e', 'Next Error', 'lnext'))
-call g:keybindings_error.add(vmenu#keybinding#command#new('E', 'Previous Error', 'lprev'))
+call g:keybindings_error.add(vmenu#keybinding#command#new('n', 'Next Error', 'lnext'))
+call g:keybindings_error.add(vmenu#keybinding#command#new('p', 'Previous Error', 'lprev'))
 
 """ Test Settings
 let test#strategy = 'neovim'

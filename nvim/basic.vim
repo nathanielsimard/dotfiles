@@ -24,15 +24,18 @@ let g:menu = vmenu#new()
 let g:keybindings_root = vmenu#keybinding#category#new('no important', 'Keybinding Menu')
 nnoremap <silent> <Space> :call g:keybindings_root.execute(g:menu)<CR>
 
+""" NERDTree Settings
+let NERDTreeShowHidden=1
+
 " File Type Keybindings
-let g:keybindings_refactor = vmenu#keybinding#filetype#new('r', 'Refactor')
+let g:keybindings_refactor_run = vmenu#keybinding#filetype#new('r', 'Refactor/Run')
 let g:keybindings_goto = vmenu#keybinding#filetype#new('g', 'GoTo')
 let g:keybindings_error = vmenu#keybinding#filetype#new('e', 'Error')
 let g:keybindings_help = vmenu#keybinding#filetype#new('h', 'Help')
 let g:keybindings_documentation = vmenu#keybinding#filetype#new('d', 'Documentation')
 let g:keybindings_test = vmenu#keybinding#filetype#new('t', 'Testing')
 
-call g:keybindings_root.add(g:keybindings_refactor)
+call g:keybindings_root.add(g:keybindings_refactor_run)
 call g:keybindings_root.add(g:keybindings_goto)
 call g:keybindings_root.add(g:keybindings_error)
 call g:keybindings_root.add(g:keybindings_help)
@@ -49,7 +52,6 @@ call g:keybindings_root.add(g:keybindings_buffer)
 call g:keybindings_root.add(g:keybindings_window)
 call g:keybindings_root.add(g:keybindings_view)
 call g:keybindings_root.add(g:keybindings_file)
-
 
 let g:linux_open={}
 function g:linux_open.open(file)
@@ -69,7 +71,6 @@ function! NewFile()
   w
   NERDTreeRefreshRoot
 endfunction
-
 
 """ File Keybindings
 call g:keybindings_file.add(vmenu#keybinding#command#new('f', 'Find Open',  'FZF'))
@@ -93,7 +94,14 @@ endfunction
 let g:terminal#id = 0
 let g:terminal#name = 'myterminal'
 
-function! OpenTerminal()
+autocmd TermOpen * setlocal norelativenumber
+autocmd TermOpen * setlocal nonumber
+
+function! RunWithTerminal(command)
+    execute '!'.a:command
+endfunction
+
+function! ToggleTerminal()
     let l:bufexists = bufexists(g:terminal#name)
     if l:bufexists == 1
         call win_gotoid(g:terminal#id)
@@ -109,8 +117,6 @@ function! OpenTerminal()
         split
         wincmd j
         terminal
-        setlocal norelativenumber
-        setlocal nonumber
         execute 'file '.g:terminal#name
         let g:terminal#id = win_getid()
     endif
@@ -187,5 +193,5 @@ call g:keybindings_view.add(vmenu#keybinding#command#new('d', 'Close View', 'tab
 
 """ Simple Keybindings
 call g:keybindings_root.add(vmenu#keybinding#command#new('Q', 'Quit', 'qa'))
-call g:keybindings_root.add(vmenu#keybinding#command#new("'", 'Terminal', 'call OpenTerminal()'))
+call g:keybindings_root.add(vmenu#keybinding#command#new("'", 'Terminal', 'call ToggleTerminal()'))
 
