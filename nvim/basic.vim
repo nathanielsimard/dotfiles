@@ -50,39 +50,14 @@ function! VerticalSplit()
     wincmd l
 endfunction
 
-let g:terminal#id = 0
-let g:terminal#name = 'myterminal'
-
-autocmd TermOpen * setlocal norelativenumber
-autocmd TermOpen * setlocal nonumber
-
 function! RunWithTerminal(command)
     execute '!'.a:command
 endfunction
 
-function! ToggleTerminal()
-    let l:bufexists = bufexists(g:terminal#name)
-    if l:bufexists == 1
-        call win_gotoid(g:terminal#id)
-        let l:terminal_id = win_getid()
-
-        if l:terminal_id != g:terminal#id
-            split
-            wincmd J
-            execute 'buffer '.g:terminal#name
-            let g:terminal#id = win_getid()
-        endif
-    else
-        split
-        wincmd j
-        terminal
-        execute 'file '.g:terminal#name
-        let g:terminal#id = win_getid()
-    endif
-    startinsert
-endfunction
-
-" Terminal Keybindings
+" Terminal Settings
+let g:floaterm_position='center'
+autocmd TermOpen * setlocal norelativenumber
+autocmd TermOpen * setlocal nonumber
 tnoremap <Esc> <C-\><C-n>
 
 " Buffer Settings
@@ -164,12 +139,12 @@ call vmenu#commands([
 " Buffer Keybindings
 call vmenu#commands([
             \['g', 'GoTo Buffer', 'call GoToBuffer()'],
-            \['g', 'GoTo Buffer', 'call GoToBuffer()'],
             \['d', 'Delete Buffer', 'call DeleteBuffer()'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
             \['f', 'Find In Buffer', 'call FindInBuffer()'],
             \['b', 'List All Buffers', 'buffers'],
-            \['e', 'New Buffer', 'e'],
+            \['s', 'Save Buffer', 'w'],
+            \['S', 'Save All Buffers', 'wa'],
             \['l', 'Next Buffer', 'bn'],
             \['k', 'Next Buffer', 'bn'],
             \['h', 'Previous Buffer', 'bp'],
@@ -195,6 +170,5 @@ call vmenu#commands([
             \['Q', 'Quit', 'qa'],
             \['s', 'Save File', 'w'],
             \['S', 'Save All Files', 'wa'],
-            \["'", 'Terminal', 'call ToggleTerminal()']
+            \["'", 'Terminal', 'FloatermToggle']
         \])
-

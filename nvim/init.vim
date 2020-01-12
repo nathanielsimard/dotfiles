@@ -8,6 +8,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
             \g:Plugin.new('vim-airline/vim-airline'),
             \g:Plugin.new('vim-airline/vim-airline-themes'),
             \g:Plugin.new('junegunn/fzf'),
+            \g:Plugin.new('voldikss/vim-floaterm'),
             \g:Plugin.new('editorconfig/editorconfig-vim'),
             \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
             \g:Plugin.new('mhinz/vim-startify'),
