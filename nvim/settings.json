@@ -1,0 +1,12 @@
+{
+    "pyls": {
+        "plugins" :{
+            "pydocstyle": {
+                "enabled": true
+            },
+            "black": {
+                "enabled": true
+            }
+        }
+    }
+}

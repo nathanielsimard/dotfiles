@@ -1,10 +1,14 @@
-let g:LanguageClient_serverCommands['tex'] = ['~/.local/bin/tex-tsp']
+let g:LanguageClient_serverCommands['tex'] = ['~/.local/bin/tex-lsp']
 call Keybinding_lsp('tex')
 
 function! CompileLatex()
     let l:file = @%
-    call RunWithTerminal('pdflatex '.l:file)
+    call RunWithTerminal('pdflatex -interaction=nonstopmode '.l:file)
 endfunction
 
-call g:keybindings_refactor_run.add_filetype('tex', vmenu#keybinding#command#new('c', 'Compile', 'call CompileLatex()'))
-
+call vmenu#commands([
+            \['c', 'Compile', 'call CompileLatex()']
+        \], {
+            \'parent': g:keybindings_refactor_run,
+            \'filetype': 'tex'
+        \})

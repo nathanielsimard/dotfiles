@@ -1,3 +1,8 @@
-call g:keybindings_help.add_filetype('markdown', vmenu#keybinding#command#new('p', 'Open Preview', 'MarkdownPreview'))
-call g:keybindings_help.add_filetype('markdown', vmenu#keybinding#command#new('s', 'Stop Preview', 'MarkdownPreviewStop'))
+call vmenu#commands([
+            \['p', 'Open Preview', 'MarkdownPreview'],
+            \['s', 'Stop Preview', 'MarkdownPreviewStop']
+        \], {
+            \'parent': g:keybindings_help,
+            \'filetype': 'markdown'
+        \})
 

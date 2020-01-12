@@ -1,16 +1,13 @@
-""" Airline Settings
+" Airline Settings
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_show = 1 
 
-""" Theming
+" Theming
 set background=dark
 set termguicolors
 let g:airline_theme='base16'
 colorscheme base16-default-dark
 
-""" Basic Settings
+" Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
 set number
 set relativenumber
@@ -19,40 +16,10 @@ let mapleader = ' '
 syntax on
 set hidden
 
-""" Keybindings Settings
-let g:menu = vmenu#new()
-let g:keybindings_root = vmenu#keybinding#category#new('no important', 'Keybinding Menu')
-nnoremap <silent> <Space> :call g:keybindings_root.execute(g:menu)<CR>
-
-""" NERDTree Settings
+" NERDTree Settings
 let NERDTreeShowHidden=1
 
-" File Type Keybindings
-let g:keybindings_refactor_run = vmenu#keybinding#filetype#new('r', 'Refactor/Run')
-let g:keybindings_goto = vmenu#keybinding#filetype#new('g', 'GoTo')
-let g:keybindings_error = vmenu#keybinding#filetype#new('e', 'Error')
-let g:keybindings_help = vmenu#keybinding#filetype#new('h', 'Help')
-let g:keybindings_documentation = vmenu#keybinding#filetype#new('d', 'Documentation')
-let g:keybindings_test = vmenu#keybinding#filetype#new('t', 'Testing')
-
-call g:keybindings_root.add(g:keybindings_refactor_run)
-call g:keybindings_root.add(g:keybindings_goto)
-call g:keybindings_root.add(g:keybindings_error)
-call g:keybindings_root.add(g:keybindings_help)
-call g:keybindings_root.add(g:keybindings_documentation)
-call g:keybindings_root.add(g:keybindings_test)
-
-" Category Keybindings
-let g:keybindings_buffer = vmenu#keybinding#category#new('b', 'Buffer')
-let g:keybindings_window = vmenu#keybinding#category#new('w', 'Window')
-let g:keybindings_view = vmenu#keybinding#category#new('v', 'View')
-let g:keybindings_file = vmenu#keybinding#category#new('f', 'File')
-
-call g:keybindings_root.add(g:keybindings_buffer)
-call g:keybindings_root.add(g:keybindings_window)
-call g:keybindings_root.add(g:keybindings_view)
-call g:keybindings_root.add(g:keybindings_file)
-
+" Linux helper
 let g:linux_open={}
 function g:linux_open.open(file)
     call jobstart('xdg-open '.a:file)
@@ -72,15 +39,7 @@ function! NewFile()
   NERDTreeRefreshRoot
 endfunction
 
-""" File Keybindings
-call g:keybindings_file.add(vmenu#keybinding#command#new('f', 'Find Open',  'FZF'))
-call g:keybindings_file.add(vmenu#keybinding#command#new('x', 'Find Xdg Open',  'call g:linux_open.find()'))
-call g:keybindings_file.add(vmenu#keybinding#command#new('t', 'Focus Tree',  'NERDTreeFocus'))
-call g:keybindings_file.add(vmenu#keybinding#command#new('c', 'Close Tree',  'NERDTreeClose'))
-call g:keybindings_file.add(vmenu#keybinding#command#new('r', 'Refresh Tree',  'NERDTreeRefreshRoot'))
-call g:keybindings_file.add(vmenu#keybinding#command#new('n', 'New File',  'call NewFile()'))
-
-""" Window Navigation Keybindings
+" Window Navigation Keybindings
 function! HorizontalSplit()
     split
     wincmd j
@@ -123,23 +82,10 @@ function! ToggleTerminal()
     startinsert
 endfunction
 
-""" Window Keybindings
-call g:keybindings_window.add(vmenu#keybinding#command#new('q', 'Quit Window', 'q'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('L', 'Add Vertical Space', 'vertical resize +5'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('H', 'Remove Vertical Space', 'vertical resize -5'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('J', 'Add Horizontal Space', 'res +5'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('K', 'Remove Horizontal Space', 'res -5'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('h', 'Focus Left', 'wincmd h'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('j', 'Focus Down',  'wincmd j'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('k', 'Focus Top',  'wincmd k'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('l', 'Focus Right',  'wincmd l'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('v', 'Split Vertical',  'call VerticalSplit()'))
-call g:keybindings_window.add(vmenu#keybinding#command#new('b', 'Split Horizontal',  'call HorizontalSplit()'))
-
-""" Terminal Keybindings
+" Terminal Keybindings
 tnoremap <Esc> <C-\><C-n>
 
-""" Buffer Settings
+" Buffer Settings
 function! GoToBuffer()
   let curline = getline('.')
   call inputsave()
@@ -171,27 +117,84 @@ function! FindInBuffer()
   execute vim_command
 endfunction
 
-""" Buffer Keybindings
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('g', 'GoTo Buffer', 'call GoToBuffer()'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('d', 'Delete Buffer', 'call DeleteBuffer()'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('D', 'Delete All Buffers', 'call DeleteAllBuffers()'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('f', 'Find In Buffer', 'call FindInBuffer()'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('b', 'List All Buffers', 'buffers'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('e', 'New Buffer', 'e'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('l', 'Next Buffer', 'bn'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('k', 'Next Buffer', 'bn'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('h', 'Previous Buffer', 'bp'))
-call g:keybindings_buffer.add(vmenu#keybinding#command#new('j', 'Previous Buffer', 'bp'))
+" VMenu Settings
+nnoremap <silent> <Space> :call vmenu#show()<CR>
 
-""" Tab Keybindings (Views)
-call g:keybindings_view.add(vmenu#keybinding#command#new('n', 'Create View', 'tabnew'))
-call g:keybindings_view.add(vmenu#keybinding#command#new('l', 'Next View', 'tabnext'))
-call g:keybindings_view.add(vmenu#keybinding#command#new('k', 'Next View', 'tabnext'))
-call g:keybindings_view.add(vmenu#keybinding#command#new('h', 'Previous View', 'tabprevious'))
-call g:keybindings_view.add(vmenu#keybinding#command#new('j', 'Previous View', 'tabprevious'))
-call g:keybindings_view.add(vmenu#keybinding#command#new('d', 'Close View', 'tabclose'))
+" VMenu Categories
+let g:keybindings_refactor_run = vmenu#category('r', 'Refactor/Run')
+let g:keybindings_goto = vmenu#category('g', 'GoTo')
+let g:keybindings_error = vmenu#category('e', 'Error')
+let g:keybindings_help = vmenu#category('h', 'Help')
+let g:keybindings_documentation = vmenu#category('d', 'Documentation')
+let g:keybindings_test = vmenu#category('t', 'Testing')
+let g:keybindings_buffer = vmenu#category('b', 'Buffer')
+let g:keybindings_window = vmenu#category('w', 'Window')
+let g:keybindings_view = vmenu#category('v', 'View')
+let g:keybindings_file = vmenu#category('f', 'File')
 
-""" Simple Keybindings
-call g:keybindings_root.add(vmenu#keybinding#command#new('Q', 'Quit', 'qa'))
-call g:keybindings_root.add(vmenu#keybinding#command#new("'", 'Terminal', 'call ToggleTerminal()'))
+" File Keybindings
+call vmenu#commands([
+            \['f', 'Find Open',  'FZF'],
+            \['x', 'Find Xdg Open',  'call g:linux_open.find()'],
+            \['t', 'Focus Tree',  'NERDTreeFocus'],
+            \['c', 'Close Tree',  'NERDTreeClose'],
+            \['r', 'Refresh Tree',  'NERDTreeRefreshRoot'],
+            \['n', 'New File',  'call NewFile()']
+        \], {
+            \'parent': g:keybindings_file
+        \})
+
+" Window Keybindings
+call vmenu#commands([
+            \['q', 'Quit Window', 'q'],
+            \['L', 'Add Vertical Space', 'vertical resize +5'],
+            \['H', 'Remove Vertical Space', 'vertical resize -5'],
+            \['J', 'Add Horizontal Space', 'res +5'],
+            \['K', 'Remove Horizontal Space', 'res -5'],
+            \['h', 'Focus Left', 'wincmd h'],
+            \['j', 'Focus Down',  'wincmd j'],
+            \['k', 'Focus Top',  'wincmd k'],
+            \['l', 'Focus Right',  'wincmd l'],
+            \['v', 'Split Vertical',  'call VerticalSplit()'],
+            \['b', 'Split Horizontal',  'call HorizontalSplit()']
+        \], {
+            \'parent': g:keybindings_window
+        \})
+
+" Buffer Keybindings
+call vmenu#commands([
+            \['g', 'GoTo Buffer', 'call GoToBuffer()'],
+            \['g', 'GoTo Buffer', 'call GoToBuffer()'],
+            \['d', 'Delete Buffer', 'call DeleteBuffer()'],
+            \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
+            \['f', 'Find In Buffer', 'call FindInBuffer()'],
+            \['b', 'List All Buffers', 'buffers'],
+            \['e', 'New Buffer', 'e'],
+            \['l', 'Next Buffer', 'bn'],
+            \['k', 'Next Buffer', 'bn'],
+            \['h', 'Previous Buffer', 'bp'],
+            \['j', 'Previous Buffer', 'bp']
+        \], { 
+            \'parent': g:keybindings_buffer
+        \})
+
+" Tab Keybindings (Views)
+call vmenu#commands([
+            \['n', 'Create View', 'tabnew'],
+            \['l', 'Next View', 'tabnext'],
+            \['k', 'Next View', 'tabnext'],
+            \['h', 'Previous View', 'tabprevious'],
+            \['j', 'Previous View', 'tabprevious'],
+            \['d', 'Close View', 'tabclose']
+        \], {
+            \'parent': g:keybindings_view
+        \})
+
+" Simple Keybindings
+call vmenu#commands([
+            \['Q', 'Quit', 'qa'],
+            \['s', 'Save File', 'w'],
+            \['S', 'Save All Files', 'wa'],
+            \["'", 'Terminal', 'call ToggleTerminal()']
+        \])
 

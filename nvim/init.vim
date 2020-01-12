@@ -1,12 +1,13 @@
 " Imports
 source ~/.config/nvim/layer.vim
+
 " Basic Plugins
-call g:Editor.add_layer( g:SimpleLayer.new('~/.config/nvim/basic.vim', [
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
             \g:Plugin.new('scrooloose/nerdtree'),
             \g:Plugin.new('nathanielsimard/vmenu'),
             \g:Plugin.new('vim-airline/vim-airline'),
             \g:Plugin.new('vim-airline/vim-airline-themes'),
-            \g:Plugin.new('junegunn/fzf', { 'on': 'FZF' }),
+            \g:Plugin.new('junegunn/fzf'),
             \g:Plugin.new('editorconfig/editorconfig-vim'),
             \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
             \g:Plugin.new('mhinz/vim-startify'),
@@ -30,6 +31,7 @@ call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/python.vim
             \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/javascript.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/vim.vim', []))
 
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/markdown.vim', [
             \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
