@@ -21,8 +21,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
             \g:Plugin.new('neomake/neomake'),
             \g:Plugin.new('janko/vim-test'),
             \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
-            \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }),
-            \g:Plugin.new('majutsushi/tagbar', { 'on': 'TagbarToggle' })
+            \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
             \]))
 
 " Language Plugins

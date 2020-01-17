@@ -55,7 +55,11 @@ function! RunWithTerminal(command)
 endfunction
 
 " Terminal Settings
-let g:floaterm_position='center'
+let g:floaterm_position='topright'
+let g:floaterm_background='#181818'
+let g:floaterm_border_color='#383838'
+let g:floaterm_width=&columns-2
+let g:floaterm_height=&lines/2
 autocmd TermOpen * setlocal norelativenumber
 autocmd TermOpen * setlocal nonumber
 tnoremap <Esc> <C-\><C-n>
@@ -92,6 +96,23 @@ function! FindInBuffer()
   execute vim_command
 endfunction
 
+let g:previous_buffer = -1
+let g:next_buffer = bufnr('%')
+function s:UpdateBuffers()
+    let s:name = bufname('%')
+    let s:num = bufnr('%')
+
+    if s:name !=# '' && s:name !=# 'vmenu' && s:num !=# g:next_buffer && s:name[:3] !=# 'NERD'
+        let g:previous_buffer = g:next_buffer
+        let g:next_buffer = s:num
+    endif
+endfunction
+
+function! PreiousBuffer()
+    execute 'b'.g:previous_buffer
+endfunction
+autocmd BufEnter * call s:UpdateBuffers()
+
 " VMenu Settings
 nnoremap <silent> <Space> :call vmenu#show()<CR>
 
@@ -126,6 +147,7 @@ call vmenu#commands([
             \['H', 'Remove Vertical Space', 'vertical resize -5'],
             \['J', 'Add Horizontal Space', 'res +5'],
             \['K', 'Remove Horizontal Space', 'res -5'],
+            \['p', 'Previous Window', 'call PreiousBuffer()'],
             \['h', 'Focus Left', 'wincmd h'],
             \['j', 'Focus Down',  'wincmd j'],
             \['k', 'Focus Top',  'wincmd k'],
@@ -139,7 +161,8 @@ call vmenu#commands([
 " Buffer Keybindings
 call vmenu#commands([
             \['g', 'GoTo Buffer', 'call GoToBuffer()'],
-            \['d', 'Delete Buffer', 'call DeleteBuffer()'],
+            \['d', 'Delete Buffer Num', 'call DeleteBuffer()'],
+            \['q', 'Delete Current Buffer', 'bd'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
             \['f', 'Find In Buffer', 'call FindInBuffer()'],
             \['b', 'List All Buffers', 'buffers'],

@@ -84,9 +84,3 @@ call vmenu#commands([
             \'parent': g:keybindings_test
         \})
 
-call vmenu#commands([
-            \['o', 'Outline',  'TagbarToggle']
-        \], {
-            \'parent': g:keybindings_help
-        \})
-
