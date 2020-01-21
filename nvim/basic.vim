@@ -1,11 +1,16 @@
 " Airline Settings
 let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Theming
 set background=dark
 set termguicolors
 let g:airline_theme='base16'
+au ColorScheme * hi Normal ctermbg=none guibg=none
+au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
 colorscheme base16-default-dark
+
 
 " Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 

@@ -1,6 +1,9 @@
 " Imports
 source ~/.config/nvim/layer.vim
 
+" Needs to be declare before Plugin Loading
+let g:polyglot_disabled = ['latex']
+
 " Basic Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
             \g:Plugin.new('scrooloose/nerdtree'),
