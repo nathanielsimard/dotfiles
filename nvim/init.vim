@@ -19,6 +19,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 " IDE Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
             \g:Plugin.new('janko/vim-test'),
+            \g:Plugin.new('Shougo/echodoc.vim'),
             \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
             \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
             \]))
@@ -30,10 +31,8 @@ call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/python.vim
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/javascript.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/vim.vim', []))
-
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/markdown.vim', [
             \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
             \]))
-
 call g:Editor.configure()
 

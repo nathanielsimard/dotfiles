@@ -1,8 +1,8 @@
 call vmenu#commands([
-            \['p', 'Open Preview', 'MarkdownPreview'],
-            \['s', 'Stop Preview', 'MarkdownPreviewStop']
+            \['p', 'Markdown Preview', 'MarkdownPreview'],
+            \['s', 'Stop Markdown Preview', 'MarkdownPreviewStop']
         \], {
-            \'parent': g:keybindings_help,
+            \'parent': g:keybindings_refactor_run,
             \'filetype': 'markdown'
         \})
 

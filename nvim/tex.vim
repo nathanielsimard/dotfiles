@@ -13,14 +13,8 @@ endfunction
 
 call vmenu#commands([
             \['c', 'Compile', 'call CompileLatex()'],
+            \['s', 'Sync Tex', 'call SyncTexForward()'],
         \], {
             \'parent': g:keybindings_refactor_run,
-            \'filetype': 'tex'
-        \})
-
-call vmenu#commands([
-            \['v', 'View PDF Output', 'call SyncTexForward()'],
-        \], {
-            \'parent': g:keybindings_file,
             \'filetype': 'tex'
         \})

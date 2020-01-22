@@ -52,6 +52,12 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 let g:deoplete#enable_at_startup = 1
 
+" Echo Doc Settings
+let g:echodoc#enable_at_startup = 1
+set completeopt-=preview
+let g:echodoc#type = 'floating'
+highlight link EchoDocFloat Pmenu
+
 " Test Settings
 let test#strategy = 'neovim'
 let g:test#preserve_screen = 1
