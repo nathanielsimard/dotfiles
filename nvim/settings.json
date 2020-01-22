@@ -1,12 +1,13 @@
 {
     "pyls": {
         "plugins" :{
-            "pydocstyle": {
-                "enabled": true
-            },
-            "black": {
-                "enabled": true
-            }
+            "pylint.enabled": false,
+            "yapf.enabled": false,
+
+            "pyflakes.enabled": true,
+            "pydocstyle.enabled": true,
+            "black.enabled": true,
+            "mypy.enabled": true
         }
     }
 }

@@ -1,5 +1,5 @@
 " Airline Settings
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -7,8 +7,8 @@ let g:airline_powerline_fonts = 1
 set background=dark
 set termguicolors
 let g:airline_theme='base16'
-au ColorScheme * hi Normal ctermbg=none guibg=none
-au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
 colorscheme base16-default-dark
 
 
@@ -113,7 +113,7 @@ function s:UpdateBuffers()
     endif
 endfunction
 
-function! PreiousBuffer()
+function! PreviousBuffer()
     execute 'b'.g:previous_buffer
 endfunction
 autocmd BufEnter * call s:UpdateBuffers()
@@ -127,15 +127,15 @@ let g:keybindings_goto = vmenu#category('g', 'GoTo')
 let g:keybindings_error = vmenu#category('e', 'Error')
 let g:keybindings_help = vmenu#category('h', 'Help')
 let g:keybindings_documentation = vmenu#category('d', 'Documentation')
-let g:keybindings_test = vmenu#category('t', 'Testing')
+let keybindings_test_tab = vmenu#category('t', 'Testing/Tab')
 let g:keybindings_buffer = vmenu#category('b', 'Buffer')
 let g:keybindings_window = vmenu#category('w', 'Window')
-let g:keybindings_view = vmenu#category('v', 'View')
+let g:keybindings_ui = vmenu#category('u', 'Ui/Toggle')
 let g:keybindings_file = vmenu#category('f', 'File')
 
 " File Keybindings
 call vmenu#commands([
-            \['f', 'Find Open',  'FZF'],
+            \['f', 'Find',  'FZF'],
             \['x', 'Find Xdg Open',  'call g:linux_open.find()'],
             \['t', 'Focus Tree',  'NERDTreeFocus'],
             \['c', 'Close Tree',  'NERDTreeClose'],
@@ -152,7 +152,7 @@ call vmenu#commands([
             \['H', 'Remove Vertical Space', 'vertical resize -5'],
             \['J', 'Add Horizontal Space', 'res +5'],
             \['K', 'Remove Horizontal Space', 'res -5'],
-            \['p', 'Previous Window', 'call PreiousBuffer()'],
+            \['p', 'Previous Window', 'call PreviousBuffer()'],
             \['h', 'Focus Left', 'wincmd h'],
             \['j', 'Focus Down',  'wincmd j'],
             \['k', 'Focus Top',  'wincmd k'],
@@ -183,14 +183,21 @@ call vmenu#commands([
 
 " Tab Keybindings (Views)
 call vmenu#commands([
-            \['n', 'Create View', 'tabnew'],
+            \['t', 'New Tab', 'tabnew'],
             \['l', 'Next View', 'tabnext'],
             \['k', 'Next View', 'tabnext'],
             \['h', 'Previous View', 'tabprevious'],
             \['j', 'Previous View', 'tabprevious'],
             \['d', 'Close View', 'tabclose']
         \], {
-            \'parent': g:keybindings_view
+            \'parent': keybindings_test_tab
+        \})
+
+" Ui/Toggle Keybindings
+call vmenu#commands([
+            \["t", 'Tree', 'NERDTreeToggle'],
+        \], {
+            \'parent': keybindings_ui
         \})
 
 " Simple Keybindings
@@ -198,5 +205,5 @@ call vmenu#commands([
             \['Q', 'Quit', 'qa'],
             \['s', 'Save File', 'w'],
             \['S', 'Save All Files', 'wa'],
-            \["'", 'Terminal', 'FloatermToggle']
+            \[" ", 'Terminal', 'FloatermToggle'],
         \])

@@ -1,9 +1,6 @@
 " Imports
 source ~/.config/nvim/layer.vim
 
-" Needs to be declare before Plugin Loading
-let g:polyglot_disabled = ['latex']
-
 " Basic Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
             \g:Plugin.new('scrooloose/nerdtree'),
@@ -21,7 +18,6 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 
 " IDE Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
-            \g:Plugin.new('neomake/neomake'),
             \g:Plugin.new('janko/vim-test'),
             \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
             \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
@@ -29,7 +25,6 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
 
 " Language Plugins
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/python.vim', [
-            \g:Plugin.new('psf/black'),
             \g:Plugin.new('heavenshell/vim-pydocstring')
             \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/tex.vim', []))

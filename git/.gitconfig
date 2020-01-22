@@ -12,6 +12,7 @@
 	helper = cache --timeout 28800
 [core]
 	editor = nvim
+    excludesfile = ~/.gitignore_global
 [user]
 	email = nathaniel.simard.42@gmail.com
 	name = nathaniel

@@ -1,4 +1,6 @@
 " LanguageClient Settings
+let g:LanguageClient_serverCommands = {}
+
 function! Keybinding_lsp(filetype)
     call vmenu#commands([
                 \['e', 'Explain', 'call LanguageClient#explainErrorAtPoint()'],
@@ -16,7 +18,7 @@ function! Keybinding_lsp(filetype)
         \})
 
     call vmenu#commands([
-                \['l', 'LSP Options', 'call LanguageClient_contextMenu()()'],
+                \['l', 'LSP Options', 'call LanguageClient_contextMenu()'],
                 \['a', 'Code Action', 'call LanguageClient#textDocument_codeAction()'],
                 \['c', 'Completion', 'call LanguageClient#textDocument_completion()'],
                 \['r', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()']
@@ -45,30 +47,10 @@ function! Keybinding_lsp(filetype)
         \})
 endfunction
 
-let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
-let g:LanguageClient_hoverPreview='Always'
-let g:LanguageClient_diagnosticsEnable=0
-call LanguageClient#setLoggingLevel('ERROR')
-
-" Tagbar Settings
-let g:tagbar_map_showproto='a'
-
 " Deoplete Settings
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 let g:deoplete#enable_at_startup = 1
-
-" Neomake Settings
-call neomake#configure#automake('w')
-let g:neomake_check_on_open = 1
-
-call vmenu#commands([
-            \['n', 'Next Error', 'lnext'],
-            \['p', 'Previous Error', 'lprev']
-        \], {
-            \'parent': g:keybindings_error
-        \})
 
 " Test Settings
 let test#strategy = 'neovim'
@@ -78,9 +60,8 @@ call vmenu#commands([
             \['n', 'Test Nearest',  'TestNearest'],
             \['f','Test File', 'TestFile'],
             \['s', 'Test Suite', 'TestSuite'],
-            \['l', 'Test Last', 'TestLast'],
+            \['p', 'Test Previous', 'TestLast'],
             \['v', 'Test Visit', 'TestVisit']
         \], {
-            \'parent': g:keybindings_test
+            \'parent': keybindings_test_tab
         \})
-
