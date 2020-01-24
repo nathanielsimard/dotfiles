@@ -1,3 +1,4 @@
+let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'pydocstyle']
 let g:LanguageClient_serverCommands['python'] = ['python', '-m', 'pyls']
 
 function! RunPython()

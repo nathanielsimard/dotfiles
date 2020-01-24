@@ -7,8 +7,12 @@
 set background=dark
 set termguicolors
 let g:airline_theme='base16'
-autocmd ColorScheme * hi Normal ctermbg=none guibg=none
-autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+
+augroup Background
+    autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+    autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+augroup END
+
 colorscheme base16-default-dark
 
 
@@ -20,6 +24,8 @@ set nowrap
 let mapleader = ' '
 syntax on
 set hidden
+set scrolloff=10
+set mouse+=a
 
 " NERDTree Settings
 let NERDTreeShowHidden=1
@@ -116,7 +122,10 @@ endfunction
 function! PreviousBuffer()
     execute 'b'.g:previous_buffer
 endfunction
-autocmd BufEnter * call s:UpdateBuffers()
+
+augroup PreBuf
+    autocmd BufEnter * call s:UpdateBuffers()
+augroup END
 
 " VMenu Settings
 nnoremap <silent> <Space> :call vmenu#show()<CR>
@@ -195,7 +204,7 @@ call vmenu#commands([
 
 " Ui/Toggle Keybindings
 call vmenu#commands([
-            \["t", 'Tree', 'NERDTreeToggle'],
+            \['t', 'Tree', 'NERDTreeToggle'],
         \], {
             \'parent': keybindings_ui
         \})
@@ -205,5 +214,5 @@ call vmenu#commands([
             \['Q', 'Quit', 'qa'],
             \['s', 'Save File', 'w'],
             \['S', 'Save All Files', 'wa'],
-            \[" ", 'Terminal', 'FloatermToggle'],
+            \[' ', 'Terminal', 'FloatermToggle'],
         \])

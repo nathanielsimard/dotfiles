@@ -1,5 +1,4 @@
 let g:LanguageClient_serverCommands['tex'] = ['~/.local/bin/tex-lsp']
-
 call Keybinding_lsp('tex')
 
 function! CompileLatex()

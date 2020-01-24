@@ -1,5 +1,6 @@
 " LanguageClient Settings
 let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_diagnosticsEnable = 0
 
 function! Keybinding_lsp(filetype)
     call vmenu#commands([
@@ -61,6 +62,19 @@ highlight link EchoDocFloat Pmenu
 " Test Settings
 let test#strategy = 'neovim'
 let g:test#preserve_screen = 1
+
+" Neomake Settings
+call neomake#configure#automake('w')
+let g:neomake_check_on_open = 1
+
+call vmenu#commands([
+            \['g', 'Check Grammar', 'GrammarousCheck  --preview'],
+            \['G', 'Disable Grammar', 'GrammarousReset'],
+            \['s', 'Check Spelling', 'setlocal spell'],
+            \['S', 'Disable Spelling', 'setlocal nospell'],
+    \], {
+        \'parent': g:keybindings_error
+    \})
 
 call vmenu#commands([
             \['n', 'Test Nearest',  'TestNearest'],
