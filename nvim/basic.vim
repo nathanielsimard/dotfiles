@@ -18,6 +18,7 @@ colorscheme base16-default-dark
 
 " Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
+set clipboard+=unnamedplus
 set number
 set relativenumber
 set nowrap
@@ -134,6 +135,7 @@ nnoremap <silent> <Space> :call vmenu#show()<CR>
 let g:keybindings_refactor_run = vmenu#category('r', 'Refactor/Run')
 let g:keybindings_goto = vmenu#category('g', 'GoTo')
 let g:keybindings_error = vmenu#category('e', 'Error')
+let g:keybindings_spelling = vmenu#category('s', 'Spelling')
 let g:keybindings_help = vmenu#category('h', 'Help')
 let g:keybindings_documentation = vmenu#category('d', 'Documentation')
 let keybindings_test_tab = vmenu#category('t', 'Testing/Tab')
@@ -212,7 +214,6 @@ call vmenu#commands([
 " Simple Keybindings
 call vmenu#commands([
             \['Q', 'Quit', 'qa'],
-            \['s', 'Save File', 'w'],
             \['S', 'Save All Files', 'wa'],
             \[' ', 'Terminal', 'FloatermToggle'],
         \])

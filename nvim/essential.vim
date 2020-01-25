@@ -2,7 +2,22 @@
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_diagnosticsEnable = 0
 
-function! Keybinding_lsp(filetype)
+let g:autoformat_on_save = {}
+function! FormatFiletype()
+    if !has_key(g:autoformat_on_save, &filetype)
+        return
+    endif
+
+    if get(g:autoformat_on_save, &filetype) ==# 1
+        call LanguageClient#textDocument_formatting_sync()
+    end
+endfunction
+
+augroup Autoformat
+    autocmd BufWritePre * call FormatFiletype()
+augroup END
+
+function! RegisterKeybindingsLSP(filetype)
     call vmenu#commands([
                 \['e', 'Explain', 'call LanguageClient#explainErrorAtPoint()'],
                 \['l', 'List', 'call LanguageClient#setDiagnosticsList()']
@@ -67,15 +82,27 @@ let g:test#preserve_screen = 1
 call neomake#configure#automake('w')
 let g:neomake_check_on_open = 1
 
+" Spelling Settings
+function! ToggleSpelling()
+    if &spell ==# 1
+        setlocal nospell
+    else
+        setlocal spell
+    endif
+endfunction
+
 call vmenu#commands([
             \['g', 'Check Grammar', 'GrammarousCheck  --preview'],
-            \['G', 'Disable Grammar', 'GrammarousReset'],
-            \['s', 'Check Spelling', 'setlocal spell'],
-            \['S', 'Disable Spelling', 'setlocal nospell'],
+            \['r', 'Reset Grammar', 'GrammarousReset'],
+            \['s', 'Toggle Spelling', 'call ToggleSpelling()'],
+            \['c', 'Correct Spelling', 'normal! z='],
+            \['n', 'Next Spelling Error', 'normal! [s'],
+            \['n', 'Previous Spelling Error', 'normal! ]s'],
     \], {
-        \'parent': g:keybindings_error
+        \'parent': g:keybindings_spelling
     \})
 
+" Test Settings
 call vmenu#commands([
             \['n', 'Test Nearest',  'TestNearest'],
             \['f','Test File', 'TestFile'],

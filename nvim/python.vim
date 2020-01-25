@@ -1,12 +1,13 @@
 let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'pydocstyle']
 let g:LanguageClient_serverCommands['python'] = ['python', '-m', 'pyls']
+let g:autoformat_on_save['python'] = 1
+call RegisterKeybindingsLSP('python')
 
 function! RunPython()
     let l:file = @%
     call RunWithTerminal('python '.l:file)
 endfunction
 
-call Keybinding_lsp('python')
 call vmenu#commands([
             \['e', 'Execute file', 'call RunPython() '],
         \], {
@@ -20,4 +21,3 @@ call vmenu#commands([
             \'parent': g:keybindings_documentation,
             \'filetype': 'python'
         \})
-

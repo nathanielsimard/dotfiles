@@ -19,10 +19,10 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 " IDE Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
             \g:Plugin.new('janko/vim-test'),
-            \g:Plugin.new('Shougo/echodoc.vim'),
-            \g:Plugin.new('rhysd/vim-grammarous'),
+            \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
             \g:Plugin.new('neomake/neomake'),
             \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
+            \g:Plugin.new('Shougo/echodoc.vim'),
             \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
             \]))
 
