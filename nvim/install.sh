@@ -14,3 +14,5 @@ cp ./settings.json ~/.config/nvim/
 # Install Editor Config
 cp ./.editorconfig ~/
 
+# Install Pydocstring Config
+cp -r pydocstring-templates ~/.config/nvim

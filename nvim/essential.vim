@@ -1,6 +1,8 @@
 " LanguageClient Settings
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_loggingFile = '/home/nathaniel/LanguageClient.log'
+let g:LanguageClient_serverStderr = '/home/nathaniel/LanguageServer.log'
 
 let g:autoformat_on_save = {}
 function! FormatFiletype()

@@ -15,6 +15,8 @@ call vmenu#commands([
             \'filetype': 'python'
         \})
 
+" Pydocstring Settings
+"let g:pydocstring_templates_dir = '~/.config/nvim/pydocstring-templates'
 call vmenu#commands([
             \['g', 'Generate Doc', 'Pydocstring']
         \], {

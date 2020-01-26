@@ -30,6 +30,9 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/python.vim', [
             \g:Plugin.new('heavenshell/vim-pydocstring')
             \]))
+call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/julia.vim', [
+            \g:Plugin.new('JuliaEditorSupport/julia-vim')
+            \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/javascript.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/vim.vim', []))
@@ -39,3 +42,5 @@ call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/markdown
             \]))
 call g:Editor.configure()
 
+let $LANGUAGECLIENT_DEBUG=1
+let g:LanguageClient_loggingLevel='DEBUG'
