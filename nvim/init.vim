@@ -19,6 +19,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 " IDE Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
             \g:Plugin.new('janko/vim-test'),
+            \g:Plugin.new('kassio/neoterm'),
             \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
             \g:Plugin.new('neomake/neomake'),
             \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
@@ -41,6 +42,3 @@ call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/markdown
             \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
             \]))
 call g:Editor.configure()
-
-let $LANGUAGECLIENT_DEBUG=1
-let g:LanguageClient_loggingLevel='DEBUG'

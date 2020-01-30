@@ -135,6 +135,7 @@ nnoremap <silent> <Space> :call vmenu#show()<CR>
 let g:keybindings_refactor_run = vmenu#category('r', 'Refactor/Run')
 let g:keybindings_goto = vmenu#category('g', 'GoTo')
 let g:keybindings_error = vmenu#category('e', 'Error')
+let g:keybindings_interactive = vmenu#category('i', 'Interactive')
 let g:keybindings_spelling = vmenu#category('s', 'Spelling')
 let g:keybindings_help = vmenu#category('h', 'Help')
 let g:keybindings_documentation = vmenu#category('d', 'Documentation')

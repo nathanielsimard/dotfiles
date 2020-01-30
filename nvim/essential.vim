@@ -1,6 +1,8 @@
 " LanguageClient Settings
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_diagnosticsEnable = 0
+"let $LANGUAGECLIENT_DEBUG=1
+"let g:LanguageClient_loggingLevel='DEBUG'
 let g:LanguageClient_loggingFile = '/home/nathaniel/LanguageClient.log'
 let g:LanguageClient_serverStderr = '/home/nathaniel/LanguageServer.log'
 
@@ -92,6 +94,21 @@ function! ToggleSpelling()
         setlocal spell
     endif
 endfunction
+
+let g:neoterm_default_mod='vertical'
+let g:neoterm_autoscroll=1
+xmap <space> <Plug>(neoterm-repl-send)
+call vmenu#commands([
+            \['i', 'REPL Send File', 'TREPLSendFile'],
+            \['v', 'REPL Visual Mode', 'echo "Use `<space>` in visual mode to send text to REPL"'],
+            \['l', 'REPL Send Line', 'TREPLSendLine'],
+            \['t', 'REPL Toggle', 'Ttoggle'],
+            \['c', 'REPL close', 'Tclose'],
+            \['o', 'REPL open', 'Topen'],
+        \], {
+            \'parent': g:keybindings_interactive,
+        \})
+
 
 call vmenu#commands([
             \['g', 'Check Grammar', 'GrammarousCheck  --preview'],
