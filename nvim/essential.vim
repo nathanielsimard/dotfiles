@@ -95,16 +95,36 @@ function! ToggleSpelling()
     endif
 endfunction
 
-let g:neoterm_default_mod='vertical'
-let g:neoterm_autoscroll=1
+""" RELP Settings
+let g:repl_neoterm_id = -1
 xmap <space> <Plug>(neoterm-repl-send)
+
+function! OpenREPL()
+    if g:repl_neoterm_id ==# -1
+        let g:neoterm_current_term_id = g:neoterm_current_term_id + 1
+        let g:repl_neoterm_id = g:neoterm_current_term_id
+    endif
+
+    Tnew
+    execute 'TREPLSetTerm '.g:repl_neoterm_id
+endfunction
+
+function! ToggleREPL()
+    execute g:repl_neoterm_id.'Ttoggle'
+endfunction
+
+function! CloseREPL()
+    execute g:repl_neoterm_id.'Tclose!'
+    let g:repl_neoterm_id = -1
+endfunction
+
 call vmenu#commands([
-            \['i', 'REPL Send File', 'TREPLSendFile'],
+            \['f', 'REPL Send File', 'TREPLSendFile'],
             \['v', 'REPL Visual Mode', 'echo "Use `<space>` in visual mode to send text to REPL"'],
             \['l', 'REPL Send Line', 'TREPLSendLine'],
-            \['t', 'REPL Toggle', 'Ttoggle'],
-            \['c', 'REPL close', 'Tclose'],
-            \['o', 'REPL open', 'Topen'],
+            \['t', 'REPL Toggle', 'call ToggleREPL()'],
+            \['c', 'REPL close', 'call CloseREPL()'],
+            \['o', 'REPL open', 'call OpenREPL()'],
         \], {
             \'parent': g:keybindings_interactive,
         \})

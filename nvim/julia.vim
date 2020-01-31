@@ -32,7 +32,7 @@ function! RunJuliaTest()
 endfunction
 
 call vmenu#commands([
-            \['u', 'REPL Update File', 'call SourceJulia() '],
+            \['i', 'REPL Include File', 'call SourceJulia() '],
         \], {
             \'parent': g:keybindings_interactive,
             \'filetype': 'julia'

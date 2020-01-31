@@ -15,7 +15,6 @@ augroup END
 
 colorscheme base16-default-dark
 
-
 " Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
 set clipboard+=unnamedplus
@@ -62,19 +61,6 @@ function! VerticalSplit()
     wincmd l
 endfunction
 
-function! RunWithTerminal(command)
-    execute '!'.a:command
-endfunction
-
-" Terminal Settings
-let g:floaterm_position='topright'
-let g:floaterm_background='#181818'
-let g:floaterm_border_color='#383838'
-let g:floaterm_width=&columns-2
-let g:floaterm_height=&lines/2
-autocmd TermOpen * setlocal norelativenumber
-autocmd TermOpen * setlocal nonumber
-tnoremap <Esc> <C-\><C-n>
 
 " Buffer Settings
 function! GoToBuffer()
@@ -144,6 +130,37 @@ let g:keybindings_buffer = vmenu#category('b', 'Buffer')
 let g:keybindings_window = vmenu#category('w', 'Window')
 let g:keybindings_ui = vmenu#category('u', 'Ui/Toggle')
 let g:keybindings_file = vmenu#category('f', 'File')
+
+" Terminal Settings 
+autocmd TermOpen * setlocal norelativenumber
+autocmd TermOpen * setlocal nonumber
+tnoremap <Esc> <C-\><C-n>
+
+" Neoterm Settings
+let g:neoterm_current_term_id = 0
+let g:neoterm_default_mod = 'bot'
+let g:neoterm_autoscroll = 1
+let g:main_neoterm_id = -1
+
+function! RunWithTerminal(command)
+    execute g:main_neoterm_id.'T '.a:command
+    execute g:main_neoterm_id.'Ttoggle'
+endfunction
+
+function! ToggleTerminal()
+    if g:main_neoterm_id ==# -1
+        let g:neoterm_current_term_id = g:neoterm_current_term_id + 1
+        let g:main_neoterm_id = g:neoterm_current_term_id
+    endif
+
+    let g:neoterm_autojump = 1
+    execute g:main_neoterm_id.'Ttoggle'
+    let g:neoterm_autojump = 0
+
+    if &filetype ==# 'neoterm'
+        startinsert
+    endif
+endfunction
 
 " File Keybindings
 call vmenu#commands([
@@ -216,5 +233,5 @@ call vmenu#commands([
 call vmenu#commands([
             \['Q', 'Quit', 'qa'],
             \['S', 'Save All Files', 'wa'],
-            \[' ', 'Terminal', 'FloatermToggle'],
+            \[' ', 'Terminal', 'call ToggleTerminal()'],
         \])
