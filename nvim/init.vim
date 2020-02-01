@@ -6,7 +6,6 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
             \g:Plugin.new('scrooloose/nerdtree'),
             \g:Plugin.new('nathanielsimard/vmenu'),
             \g:Plugin.new('vim-airline/vim-airline'),
-            \g:Plugin.new('kassio/neoterm'),
             \g:Plugin.new('vim-airline/vim-airline-themes'),
             \g:Plugin.new('junegunn/fzf'),
             \g:Plugin.new('editorconfig/editorconfig-vim'),
@@ -18,13 +17,15 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 
 " IDE Plugins
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
-            \g:Plugin.new('janko/vim-test'),
             \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
             \g:Plugin.new('neomake/neomake'),
             \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
             \g:Plugin.new('Shougo/echodoc.vim'),
             \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
             \]))
+
+" Terminal Settings and Helpers
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/terminal.vim', []))
 
 " Language Plugins
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/python.vim', [

@@ -3,13 +3,22 @@ let g:LanguageClient_serverCommands['python'] = ['python', '-m', 'pyls']
 let g:autoformat_on_save['python'] = 1
 call RegisterKeybindingsLSP('python')
 
-function! RunPython()
+function! PythonRun()
     let l:file = @%
     call RunWithTerminal('python '.l:file)
 endfunction
 
+function! PythonTestFile()
+    let l:file = @%
+    call RunWithTerminal('pytest '.l:file)
+endfunction
+
+function! PythonTestSuite()
+    call RunWithTerminal('pytest .')
+endfunction
+
 call vmenu#commands([
-            \['e', 'Execute file', 'call RunPython() '],
+            \['e', 'Execute file', 'call PythonRun() '],
         \], {
             \'parent': g:keybindings_refactor_run,
             \'filetype': 'python'
@@ -21,5 +30,14 @@ call vmenu#commands([
             \['g', 'Generate Doc', 'Pydocstring']
         \], {
             \'parent': g:keybindings_documentation,
+            \'filetype': 'python'
+        \})
+
+" Test Settings
+call vmenu#commands([
+            \['f','Test File', 'call PythonTestFile()'],
+            \['s', 'Test Suite', 'call PythonTestSuite()'],
+        \], {
+            \'parent': keybindings_test_tab,
             \'filetype': 'python'
         \})
