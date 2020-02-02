@@ -1,18 +1,14 @@
-" Airline Settings
-" let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
-
 " Theming
 set background=dark
 set termguicolors
+set noshowmode
+
+"augroup Background
+"    autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+"    autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+"augroup END
+
 let g:airline_theme='base16'
-
-augroup Background
-    autocmd ColorScheme * hi Normal ctermbg=none guibg=none
-    autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
-augroup END
-
 colorscheme base16-default-dark
 
 " Basic Settings
@@ -60,7 +56,6 @@ function! VerticalSplit()
     vsplit
     wincmd l
 endfunction
-
 
 " Buffer Settings
 function! GoToBuffer()

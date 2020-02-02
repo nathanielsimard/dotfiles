@@ -1,45 +1,41 @@
-" Imports
 source ~/.config/nvim/layer.vim
 
-" Basic Plugins
+" Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
-            \g:Plugin.new('scrooloose/nerdtree'),
-            \g:Plugin.new('nathanielsimard/vmenu'),
-            \g:Plugin.new('vim-airline/vim-airline'),
-            \g:Plugin.new('vim-airline/vim-airline-themes'),
-            \g:Plugin.new('junegunn/fzf'),
-            \g:Plugin.new('editorconfig/editorconfig-vim'),
-            \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
-            \g:Plugin.new('mhinz/vim-startify'),
-            \g:Plugin.new('sheerun/vim-polyglot'),
-            \g:Plugin.new('chriskempson/base16-vim')
+                \g:Plugin.new('scrooloose/nerdtree'),
+                \g:Plugin.new('Xuyuanp/nerdtree-git-plugin'),
+                \g:Plugin.new('nathanielsimard/vmenu'),
+                \g:Plugin.new('junegunn/fzf'),
+                \g:Plugin.new('editorconfig/editorconfig-vim'),
+                \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
+                \g:Plugin.new('sheerun/vim-polyglot'),
+                \g:Plugin.new('chriskempson/base16-vim'),
+                \g:Plugin.new('vim-airline/vim-airline'),
+                \g:Plugin.new('vim-airline/vim-airline-themes'),
             \]))
 
-" IDE Plugins
-call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/essential.vim', [
-            \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
-            \g:Plugin.new('neomake/neomake'),
-            \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
-            \g:Plugin.new('Shougo/echodoc.vim'),
-            \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
+" IDE Layer
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
+                \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
+                \g:Plugin.new('neomake/neomake'),
+                \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
+                \g:Plugin.new('Shougo/echodoc.vim'),
+                \g:Plugin.new('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
             \]))
 
-" Terminal Settings and Helpers
+" Terminal Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/terminal.vim', []))
 
-" Language Plugins
-call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/python.vim', [
-            \g:Plugin.new('heavenshell/vim-pydocstring')
-            \]))
-call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/julia.vim', [
-            \g:Plugin.new('JuliaEditorSupport/julia-vim')
-            \]))
+" Language Layers
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/markdown.vim', [
-            \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
+                \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
             \]))
-call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/tex.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/javascript.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/vim.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('clojure', '~/.config/nvim/clojure.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/lang/javascript.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/lang/vim.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('clojure', '~/.config/nvim/lang/clojure.vim', []))
 
+" Configure Editor
 call g:Editor.configure()

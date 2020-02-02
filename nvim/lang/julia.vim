@@ -46,7 +46,6 @@ call vmenu#commands([
             \'filetype': 'julia'
         \})
 
-
 call vmenu#commands([
             \['e', 'Execute file', 'call RunJulia() '],
         \], {
