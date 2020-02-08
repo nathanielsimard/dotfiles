@@ -95,7 +95,11 @@ function s:UpdateBuffers()
     let s:name = bufname('%')
     let s:num = bufnr('%')
 
-    if s:name !=# '' && s:name !=# 'vmenu' && s:num !=# g:next_buffer && s:name[:3] !=# 'NERD'
+    if s:name !=# '' &&
+                \s:name !=# 'vmenu' &&
+                \s:name[0:4] !=# 'term:' &&
+                \s:num !=# g:next_buffer &&
+                \s:name[:3] !=# 'NERD'
         let g:previous_buffer = g:next_buffer
         let g:next_buffer = s:num
     endif
@@ -120,7 +124,8 @@ let g:keybindings_interactive = vmenu#category('i', 'Interactive')
 let g:keybindings_spelling = vmenu#category('s', 'Spelling')
 let g:keybindings_help = vmenu#category('h', 'Help')
 let g:keybindings_documentation = vmenu#category('d', 'Documentation')
-let keybindings_test_tab = vmenu#category('t', 'Testing/Tab')
+let g:keybindings_tab = vmenu#category('t', 'Tab')
+let g:keybindings_jobs = vmenu#category('j', 'Jobs')
 let g:keybindings_buffer = vmenu#category('b', 'Buffer')
 let g:keybindings_window = vmenu#category('w', 'Window')
 let g:keybindings_ui = vmenu#category('u', 'Ui/Toggle')
@@ -176,14 +181,14 @@ call vmenu#commands([
 
 " Tab Keybindings (Views)
 call vmenu#commands([
-            \['t', 'New Tab', 'tabnew'],
+            \['n', 'New Tab', 'tabnew'],
             \['l', 'Next View', 'tabnext'],
             \['k', 'Next View', 'tabnext'],
             \['h', 'Previous View', 'tabprevious'],
             \['j', 'Previous View', 'tabprevious'],
             \['d', 'Close View', 'tabclose']
         \], {
-            \'parent': keybindings_test_tab
+            \'parent': g:keybindings_tab
         \})
 
 " Ui/Toggle Keybindings

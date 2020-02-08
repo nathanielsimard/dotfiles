@@ -35,13 +35,15 @@ function g:Terminal.toggle()
     else
         call self._toggle()
     endif
+
+    call self._apply_options()
 endfunction
 
 function g:Terminal.run(command)
     if !bufexists(self.bufnr)
         call self._create()
     else
-        call self.open()
+        call self._open()
     endif
 
     let l:channel = &channel
@@ -50,7 +52,7 @@ function g:Terminal.run(command)
     call self._apply_options()
 endfunction
 
-function g:Terminal.open()
+function g:Terminal._open()
     if bufnr() !=# self.bufnr
         call win_gotoid(self.winid)
 
@@ -60,16 +62,21 @@ function g:Terminal.open()
     endif
 endfunction
 
+function g:Terminal._close()
+    wincmd p
+    call nvim_win_close(self.winid, 0)
+endfunction
+
 function g:Terminal._toggle()
     if bufnr() ==# self.bufnr
-        q
+        call self._close()
         return
     endif
 
     call win_gotoid(self.winid)
 
     if win_getid() ==# self.winid && bufnr() ==# self.bufnr
-        q
+        call self._close()
         return
     end
 
@@ -81,7 +88,6 @@ function g:Terminal._open_existing()
     execute 'b'.self.bufnr
 
     let self.winid = win_getid()
-    call self._apply_options()
 endfunction
 
 function g:Terminal._create()
@@ -91,12 +97,11 @@ function g:Terminal._create()
     let self.bufnr = bufnr()
     let self.winid = win_getid()
 
-    call self._apply_options()
     call self._on_open()
 endfunction
 
 function g:Terminal._apply_options()
-    if self.autoinsert ==# 1
+    if self.autoinsert ==# 1 && self.bufnr ==# bufnr()
         startinsert
     end
 
@@ -124,6 +129,8 @@ endfunction
 let g:ReplTerminal = {}
 function g:ReplTerminal.new(relp_command)
     let l:newTerminal = g:Terminal.new({
+                \'autojump': 0,
+                \'autoinsert': 0,
                 \'autoscroll': 1,
                 \'shell': 'sh',
             \})
@@ -157,18 +164,24 @@ let g:main_terminal = g:Terminal.new({
                 \'autoinsert': 1,
             \})
 let g:jobs_terminal = g:Terminal.new({
-                \'autojump': 1,
-                \'autoinsert': 1,
+                \'autojump': 0,
+                \'autoinsert': 0,
                 \'autoscroll': 1,
                 \'shell': 'sh',
             \})
 
-function! RunWithTerminal(command)
-    call g:jobs_terminal.run(a:command."\nexit")
+" Run command with the neovim terminal.
+"
+" The command will run with sh shell and the terminal will
+" be close after the end of the command.
+function! terminal#run_command(command)
+    call g:jobs_terminal.run(a:command)
 endfunction
 
-""" RELP Settings
-function! SetupRepl(filetype, repl_terminal_name)
+" Setup the basic keybindings for the repl for a specific filetype.
+"
+" The repl_terminal_name must be an instance of g:ReplTerminal.
+function! terminal#repl_setup(filetype, repl_terminal_name)
     call vmenu#commands([
                 \['f', 'REPL Send File', 'call '.a:repl_terminal_name.'.send_file()'],
                 \['l', 'REPL Send Line', 'call '.a:repl_terminal_name.'.send_line()'],
@@ -180,5 +193,11 @@ function! SetupRepl(filetype, repl_terminal_name)
 endfunction
 
 call vmenu#commands([
-            \[' ', 'Terminal', 'call g:main_terminal.toggle()'],
+            \[' ', 'Toggle Terminal', 'call g:main_terminal.toggle()'],
         \])
+
+call vmenu#commands([
+                \['j', 'Toggle', 'call g:jobs_terminal.toggle()'],
+            \], {
+                \'parent': g:keybindings_jobs
+            \})

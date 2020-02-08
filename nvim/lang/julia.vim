@@ -16,11 +16,11 @@ let g:repl_terminal_julia = g:ReplTerminal.new("julia\n
                 \using Revise
             \")
 
-call SetupRepl('julia', 'g:repl_terminal_julia')
+call terminal#repl_setup('julia', 'g:repl_terminal_julia')
 
 function! RunJulia()
     let l:file = @%
-    call RunWithTerminal('julia '.l:file)
+    call terminal#run_command('julia '.l:file)
 endfunction
 
 function! SourceJulia()
@@ -32,7 +32,7 @@ endfunction
 function! RunJuliaTest()
     let l:file = @%
     let l:pwd = trim(execute('pwd'))
-    call RunWithTerminal("julia --color=yes -e '
+    call terminal#run_command("julia --color=yes -e '
                 \using Pkg;
                 \Pkg.activate(\"".l:pwd."\");
                 \include(\"".l:pwd.'/'.l:file."\");
@@ -48,14 +48,8 @@ call vmenu#commands([
 
 call vmenu#commands([
             \['e', 'Execute file', 'call RunJulia() '],
+            \['t', 'Test file', 'call RunJuliaTest() '],
         \], {
             \'parent': g:keybindings_refactor_run,
-            \'filetype': 'julia'
-        \})
-
-call vmenu#commands([
-            \['f', 'Test file', 'call RunJuliaTest() '],
-        \], {
-            \'parent': g:keybindings_test_tab,
             \'filetype': 'julia'
         \})

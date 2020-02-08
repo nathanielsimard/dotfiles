@@ -24,22 +24,22 @@ function s:to_src_file(test_file)
 
 endfunction
 
-function! PythonRun()
+function! lang#python#run()
     let l:file = @%
-    call RunWithTerminal('python '.l:file)
+    call terminal#run_command('python '.l:file)
 endfunction
 
-function! PythonTestFile()
+function! lang#python#test_file()
     let l:file = @%
 
     if !s:is_test_file(l:file)
         let l:file =  s:to_test_file(l:file)
     end
 
-    call RunWithTerminal('pytest '.l:file)
+    call terminal#run_command('pytest '.l:file)
 endfunction
 
-function! PythonGotoTestFile()
+function! lang#python#test_toggle()
     let l:file = @%
 
     if s:is_test_file(l:file)
@@ -51,48 +51,39 @@ function! PythonGotoTestFile()
     execute 'e '.l:file
 endfunction
 
-function! PythonTestSuite()
-    call RunWithTerminal('pytest .')
+function! lang#python#test_suite()
+    call terminal#run_command('pytest .')
 endfunction
 
+" Run Settings
 call vmenu#commands([
-            \['e', 'Execute file', 'call PythonRun() '],
+            \['e', 'Execute file', 'call lang#python#run() '],
+            \['t','Test File', 'call lang#python#test_file()'],
+            \['s','Test Suite', 'call lang#python#test_suite()'],
         \], {
             \'parent': g:keybindings_refactor_run,
             \'filetype': 'python'
         \})
 
-" Pydocstring Settings
-"let g:pydocstring_templates_dir = '~/.config/nvim/pydocstring-templates'
 call vmenu#commands([
-            \['g', 'Generate Doc', 'Pydocstring']
+            \['t', 'Toggle Test/Impl', 'call lang#python#test_toggle()'],
         \], {
-            \'parent': g:keybindings_documentation,
-            \'filetype': 'python'
-        \})
-
-" Test Settings
-call vmenu#commands([
-            \['f','Test File', 'call PythonTestFile()'],
-            \['s','Test Suite', 'call PythonTestSuite()'],
-            \['g', 'Goto Test File', 'call PythonGotoTestFile()'],
-        \], {
-            \'parent': keybindings_test_tab,
+            \'parent': g:keybindings_goto,
             \'filetype': 'python'
         \})
 
 let g:repl_terminal_python = g:ReplTerminal.new('ipython --no-autoindent --matplotlib')
-call SetupRepl('python', 'g:repl_terminal_python')
+call terminal#repl_setup('python', 'g:repl_terminal_python')
 
-function! PythonReplImport()
+function! lang#python#repl_import()
     let l:file = @%
-    let l:import = substitute(l:file, '/', '.', '')
+    let l:import = substitute(l:file, '/', '.', 'g')
     let l:command = 'import '.l:import[0:-4]
     call g:repl_terminal_python.run(l:command)
 endfunction
 
 call vmenu#commands([
-            \['i', 'REPL Import File', 'call PythonReplImport() '],
+            \['i', 'REPL Import File', 'call lang#python#repl_import() '],
         \], {
             \'parent': g:keybindings_interactive,
             \'filetype': 'python'

@@ -3,7 +3,7 @@ call RegisterKeybindingsLSP('tex')
 
 function! CompileLatex()
     let l:file = @%
-    call RunWithTerminal('pdflatex -interaction=nonstopmode -synctex=1 '.l:file)
+    call terminal#run_command('pdflatex -interaction=nonstopmode -synctex=1 '.l:file)
 endfunction
 
 function! SyncTexForward()
