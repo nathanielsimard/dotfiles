@@ -164,11 +164,13 @@ endfunction
 " Git Keybindings
 call vmenu#commands([
             \['s', 'Status',  'GFiles?'],
-            \['c', 'Create Commits',  'call basic#git_commit()'],
-            \['a', 'Add All',  'call terminal#run_command("git add --all")'],
-            \['p', 'Push Existing Branch',  'call terminal#run_command("git push")'],
-            \['b', 'Create Branch',  'call basic#git_branch()'],
+            \['m', 'Checkout master',  'call terminal#run_command("git checkout master")'],
             \['l', 'List Buffer Commits',  'BCommits'],
+            \['p', 'Pull',  'call terminal#run_command("git pull")'],
+            \['A', 'Add All',  'call terminal#run_command("git add --all")'],
+            \['C', 'Create Commits',  'call basic#git_commit()'],
+            \['P', 'Push Existing Branch',  'call terminal#run_command("git push")'],
+            \['B', 'Create Branch',  'call basic#git_branch()'],
         \], {
             \'parent': g:keybindings_git
         \})
