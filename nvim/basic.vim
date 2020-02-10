@@ -118,29 +118,59 @@ nnoremap <silent> <Space> :call vmenu#show()<CR>
 
 " VMenu Categories
 let g:keybindings_refactor_run = vmenu#category('r', 'Refactor/Run')
-let g:keybindings_goto = vmenu#category('g', 'GoTo')
+let g:keybindings_git = vmenu#category('g', 'Git')
 let g:keybindings_error = vmenu#category('e', 'Error')
 let g:keybindings_interactive = vmenu#category('i', 'Interactive')
 let g:keybindings_spelling = vmenu#category('s', 'Spelling')
 let g:keybindings_help = vmenu#category('h', 'Help')
 let g:keybindings_documentation = vmenu#category('d', 'Documentation')
 let g:keybindings_tab = vmenu#category('t', 'Tab')
-let g:keybindings_jobs = vmenu#category('j', 'Jobs')
+let g:keybindings_jumps_jobs = vmenu#category('j', 'Jumps/Jobs')
 let g:keybindings_buffer = vmenu#category('b', 'Buffer')
 let g:keybindings_window = vmenu#category('w', 'Window')
 let g:keybindings_ui = vmenu#category('u', 'Ui/Toggle')
-let g:keybindings_file = vmenu#category('f', 'File')
+let g:keybindings_file = vmenu#category('f', 'File/Find')
 
 " File Keybindings
 call vmenu#commands([
-            \['f', 'Find',  'FZF'],
+            \['f', 'Find Files',  'Files'],
+            \['l', 'Find Lines',  'BLines'],
             \['x', 'Find Xdg Open',  'call g:linux_open.find()'],
             \['t', 'Focus Tree',  'NERDTreeFocus'],
             \['c', 'Close Tree',  'NERDTreeClose'],
             \['r', 'Refresh Tree',  'NERDTreeRefreshRoot'],
-            \['n', 'New File',  'call NewFile()']
+            \['n', 'New File',  'call NewFile()'],
         \], {
             \'parent': g:keybindings_file
+        \})
+
+function! basic#git_commit()
+    let curline = getline('.')
+    call inputsave()
+    let message = input('[Git Commit Message]: ')
+    call inputrestore()
+    call terminal#run_command('git commit -m "'.message.'"')
+endfunction
+
+function! basic#git_branch()
+    let curline = getline('.')
+    call inputsave()
+    let name = input('[Git Branch Name]: ')
+    call inputrestore()
+    call terminal#run_command('git checkout -b "'.name.'"')
+    call terminal#run_command('git push -u origin "'.name.'"')
+endfunction
+
+" Git Keybindings
+call vmenu#commands([
+            \['s', 'Status',  'GFiles?'],
+            \['c', 'Create Commits',  'call basic#git_commit()'],
+            \['a', 'Add All',  'call terminal#run_command("git add --all")'],
+            \['p', 'Push Existing Branch',  'call terminal#run_command("git push")'],
+            \['b', 'Create Branch',  'call basic#git_branch()'],
+            \['l', 'List Buffer Commits',  'BCommits'],
+        \], {
+            \'parent': g:keybindings_git
         \})
 
 " Window Keybindings
@@ -168,7 +198,7 @@ call vmenu#commands([
             \['q', 'Delete Current Buffer', 'bd'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
             \['f', 'Find In Buffer', 'call FindInBuffer()'],
-            \['b', 'List All Buffers', 'buffers'],
+            \['b', 'List All Buffers', 'Buffers'],
             \['s', 'Save Buffer', 'w'],
             \['S', 'Save All Buffers', 'wa'],
             \['l', 'Next Buffer', 'bn'],

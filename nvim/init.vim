@@ -6,6 +6,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('Xuyuanp/nerdtree-git-plugin'),
                 \g:Plugin.new('nathanielsimard/vmenu'),
                 \g:Plugin.new('junegunn/fzf'),
+                \g:Plugin.new('junegunn/fzf.vim'),
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
                 \g:Plugin.new('sheerun/vim-polyglot'),

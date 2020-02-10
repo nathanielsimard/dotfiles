@@ -53,7 +53,7 @@ function! RegisterKeybindingsLSP(filetype)
                 \['r', 'References', 'call LanguageClient#textDocument_references()'],
                 \['s', 'Symbol', 'call LanguageClient#textDocument_documentSymbol()']
         \], {
-            \'parent': g:keybindings_goto,
+            \'parent': g:keybindings_jumps_jobs,
             \'filetype': a:filetype
         \})
 

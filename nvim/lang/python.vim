@@ -66,9 +66,9 @@ call vmenu#commands([
         \})
 
 call vmenu#commands([
-            \['t', 'Toggle Test/Impl', 'call lang#python#test_toggle()'],
+            \['t', 'Test - Impl', 'call lang#python#test_toggle()'],
         \], {
-            \'parent': g:keybindings_goto,
+            \'parent': g:keybindings_jumps_jobs,
             \'filetype': 'python'
         \})
 
