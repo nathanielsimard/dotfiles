@@ -101,15 +101,17 @@ function g:Terminal._create()
 endfunction
 
 function g:Terminal._apply_options()
-    if self.autoinsert ==# 1 && self.bufnr ==# bufnr()
+    let l:focused = self.bufnr ==# bufnr()
+
+    if self.autoinsert ==# 1 && l:focused ==# 1
         startinsert
     end
 
-    if self.autoscroll ==# 1
+    if self.autoscroll ==# 1 && l:focused ==# 1
         normal! G
     end
 
-    if self.autojump !=# 1
+    if self.autojump !=# 1 && l:focused ==# 1
         wincmd p
     end
 endfunction
