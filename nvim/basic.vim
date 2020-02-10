@@ -134,6 +134,7 @@ let g:keybindings_file = vmenu#category('f', 'File/Find')
 " File Keybindings
 call vmenu#commands([
             \['f', 'Find Files',  'Files'],
+            \['d', 'Delete Files',  'call fzf#run({"sink": "silent !rm"})'],
             \['l', 'Find Lines',  'BLines'],
             \['x', 'Find Xdg Open',  'call g:linux_open.find()'],
             \['t', 'Focus Tree',  'NERDTreeFocus'],
@@ -161,7 +162,7 @@ function! basic#git_branch()
     call terminal#run_command('git push -u origin "'.name.'"')
 endfunction
 
-function! basic#git_sync()
+function! basic#git_save()
     call terminal#run_command('git add --all')
     call basic#git_commit()
     call terminal#run_command('git push')
@@ -176,7 +177,7 @@ call vmenu#commands([
             \['o', 'Open Browser',  'Gbrowse'],
             \['p', 'Pull',  'call terminal#run_command("git pull")'],
             \['b', 'Show Branches',  'call terminal#run_command("git branch")'],
-            \['S', 'Save & Sync Everything',  'call basic#git_sync()'],
+            \['S', 'Save All',  'call basic#git_save()'],
             \['A', 'Add All',  'call terminal#run_command("git add --all")'],
             \['C', 'Create Commits',  'call basic#git_commit()'],
             \['P', 'Push Branch',  'call terminal#run_command("git push")'],
@@ -203,10 +204,16 @@ call vmenu#commands([
             \'parent': g:keybindings_window
         \})
 
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-d': 'bdelete',
+  \ 'ctrl-v': 'vsplit' }
+
 " Buffer Keybindings
 call vmenu#commands([
             \['g', 'GoTo Buffer', 'call GoToBuffer()'],
-            \['d', 'Delete Buffer Num', 'call DeleteBuffer()'],
+            \['d', 'Delete Buffer', 'call DeleteBuffer()'],
             \['q', 'Delete Current Buffer', 'bd'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
             \['f', 'Find In Buffer', 'call FindInBuffer()'],
@@ -242,6 +249,8 @@ call vmenu#commands([
 
 " Simple Keybindings
 call vmenu#commands([
-            \['Q', 'Quit', 'qa'],
+            \['Q', 'Quit All', 'qa'],
+            \['q', 'Quit', 'q'],
             \['S', 'Save All Files', 'wa'],
         \])
+

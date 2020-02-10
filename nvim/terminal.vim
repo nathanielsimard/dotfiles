@@ -199,7 +199,8 @@ call vmenu#commands([
         \])
 
 call vmenu#commands([
-                \['j', 'Toggle', 'call g:jobs_terminal.toggle()'],
+                \['j', 'JOBS Toggle', 'call g:jobs_terminal.toggle()'],
             \], {
                 \'parent': g:keybindings_jumps_jobs
             \})
+
