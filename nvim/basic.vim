@@ -167,16 +167,19 @@ function! basic#git_sync()
     call terminal#run_command('git push')
 endfunction
 
+let g:airline#extensions#branch#enabled = 1
+
 " Git Keybindings
 call vmenu#commands([
             \['s', 'Status',  'GFiles?'],
             \['m', 'Checkout master',  'call terminal#run_command("git checkout master")'],
             \['l', 'List Buffer Commits',  'BCommits'],
             \['p', 'Pull',  'call terminal#run_command("git pull")'],
-            \['S', 'Sync Remote Branch',  'call basic#git_sync()'],
+            \['b', 'Show Branches',  'call terminal#run_command("git branch")'],
+            \['S', 'Save & Sync Everything',  'call basic#git_sync()'],
             \['A', 'Add All',  'call terminal#run_command("git add --all")'],
             \['C', 'Create Commits',  'call basic#git_commit()'],
-            \['P', 'Push Existing Branch',  'call terminal#run_command("git push")'],
+            \['P', 'Push Branch',  'call terminal#run_command("git push")'],
             \['B', 'Create Branch',  'call basic#git_branch()'],
         \], {
             \'parent': g:keybindings_git

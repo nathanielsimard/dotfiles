@@ -169,6 +169,7 @@ let g:jobs_terminal = g:Terminal.new({
                 \'autojump': 0,
                 \'autoinsert': 0,
                 \'autoscroll': 1,
+                \'shell': 'sh',
             \})
 
 " Run command with the neovim terminal.
