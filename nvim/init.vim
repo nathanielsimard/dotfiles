@@ -3,10 +3,11 @@ source ~/.config/nvim/layer.vim
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('scrooloose/nerdtree'),
-                \g:Plugin.new('Xuyuanp/nerdtree-git-plugin'),
                 \g:Plugin.new('nathanielsimard/vmenu'),
                 \g:Plugin.new('junegunn/fzf'),
                 \g:Plugin.new('junegunn/fzf.vim'),
+                \g:Plugin.new('tpope/vim-fugitive'),
+                \g:Plugin.new('tpope/vim-rhubarb'),
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
                 \g:Plugin.new('sheerun/vim-polyglot'),

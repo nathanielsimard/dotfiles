@@ -167,13 +167,13 @@ function! basic#git_sync()
     call terminal#run_command('git push')
 endfunction
 
-let g:airline#extensions#branch#enabled = 1
-
 " Git Keybindings
 call vmenu#commands([
             \['s', 'Status',  'GFiles?'],
+            \['d', 'Diff',  'Gdiffsplit'],
             \['m', 'Checkout master',  'call terminal#run_command("git checkout master")'],
             \['l', 'List Buffer Commits',  'BCommits'],
+            \['o', 'Open Browser',  'Gbrowse'],
             \['p', 'Pull',  'call terminal#run_command("git pull")'],
             \['b', 'Show Branches',  'call terminal#run_command("git branch")'],
             \['S', 'Save & Sync Everything',  'call basic#git_sync()'],
