@@ -29,7 +29,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/terminal.vim', []))
 
 " Language Layers
-call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/markdown.vim', [
+call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/markdown.vim', [
                 \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
             \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))

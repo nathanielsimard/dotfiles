@@ -26,16 +26,6 @@ set mouse+=a
 " NERDTree Settings
 let NERDTreeShowHidden=1
 
-" Linux helper
-let g:linux_open={}
-function g:linux_open.open(file)
-    call jobstart('xdg-open '.a:file)
-endfunction
-
-function! g:linux_open.find()
-    call fzf#run({'sink': g:linux_open.open})
-endfunction
-
 function! NewFile()
   let curline = getline('.')
   call inputsave()
@@ -136,7 +126,7 @@ call vmenu#commands([
             \['f', 'Find Files',  'Files'],
             \['d', 'Delete Files',  'call fzf#run({"sink": "silent !rm"})'],
             \['l', 'Find Lines',  'BLines'],
-            \['x', 'Find Xdg Open',  'call g:linux_open.find()'],
+            \['x', 'Find Xdg Open',  'call fzf#run(fzf#wrap({"sink": "silent !xdg-open"}))'],
             \['t', 'Focus Tree',  'NERDTreeFocus'],
             \['c', 'Close Tree',  'NERDTreeClose'],
             \['r', 'Refresh Tree',  'NERDTreeRefreshRoot'],

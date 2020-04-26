@@ -1,6 +1,6 @@
 let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'pydocstyle']
 let g:LanguageClient_serverCommands['python'] = ['python', '-m', 'pyls']
-let g:autoformat_on_save['python'] = 1
+let g:autoformat_on_save['python'] = 0
 call RegisterKeybindingsLSP('python')
 
 function s:is_test_file(file)
