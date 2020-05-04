@@ -3,10 +3,10 @@ set background=dark
 set termguicolors
 set noshowmode
 
-"augroup Background
-"    autocmd ColorScheme * hi Normal ctermbg=none guibg=none
-"    autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
-"augroup END
+augroup Background
+    autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+    autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+augroup END
 
 let g:airline_theme='base16'
 colorscheme base16-default-dark

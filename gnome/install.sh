@@ -1,5 +1,5 @@
 echo "Installing extensions and Jetbrains Toolbox"
-firefox \
+google-chrome-stable \
     https://extensions.gnome.org/extension/615/appindicator-support/ \
     https://extensions.gnome.org/extension/517/caffeine/ \
     https://extensions.gnome.org/extension/1253/extended-gestures/ \

@@ -19,3 +19,6 @@ if [ -e ~/.bash_profile ]; then
 fi
 
 cp .bash_profile ~/
+
+# Add Npm Completion
+npm completion >> ~/.bashrc

@@ -1,4 +1,4 @@
-let g:LanguageClient_serverCommands['tex'] = ['~/.local/bin/tex-lsp']
+let g:LanguageClient_serverCommands['tex'] = ['~/.local/bin/texlab']
 call RegisterKeybindingsLSP('tex')
 
 function! CompileLatex()

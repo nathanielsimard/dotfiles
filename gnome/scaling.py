@@ -10,7 +10,7 @@ def current_scaling_factor():
     return float(scaling.decode("utf-8").replace("\n", ""))
 
 
-def set_scaling_factor(scaling=1.5):
+def set_scaling_factor(scaling=1.4):
     subprocess.check_call(
         [
             "gsettings",
