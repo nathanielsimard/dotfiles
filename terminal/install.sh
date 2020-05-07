@@ -21,4 +21,7 @@ fi
 cp .bash_profile ~/
 
 # Add Npm Completion
-npm completion >> ~/.bashrc
+touch ~/.npm-completion.sh
+if [ -e "$(command -v npm)" ]; then
+    npm completion >> ~/.npm-completion.sh
+fi
