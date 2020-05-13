@@ -8,3 +8,4 @@ if [ -e ~/.gitconfig ]; then
 fi
 
 cp .gitconfig ~/
+cp .gitignore_global ~/
