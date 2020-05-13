@@ -7,10 +7,18 @@ function s:is_test_file(file)
     return a:file[-7:] ==# 'test.py'
 endfunction
 
+if !exists('g:python_project_root')
+    let g:python_project_root='src'
+end
+
+if !exists('g:python_project_tests_root')
+    let g:python_project_tests_root='tests'
+end
+
 function s:to_test_file(file)
     let l:test_file = a:file
     let l:test_file = substitute(l:test_file, '.py', '_test.py', '')
-    let l:test_file = substitute(l:test_file, 'src', 'tests', '')
+    let l:test_file = substitute(l:test_file, g:python_project_root, g:python_project_tests_root, '')
 
     return l:test_file
 endfunction
@@ -18,10 +26,9 @@ endfunction
 function s:to_src_file(test_file)
     let l:file = a:test_file
     let l:file = substitute(l:file, '_test.py', '.py', '')
-    let l:file = substitute(l:file, 'tests', 'src', '')
+    let l:file = substitute(l:file, g:python_project_tests_root, g:python_project_root, '')
 
     return l:file
-
 endfunction
 
 function! lang#python#run()
@@ -41,6 +48,7 @@ endfunction
 
 function! lang#python#test_toggle()
     let l:file = @%
+    echo g:python_project_root
 
     if s:is_test_file(l:file)
         let l:file = s:to_src_file(l:file)

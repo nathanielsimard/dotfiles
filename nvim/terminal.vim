@@ -134,7 +134,7 @@ function g:ReplTerminal.new(relp_command)
                 \'autojump': 0,
                 \'autoinsert': 0,
                 \'autoscroll': 1,
-                \'shell': 'sh',
+                \'shell': 'bash',
             \})
     let l:newTerminal.relp_command = a:relp_command
     return extend(l:newTerminal, copy(self))
@@ -169,7 +169,7 @@ let g:jobs_terminal = g:Terminal.new({
                 \'autojump': 0,
                 \'autoinsert': 0,
                 \'autoscroll': 1,
-                \'shell': 'sh',
+                \'shell': 'bash',
             \})
 
 " Run command with the neovim terminal.

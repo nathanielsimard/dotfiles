@@ -41,3 +41,8 @@ call g:Editor.add_layer(g:FileTypeLayer.new('clojure', '~/.config/nvim/lang/cloj
 
 " Configure Editor
 call g:Editor.configure()
+
+" Source project based config
+if filereadable(".project.vim")
+    source .project.vim
+endif
