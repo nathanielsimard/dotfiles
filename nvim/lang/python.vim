@@ -60,7 +60,7 @@ function! lang#python#test_toggle()
 endfunction
 
 function! lang#python#test_suite()
-    call terminal#run_command('pytest .')
+    call terminal#run_command('pytest . --ignore it')
 endfunction
 
 " Run Settings

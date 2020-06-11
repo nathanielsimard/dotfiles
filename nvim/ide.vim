@@ -59,7 +59,7 @@ function! RegisterKeybindingsLSP(filetype)
 
     call vmenu#commands([
                 \['r', 'Rename', 'call LanguageClient#textDocument_rename()'],
-                \['f', 'Format', 'call LanguageClient#textDocument_formatting()'],
+                \['f', 'Format', 'call LanguageClient#textDocument_formatting_sync()'],
                 \['F', 'Range Format', 'call LanguageClient#textDocument_rangeFormatting()']
         \], {
             \'parent': g:keybindings_refactor_run,
@@ -71,6 +71,7 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 let g:deoplete#enable_at_startup = 1
+set completeopt=menu,noselect
 
 " Echo Doc Settings
 let g:echodoc#enable_at_startup = 1
