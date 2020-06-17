@@ -97,4 +97,3 @@ call vmenu#commands([
             \'filetype': 'python'
         \})
 
-

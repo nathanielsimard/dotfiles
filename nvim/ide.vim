@@ -31,36 +31,35 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 
     call vmenu#commands([
-                \['d', 'Show Documentation', 'call LanguageClient#textDocument_hover()']
+                \['d', 'Show Documentation', 'lua vim.lsp.buf.hover()']
         \], {
             \'parent': g:keybindings_documentation,
             \'filetype': a:filetype
         \})
 
     call vmenu#commands([
-                \['l', 'LSP Options', 'call LanguageClient_contextMenu()'],
-                \['a', 'Code Action', 'call LanguageClient#textDocument_codeAction()'],
-                \['c', 'Completion', 'call LanguageClient#textDocument_completion()'],
-                \['r', 'Highlight References', 'call LanguageClient#textDocument_documentHighlight()']
+                \['a', 'Code Action', 'lua vim.lsp.buf.code_action()'],
+                \['c', 'Completion', 'lua vim.lsp.buf.completion()'],
+                \['r', 'Highlight References', 'lua vim.lsp.buf.document_highlight()']
         \], {
             \'parent': g:keybindings_help,
             \'filetype': a:filetype
         \})
 
     call vmenu#commands([
-                \['d', 'Definition', 'call LanguageClient#textDocument_definition()'],
-                \['i', 'Implementation', 'call LanguageClient#textDocument_implementation()'],
-                \['r', 'References', 'call LanguageClient#textDocument_references()'],
-                \['s', 'Symbol', 'call LanguageClient#textDocument_documentSymbol()']
+                \['d', 'Definition', 'lua vim.lsp.buf.definition()'],
+                \['i', 'Implementation', 'lua vim.lsp.buf.implementation()'],
+                \['r', 'References', 'lua vim.lsp.buf.references()'],
+                \['s', 'Symbol', 'lua vim.lsp.buf.document_symbol()']
         \], {
             \'parent': g:keybindings_jumps_jobs,
             \'filetype': a:filetype
         \})
 
     call vmenu#commands([
-                \['r', 'Rename', 'call LanguageClient#textDocument_rename()'],
-                \['f', 'Format', 'call LanguageClient#textDocument_formatting_sync()'],
-                \['F', 'Range Format', 'call LanguageClient#textDocument_rangeFormatting()']
+                \['r', 'Rename', 'lua vim.lsp.buf.rename()'],
+                \['f', 'Format', 'lua vim.lsp.buf.formatting()'],
+                \['F', 'Range Format', 'lua vim.lsp.buf.range_formatting()']
         \], {
             \'parent': g:keybindings_refactor_run,
             \'filetype': a:filetype
@@ -102,3 +101,5 @@ call vmenu#commands([
     \], {
         \'parent': g:keybindings_spelling
     \})
+
+lua require'nvim_lsp'.pyls_ms.setup{}
