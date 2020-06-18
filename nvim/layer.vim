@@ -55,6 +55,7 @@ function g:FileTypeLayer.load_config()
     if self.configured ==# 0
         execute 'source '.self.config
         let self.configured = 1
+        e " Reload the file, needed by LSP :(
     endif
 endfunction
 

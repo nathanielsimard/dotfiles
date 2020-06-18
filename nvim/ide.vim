@@ -1,11 +1,3 @@
-" LanguageClient Settings
-let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_diagnosticsEnable = 0
-"let $LANGUAGECLIENT_DEBUG=1
-"let g:LanguageClient_loggingLevel='DEBUG'
-let g:LanguageClient_loggingFile = '/home/nathaniel/LanguageClient.log'
-let g:LanguageClient_serverStderr = '/home/nathaniel/LanguageServer.log'
-
 let g:autoformat_on_save = {}
 function! FormatFiletype()
     if !has_key(g:autoformat_on_save, &filetype)
@@ -13,7 +5,7 @@ function! FormatFiletype()
     endif
 
     if get(g:autoformat_on_save, &filetype) ==# 1
-        call LanguageClient#textDocument_formatting_sync()
+        lua vim.lsp.buf.formatting()
     end
 endfunction
 
@@ -78,10 +70,6 @@ set completeopt-=preview
 let g:echodoc#type = 'floating'
 highlight link EchoDocFloat Pmenu
 
-" Neomake Settings
-" call neomake#configure#automake('w')
-" let g:neomake_check_on_open = 1
-
 " Spelling Settings
 function! ToggleSpelling()
     if &spell ==# 1
@@ -101,5 +89,3 @@ call vmenu#commands([
     \], {
         \'parent': g:keybindings_spelling
     \})
-
-lua require'nvim_lsp'.pyls_ms.setup{}
