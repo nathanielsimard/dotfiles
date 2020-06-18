@@ -19,12 +19,11 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
-                \g:Plugin.new('neomake/neomake'),
-                \g:Plugin.new('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }),
-                \g:Plugin.new('Shougo/echodoc.vim'),
-                \g:Plugin.new('Shougo/deoplete-lsp'),
-                \g:Plugin.new('neovim/nvim-lsp')
+                \g:Plugin.new('haorenW1025/completion-nvim'),
+                \g:Plugin.new('haorenW1025/diagnostic-nvim'),
+                \g:Plugin.new('neovim/nvim-lsp'),
             \]))
+
 
 " Terminal Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/terminal.vim', []))

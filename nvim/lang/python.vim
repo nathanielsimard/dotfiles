@@ -63,11 +63,21 @@ function! lang#python#test_suite()
     call terminal#run_command('pytest . --ignore it')
 endfunction
 
+function! lang#python#format()
+    w
+    let l:file = @%
+    let l:cmd = 'silent !black '.l:file
+    execute l:cmd
+    e
+endfunction
+
+
 " Run Settings
 call vmenu#commands([
             \['e', 'Execute file', 'call lang#python#run() '],
             \['t','Test File', 'call lang#python#test_file()'],
             \['s','Test Suite', 'call lang#python#test_suite()'],
+            \['f','Format', 'call lang#python#format()'],
         \], {
             \'parent': g:keybindings_refactor_run,
             \'filetype': 'python'

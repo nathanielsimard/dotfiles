@@ -66,11 +66,11 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 endfunction
 
-" Deoplete Settings
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-let g:deoplete#enable_at_startup = 1
-set completeopt=menu,noselect
+" Completion Settings
+autocmd BufEnter * lua require'completion'.on_attach()
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+set completeopt=menuone,noinsert,noselect
 
 " Echo Doc Settings
 let g:echodoc#enable_at_startup = 1
@@ -79,8 +79,8 @@ let g:echodoc#type = 'floating'
 highlight link EchoDocFloat Pmenu
 
 " Neomake Settings
-call neomake#configure#automake('w')
-let g:neomake_check_on_open = 1
+" call neomake#configure#automake('w')
+" let g:neomake_check_on_open = 1
 
 " Spelling Settings
 function! ToggleSpelling()
