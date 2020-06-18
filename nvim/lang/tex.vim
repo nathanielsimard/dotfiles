@@ -1,4 +1,5 @@
-let g:LanguageClient_serverCommands['tex'] = ['~/.local/bin/texlab']
+" Language Serveur Settings
+lua require'nvim_lsp'.texlab.setup{}
 call RegisterKeybindingsLSP('tex')
 
 function! CompileLatex()

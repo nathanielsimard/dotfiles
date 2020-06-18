@@ -1,2 +1,3 @@
-let g:LanguageClient_serverCommands['vim'] = ['vim-language-server', '--stdio']
+" Language Serveur Settings
+lua require'nvim_lsp'.vimls.setup{}
 call RegisterKeybindingsLSP('vim')

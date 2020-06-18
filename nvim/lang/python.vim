@@ -1,8 +1,28 @@
-lua require'nvim_lsp'.pyls_ms.setup{}
+" Neomake Settings
+let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'pydocstyle']
 
+" Diagnotic Lsp Setting
+let g:diagnostic_enable_virtual_text = 0
+let g:diagnostic_show_sign = 0
+let g:diagnostic_auto_popup_while_jump = 0
+
+" Language Serveur Settings
+lua << EOF
+require'nvim_lsp'.pyls_ms.setup{
+    on_attach = require'diagnostic'.on_attach,
+    settings = {
+        python = {
+            linting = {
+                enabled = false
+            }
+        }
+    }
+}
+EOF
 let g:autoformat_on_save['python'] = 0
 call RegisterKeybindingsLSP('python')
 
+" Test Utilities
 function s:is_test_file(file)
     return a:file[-7:] ==# 'test.py'
 endfunction
@@ -63,6 +83,7 @@ function! lang#python#test_suite()
     call terminal#run_command('pytest . --ignore it')
 endfunction
 
+" Formatteur Settings
 function! lang#python#format()
     w
     let l:file = @%

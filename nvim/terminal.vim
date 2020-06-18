@@ -17,6 +17,7 @@ function g:Terminal.new(...)
     end
 
     let l:newTerminal = copy(self)
+    let l:newTerminal.last_command = "echo 'No last command used'"
 
     let l:newTerminal.bufnr = -1
     let l:newTerminal.winid = -1
@@ -40,6 +41,7 @@ function g:Terminal.toggle()
 endfunction
 
 function g:Terminal.run(command)
+    let self.last_command = a:command
     if !bufexists(self.bufnr)
         call self._create()
     else
@@ -51,6 +53,11 @@ function g:Terminal.run(command)
 
     call self._apply_options()
 endfunction
+
+function g:Terminal.run_last()
+    call self.run(self.last_command)
+endfunction
+
 
 function g:Terminal._open()
     if bufnr() !=# self.bufnr
@@ -200,6 +207,7 @@ call vmenu#commands([
 
 call vmenu#commands([
                 \['j', 'JOBS Toggle', 'call g:jobs_terminal.toggle()'],
+                \['l', 'Execute Last JOBS', 'call g:jobs_terminal.run_last()'],
             \], {
                 \'parent': g:keybindings_jumps_jobs
             \})

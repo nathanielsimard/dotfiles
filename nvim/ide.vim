@@ -15,8 +15,8 @@ augroup END
 
 function! RegisterKeybindingsLSP(filetype)
     call vmenu#commands([
-                \['e', 'Explain', 'call LanguageClient#explainErrorAtPoint()'],
-                \['l', 'List', 'call LanguageClient#setDiagnosticsList()']
+                \['j', 'Next', 'NextDiagnosticCycle'],
+                \['k', 'Prev', 'PrecDiagnosticCycle'],
         \], {
             \'parent': g:keybindings_error,
             \'filetype': a:filetype
@@ -62,13 +62,16 @@ endfunction
 autocmd BufEnter * lua require'completion'.on_attach()
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 set completeopt=menuone,noinsert,noselect
 
-" Echo Doc Settings
-let g:echodoc#enable_at_startup = 1
-set completeopt-=preview
-let g:echodoc#type = 'floating'
-highlight link EchoDocFloat Pmenu
+" Diagnotic Lsp Setting
+let g:diagnostic_enable_virtual_text = 1
+let g:space_before_virtual_text = 5
+
+" Neomake Settings
+call neomake#configure#automake('w')
+let g:neomake_check_on_open = 1
 
 " Spelling Settings
 function! ToggleSpelling()
