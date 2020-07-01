@@ -1,2 +1,2 @@
-let g:LanguageClient_serverCommands['javascript'] = ['typescript-language-server', '--stdio']
+lua require'nvim_lsp'.tsserver.setup{}
 call RegisterKeybindingsLSP('javascript')

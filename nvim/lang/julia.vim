@@ -2,9 +2,9 @@
 let g:latex_to_unicode_auto = 1
 let g:default_julia_version = '1.3'
 
-" LanguageServer Settings
-let g:LanguageClient_useVirtualText = 'No'
-let g:LanguageClient_serverCommands['julia'] = ['julia-lsp']
+" Language Serveur Settings
+lua require'nvim_lsp'.julials.setup{}
+call RegisterKeybindingsLSP('julia')
 
 " Other Settings
 let g:autoformat_on_save['julia'] = 0
