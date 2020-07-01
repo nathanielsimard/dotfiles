@@ -1,14 +1,6 @@
 #!/bin/sh
 
-# Install Zathura Config for LaTex
-mkdir -p ~/.config/zathura
-cp ./config/zathurarc ~/.config/zathura/zathurarc
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# Install Neovim Config
-mkdir -p ~/.config/nvim
-cp ./*.vim ~/.config/nvim/
-mkdir -p ~/.config/nvim/lang/
-cp ./lang/*.vim ~/.config/nvim/lang/
-
-# Install Editor Config
-cp ./config/.editorconfig ~/
+. ./scripts/update.sh

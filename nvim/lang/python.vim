@@ -19,14 +19,16 @@ require'nvim_lsp'.pyls_ms.setup{
     }
 }
 EOF
+
 let g:autoformat_on_save['python'] = 0
 call RegisterKeybindingsLSP('python')
 
-" Test Utilities
-function s:is_test_file(file)
-    return a:file[-7:] ==# 'test.py'
+function! lang#python#run()
+    let l:file = @%
+    call terminal#run_command('python '.l:file)
 endfunction
 
+" Test Utilities
 if !exists('g:python_project_root')
     let g:python_project_root='src'
 end
@@ -35,48 +37,20 @@ if !exists('g:python_project_tests_root')
     let g:python_project_tests_root='tests'
 end
 
-function s:to_test_file(file)
-    let l:test_file = a:file
-    let l:test_file = substitute(l:test_file, '.py', '_test.py', '')
-    let l:test_file = substitute(l:test_file, g:python_project_root, g:python_project_tests_root, '')
+let s:test_utils =  g:Test.new({
+            \'root_src' : g:python_project_root,
+            \'root_test' : g:python_project_tests_root,
+            \'suffix_src' : '.py',
+            \'suffix_test' : '_test.py',
+            \'runner_test' : 'pytest',
+            \})
 
-    return l:test_file
-endfunction
-
-function s:to_src_file(test_file)
-    let l:file = a:test_file
-    let l:file = substitute(l:file, '_test.py', '.py', '')
-    let l:file = substitute(l:file, g:python_project_tests_root, g:python_project_root, '')
-
-    return l:file
-endfunction
-
-function! lang#python#run()
-    let l:file = @%
-    call terminal#run_command('python '.l:file)
+function! lang#python#test_toggle()
+    call s:test_utils.toggle()
 endfunction
 
 function! lang#python#test_file()
-    let l:file = @%
-
-    if !s:is_test_file(l:file)
-        let l:file =  s:to_test_file(l:file)
-    end
-
-    call terminal#run_command('pytest '.l:file)
-endfunction
-
-function! lang#python#test_toggle()
-    let l:file = @%
-    echo g:python_project_root
-
-    if s:is_test_file(l:file)
-        let l:file = s:to_src_file(l:file)
-    else
-        let l:file = s:to_test_file(l:file)
-    end
-
-    execute 'e '.l:file
+    call s:test_utils.test_file()
 endfunction
 
 function! lang#python#test_suite()

@@ -27,8 +27,9 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
             \]))
 
 
-" Terminal Layer
-call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/terminal.vim', []))
+" Utils Layers
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/terminal.vim', []))
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/test.vim', []))
 
 " Language Layers
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/markdown.vim', [
