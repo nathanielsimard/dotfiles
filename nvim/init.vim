@@ -35,8 +35,10 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/test.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/markdown.vim', [
                 \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
             \]))
+call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', [
+                \g:Plugin.new('JuliaEditorSupport/julia-vim')
+            \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/lang/javascript.vim', []))

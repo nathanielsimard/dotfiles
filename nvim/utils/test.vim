@@ -35,7 +35,7 @@ endfunction
 function g:Test.test_file()
     let l:file = @%
 
-    if !self._is_test(l:file)
+    if self._is_src(l:file)
         let l:file = self._test_name(l:file)
     endif
 
@@ -46,6 +46,12 @@ function g:Test._is_test(file)
     let l:size = len(self.root_test) - 1
     return a:file[:l:size] ==# self.root_test
 endfunction
+
+function g:Test._is_src(file)
+    let l:size = len(self.root_src) - 1
+    return a:file[:l:size] ==# self.root_src
+endfunction
+
 
 function g:Test._test_name(file)
     let l:test_file = a:file

@@ -45,9 +45,13 @@ function g:JuliaTest.test_suite()
     call self._test_file(self.root_test.'/runtests.jl')
 endfunction
 
+if !exists('g:julia_bin')
+    let g:julia_bin='julia'
+end
+
 function g:JuliaTest._test_file(file)
     let l:pwd = trim(execute('pwd'))
-    call terminal#run_command("julia --color=yes -e '
+    call terminal#run_command(g:julia_bin." --color=yes -e '
                 \using Pkg;
                 \Pkg.activate(\"".l:pwd."\");
                 \include(\"".l:pwd.'/'.a:file."\");
@@ -70,7 +74,7 @@ endfunction
 
 function! lang#julia#run_file()
     let l:file = @%
-    call terminal#run_command('julia '.l:file)
+    call terminal#run_command(g:julia_bin.' '.l:file)
 endfunction
 
 function! lang#julia#include_file()

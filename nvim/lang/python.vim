@@ -9,7 +9,6 @@ let g:diagnostic_auto_popup_while_jump = 0
 " Language Serveur Settings
 lua << EOF
 require'nvim_lsp'.pyls_ms.setup{
-    on_attach = require'diagnostic'.on_attach,
     settings = {
         python = {
             linting = {

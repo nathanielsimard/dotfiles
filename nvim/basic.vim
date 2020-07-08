@@ -1,15 +1,30 @@
 " Theming
-set background=dark
 set termguicolors
 set noshowmode
 
-augroup Background
-    autocmd ColorScheme * hi Normal ctermbg=none guibg=none
-    autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
-augroup END
+function! NativeBackground()
+    augroup Background
+        autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+        autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+    augroup END
+endfunction
 
 let g:airline_theme='base16'
-colorscheme base16-default-dark
+let g:colorscheme_dark='base16-default-dark'
+let g:colorscheme_light='base16-default-light'
+let g:colorscheme_current=g:colorscheme_dark
+
+execute 'colorscheme '.g:colorscheme_current
+
+function! ToggleLightDarkTheme()
+    if g:colorscheme_current ==# g:colorscheme_dark
+        let g:colorscheme_current  = g:colorscheme_light
+    else
+        let g:colorscheme_current  = g:colorscheme_dark
+    endif
+
+    execute 'colorscheme '.g:colorscheme_current
+endfunction
 
 " Basic Settings
 set tabstop=4 shiftwidth=4 expandtab 
@@ -233,6 +248,7 @@ call vmenu#commands([
 " Ui/Toggle Keybindings
 call vmenu#commands([
             \['t', 'Tree', 'NERDTreeToggle'],
+            \['c', 'Theme Light/Dark', 'call ToggleLightDarkTheme()'],
         \], {
             \'parent': keybindings_ui
         \})
