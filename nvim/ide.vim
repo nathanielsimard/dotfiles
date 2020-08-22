@@ -62,8 +62,14 @@ endfunction
 autocmd BufEnter * lua require'completion'.on_attach()
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua << EOF
+completion_chain_complete_list = {
+  { complete_items = { 'lsp' } },
+  { complete_items = { 'buffers' } },
+}
+EOF
 
 " Diagnotic Lsp Setting
 let g:diagnostic_enable_virtual_text = 1
