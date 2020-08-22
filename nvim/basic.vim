@@ -8,6 +8,7 @@ function! NativeBackground()
         autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
     augroup END
 endfunction
+call NativeBackground()
 
 let g:airline_theme='base16'
 let g:colorscheme_dark='base16-default-dark'

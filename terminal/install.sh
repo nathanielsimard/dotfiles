@@ -25,3 +25,8 @@ touch ~/.npm-completion.sh
 if [ -e "$(command -v npm)" ]; then
     npm completion >> ~/.npm-completion.sh
 fi
+
+mkdir -p ~/.config
+mkdir -p ~/.config/alacritty
+
+cp alacritty.yml ~/.config/alacritty
