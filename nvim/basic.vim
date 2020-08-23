@@ -5,17 +5,30 @@ set noshowmode
 function! NativeBackground()
     augroup Background
         autocmd ColorScheme * hi Normal ctermbg=none guibg=none
-        autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
     augroup END
 endfunction
 call NativeBackground()
 
 let g:airline_theme='base16'
-let g:colorscheme_dark='base16-default-dark'
+let g:airline#extensions#tabline#enabled = 0
+
+let g:colorscheme_dark='base16-brewer'
 let g:colorscheme_light='base16-default-light'
 let g:colorscheme_current=g:colorscheme_dark
 
 execute 'colorscheme '.g:colorscheme_current
+
+augroup ModifiedColor
+    autocmd VimEnter * hi airline_tabfill guibg=#2D2D2D
+    autocmd ColorScheme * hi VertSplit guibg=#2D2D2D
+    autocmd ColorScheme * hi LineNr guibg=#2D2D2D
+    autocmd ColorScheme * hi CursorLineNr guibg=#2D2D2D
+    autocmd ColorScheme * hi SignColumn guibg=#2D2D2D
+    autocmd ColorScheme * hi CursorColumn guibg=#2D2D2D
+    autocmd ColorScheme * hi CursorLine guibg=#2D2D2D
+    autocmd ColorScheme * hi ColorColumn guibg=#2D2D2D
+    autocmd ColorScheme * hi QuickFixLine guibg=#2D2D2D
+augroup END
 
 function! ToggleLightDarkTheme()
     if g:colorscheme_current ==# g:colorscheme_dark

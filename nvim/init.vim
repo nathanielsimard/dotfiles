@@ -15,7 +15,6 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('vim-airline/vim-airline'),
                 \g:Plugin.new('vim-airline/vim-airline-themes'),
                 \g:Plugin.new('mhinz/vim-startify'),
-                \g:Plugin.new('ryanoasis/vim-devicons'),
             \]))
 
 " IDE Layer
@@ -23,10 +22,10 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
                 \g:Plugin.new('neomake/neomake'),
                 \g:Plugin.new('nvim-lua/completion-nvim'),
-                \g:Plugin.new('nvim-lua/diagnostic-nvim'),
                 \g:Plugin.new('steelsojka/completion-buffers'),
                 \g:Plugin.new('neovim/nvim-lsp'),
             \]))
+" \g:Plugin.new('nvim-lua/diagnostic-nvim'),
 
 " Utils Layers
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/terminal.vim', []))

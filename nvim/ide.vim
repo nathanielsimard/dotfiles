@@ -64,16 +64,17 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua << EOF
-completion_chain_complete_list = {
-  { complete_items = { 'lsp' } },
-  { complete_items = { 'buffers' } },
-}
-EOF
+
+"lua << EOF
+"completion_chain_complete_list = {
+"  { complete_items = { 'lsp' } },
+"  { complete_items = { 'buffers' } },
+"}
+"EOF
 
 " Diagnotic Lsp Setting
-let g:diagnostic_enable_virtual_text = 1
-let g:space_before_virtual_text = 5
+" let g:diagnostic_enable_virtual_text = 1
+" let g:space_before_virtual_text = 5
 
 " Neomake Settings
 call neomake#configure#automake('w')
