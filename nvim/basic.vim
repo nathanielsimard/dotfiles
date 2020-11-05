@@ -104,7 +104,7 @@ function! FindInBuffer()
   call inputsave()
   let pattern = input('[FIND IN BUFFERS] Pattern : ')
   call inputrestore()
-  let vim_command = 'Ack '.pattern
+  let vim_command = 'Ack! '.pattern
   execute vim_command
 endfunction
 

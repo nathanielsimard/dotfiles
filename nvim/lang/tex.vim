@@ -2,6 +2,9 @@
 lua require'nvim_lsp'.texlab.setup{}
 call RegisterKeybindingsLSP('tex')
 
+" Fix linting issues
+autocmd FileType tex :call TexNewMathZone("E","align",1)
+
 function! CompileLatex()
     let l:file = @%
     call terminal#run_command('pdflatex -interaction=nonstopmode -synctex=1 '.l:file)

@@ -31,6 +31,7 @@ function! RegisterKeybindingsLSP(filetype)
 
     call vmenu#commands([
                 \['a', 'Code Action', 'lua vim.lsp.buf.code_action()'],
+                \['s', 'Signature', 'lua vim.lsp.buf.signature_help()'],
                 \['c', 'Completion', 'lua vim.lsp.buf.completion()'],
                 \['r', 'Highlight References', 'lua vim.lsp.buf.document_highlight()']
         \], {
@@ -60,21 +61,21 @@ endfunction
 
 " Completion Settings
 autocmd BufEnter * lua require'completion'.on_attach()
+" Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-
-"lua << EOF
-"completion_chain_complete_list = {
-"  { complete_items = { 'lsp' } },
-"  { complete_items = { 'buffers' } },
-"}
-"EOF
+" Avoid showing message extra message when using completion
+set shortmess+=c
+" Bug with this features :(
+let g:completion_enable_auto_signature = 0
 
 " Diagnotic Lsp Setting
-" let g:diagnostic_enable_virtual_text = 1
-" let g:space_before_virtual_text = 5
+autocmd BufEnter * lua require'diagnostic'.on_attach()
+let g:diagnostic_enable_virtual_text = 1
+let g:space_before_virtual_text = 5
 
 " Neomake Settings
 call neomake#configure#automake('w')
