@@ -8,7 +8,7 @@ let g:diagnostic_auto_popup_while_jump = 0
 
 " Language Serveur Settings
 lua << EOF
-require'nvim_lsp'.pyls.setup{
+require'lspconfig'.pyls.setup{
     settings = {
         pyls = {
             plugins = {

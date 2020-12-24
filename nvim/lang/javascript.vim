@@ -1,2 +1,2 @@
-lua require'nvim_lsp'.tsserver.setup{}
+lua require'lspconfig'.tsserver.setup{}
 call RegisterKeybindingsLSP('javascript')

@@ -1,3 +1,3 @@
 " Language Serveur Settings
-lua require'nvim_lsp'.jsonls.setup{}
+lua require'lspconfig'.jsonls.setup{}
 call RegisterKeybindingsLSP('json')

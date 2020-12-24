@@ -20,9 +20,8 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
-                \g:Plugin.new('nvim-lua/completion-nvim'),
-                \g:Plugin.new('nvim-lua/diagnostic-nvim'),
                 \g:Plugin.new('neomake/neomake'),
+                \g:Plugin.new('nvim-lua/completion-nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
             \]))
 

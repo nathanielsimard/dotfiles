@@ -64,18 +64,16 @@ autocmd BufEnter * lua require'completion'.on_attach()
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
 " Avoid showing message extra message when using completion
 set shortmess+=c
-" Bug with this features :(
-let g:completion_enable_auto_signature = 0
 
-" Diagnotic Lsp Setting
-autocmd BufEnter * lua require'diagnostic'.on_attach()
-let g:diagnostic_enable_virtual_text = 1
-let g:space_before_virtual_text = 5
+" Bug with this features :(
+" let g:completion_enable_auto_signature = 0
+" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " Neomake Settings
 call neomake#configure#automake('w')
