@@ -8,19 +8,13 @@ let g:diagnostic_auto_popup_while_jump = 0
 
 " Language Serveur Settings
 lua << EOF
-require'lspconfig'.pyls.setup{
+require'lspconfig'.pyright.setup{
+    on_attach=require'completion'.on_attach,
     settings = {
-        pyls = {
-            plugins = {
-                pylint = {
-                    enabled = False
-                },
-                yapf = {
-                    enabled = False
-                },
-                mccabe = {
-                    enabled = False
-                }
+        python = {
+            analysis = {
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = "off",
             }
         }
     }

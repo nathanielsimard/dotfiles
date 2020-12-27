@@ -1,5 +1,5 @@
 " Language Serveur Settings
-lua require'lspconfig'.texlab.setup{}
+lua require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
 call RegisterKeybindingsLSP('tex')
 
 " Fix linting issues
