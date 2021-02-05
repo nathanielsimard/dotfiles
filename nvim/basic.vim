@@ -187,6 +187,9 @@ function! basic#git_save()
     call terminal#run_command('git push')
 endfunction
 
+" LATEX FIX
+let g:tex_flavor = "latex"
+
 " Git Keybindings
 call vmenu#commands([
             \['s', 'Status',  'GFiles?'],
