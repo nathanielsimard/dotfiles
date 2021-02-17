@@ -35,7 +35,7 @@ endfunction
 function g:Test.test_file()
     let l:file = @%
 
-    if self._is_src(l:file)
+    if !self._is_test(l:file)
         let l:file = self._test_name(l:file)
     endif
 
@@ -43,15 +43,13 @@ function g:Test.test_file()
 endfunction
 
 function g:Test._is_test(file)
-    let l:size = len(self.root_test) - 1
-    return a:file[:l:size] ==# self.root_test
-endfunction
+    let l:size_root = len(self.root_test) - 1
+    let l:from_root = a:file[:l:size_root] ==# self.root_test
+    let l:size_suffix = len(self.suffix_test)
+    let l:from_suffix = a:file[-l:size_suffix:] ==# self.suffix_test
 
-function g:Test._is_src(file)
-    let l:size = len(self.root_src) - 1
-    return a:file[:l:size] ==# self.root_src
+    return l:from_root && l:from_suffix
 endfunction
-
 
 function g:Test._test_name(file)
     let l:test_file = a:file

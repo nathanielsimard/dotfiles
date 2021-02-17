@@ -4,16 +4,16 @@
 pip install neovim
 
 # VimL
-#sudo npm install -g vim-language-server
+# sudo npm install -g vim-language-server
 #
 ## Javscript / Typescript
 #sudo npm install -g typescript-language-server
 
 # Python
-pip install 'python-language-server[all]'
-pip install pyls-mypy
-pip install pyls-black
-pip install pyls-isort
+# pip install 'python-language-server[all]'
+# pip install pyls-mypy
+# pip install pyls-black
+# pip install pyls-isort
 
 # LaTex
 pip install neovim-remote
