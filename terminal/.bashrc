@@ -11,12 +11,6 @@ elif [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
 fi
 
-# Anaconda
-if ! [ -z "$CONDA_INTERNAL_OLDPATH" ]; then
-    export VIRTUAL_ENV="conda:"$CONDA_DEFAULT_ENV
-fi
-
-
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export TERM=screen-256color
@@ -65,24 +59,54 @@ LPURPLE='[01;35m'
 LCYAN='[01;36m'
 WHITE='[01;37m'
 
-PS1='┌['
-PS1+='\[\e${CYAN1}\]'
-PS1+='\u' # User
-PS1+='\[\e${LCYAN}\]'
-PS1+='@'
-PS1+='\[\e${RESTORE}\]'
-PS1+='\[\e${CYAN1}\]'
-PS1+='\h' # Host
-PS1+='\[\e${RESTORE}\]'
-PS1+=']-['
-PS1+='\[\e${ORANGE}\]'
-PS1+='\w' # Path
-PS1+='\[\e${RESTORE}\]'
-PS1+=']'
-PS1+='$(if [[ $VIRTUAL_ENV != "" ]] ; then echo "-[\[\e${BLUE1}\]${VIRTUAL_ENV##*/}\e\[${RESTORE}\]]"; fi )' # Python Virtual Env
-PS1+='$(__git_ps1 "-[\[\e${RED1}\]%s\e\[${RESTORE}\]]")' # Git
-PS1+='\n└['
-PS1+='\[\e${GREEN1}\]'
-PS1+='\$'
-PS1+='\[\e${RESTORE}\]'
-PS1+='] '
+reset_ps1() {
+    PS1='┌['
+    PS1+='\[\e${CYAN1}\]'
+    PS1+='\u' # User
+    PS1+='\[\e${LCYAN}\]'
+    PS1+='@'
+    PS1+='\[\e${RESTORE}\]'
+    PS1+='\[\e${CYAN1}\]'
+    PS1+='\h' # Host
+    PS1+='\[\e${RESTORE}\]'
+    PS1+=']-['
+    PS1+='\[\e${ORANGE}\]'
+    PS1+='\w' # Path
+    PS1+='\[\e${RESTORE}\]'
+    PS1+=']'
+
+    if command -v nvm &> /dev/null; then
+        nvm_env=$(nvm current)
+        PS1+='-[\[\e${YELLOW}\]nvm:${nvm_env##*/}\e\[${RESTORE}\]]' # Node Virtual Manager
+    fi
+
+    if command -v conda &> /dev/null; then
+        export VIRTUAL_ENV="conda:"$CONDA_DEFAULT_ENV
+        PS1+='-[\[\e${BLUE1}\]${VIRTUAL_ENV##*/}\e\[${RESTORE}\]]' # Python Virtual Env
+    fi
+
+    PS1+='$(__git_ps1 "-[\[\e${RED1}\]%s\e\[${RESTORE}\]]")' # Git
+    PS1+='\n└['
+    PS1+='\[\e${GREEN1}\]'
+    PS1+='\$'
+    PS1+='\[\e${RESTORE}\]'
+    PS1+='] '
+}
+
+conda_env() {
+    name=$1
+    conda activate $name
+    reset_ps1
+}
+
+nvm_env() {
+    name=$1
+    nvm use $name
+    reset_ps1
+}
+
+alias cenv='conda_env'
+alias nenv='nvm_env'
+
+reset_ps1
+
