@@ -40,6 +40,7 @@ call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/pytho
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript', '~/.config/nvim/lang/javascript.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('typescript', '~/.config/nvim/lang/typescript.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/lang/vim.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('clojure', '~/.config/nvim/lang/clojure.vim', []))
 

@@ -48,6 +48,11 @@ function g:Test._is_test(file)
     let l:size_suffix = len(self.suffix_test)
     let l:from_suffix = a:file[-l:size_suffix:] ==# self.suffix_test
 
+    " If no root_test is specified
+    if len(self.root_test) ==# 0
+        let l:from_root = 1
+    endif
+
     return l:from_root && l:from_suffix
 endfunction
 

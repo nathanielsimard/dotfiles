@@ -4,11 +4,11 @@ call RegisterKeybindingsLSP('javascript')
 
 " Test Utilities
 if !exists('g:javascript_project_root')
-    let g:javascript_project_root='src'
+    let g:javascript_project_root=''
 end
 
 if !exists('g:javascript_project_tests_root')
-    let g:javascript_project_tests_root='src'
+    let g:javascript_project_tests_root=''
 end
 
 let s:test_utils =  g:Test.new({
