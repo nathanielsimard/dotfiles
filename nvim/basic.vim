@@ -99,6 +99,11 @@ function! DeleteAllBuffers()
     execute '%bd | e#'
 endfunction
 
+function! FindWordUnderCursorInBuffers()
+    let wordUnderCursor = expand("<cword>")
+    execute 'Ack! '.wordUnderCursor
+endfunction
+
 function! FindInBuffer()
   let curline = getline('.')
   call inputsave()
@@ -239,8 +244,8 @@ call vmenu#commands([
             \['q', 'Delete Current Buffer', 'bd'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
             \['f', 'Find In Buffer', 'call FindInBuffer()'],
+            \['s', 'Find Word Under Cursor in Buffers', 'call FindWordUnderCursorInBuffers()'],
             \['b', 'List All Buffers', 'Buffers'],
-            \['s', 'Save Buffer', 'w'],
             \['S', 'Save All Buffers', 'wa'],
             \['l', 'Next Buffer', 'bn'],
             \['k', 'Next Buffer', 'bn'],

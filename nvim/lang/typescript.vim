@@ -1,6 +1,49 @@
-let g:neomake_typescript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-lua require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+let g:neomake_typescript_enabled_makers = []
+let g:neomake_javascript_enabled_makers = []
+
+lua << EOF
+require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.diagnosticls.setup{
+  filetypes = { "javascript", "typescript" },
+  init_options = {
+    filetypes = {
+      javascript = "eslint",
+      typescript = "eslint",
+    },
+    linters = {
+      eslint = {
+        sourceName = "eslint",
+        command = "./node_modules/.bin/eslint",
+        rootPatterns = { "package.json" },
+        debounce = 100,
+        args = {
+          "--stdin",
+          "--stdin-filename",
+          "%filepath",
+          "--format",
+          "json",
+        },
+        parseJson = {
+          errorsRoot = "[0].messages",
+          line = "line",
+          column = "column",
+          endLine = "endLine",
+          endColumn = "endColumn",
+          message = "${message} [${ruleId}]",
+          security = "severity",
+        };
+        securities = {
+          [2] = "error",
+          [1] = "warning"
+        }
+      }
+    }
+  }
+}
+EOF
+
 call RegisterKeybindingsLSP('typescript')
+call RegisterKeybindingsLSP('javascript')
 
 " Test Utilities
 if !exists('g:typescript_project_root')
@@ -11,7 +54,7 @@ if !exists('g:typescript_project_tests_root')
     let g:typescript_project_tests_root=''
 end
 
-let s:test_utils =  g:Test.new({
+let s:test_utils_ts =  g:Test.new({
             \'root_src' : g:typescript_project_root,
             \'root_test' : g:typescript_project_tests_root,
             \'suffix_src' : '.ts',
@@ -19,20 +62,33 @@ let s:test_utils =  g:Test.new({
             \'runner_test' : './node_modules/.bin/jest --coverage=False',
             \})
 
+let s:test_utils_js =  g:Test.new({
+            \'root_src' : g:typescript_project_root,
+            \'root_test' : g:typescript_project_tests_root,
+            \'suffix_src' : '.js',
+            \'suffix_test' : '.spec.js',
+            \'runner_test' : './node_modules/.bin/jest --coverage=False',
+            \})
+
 function! lang#typescript#test_toggle()
-    call s:test_utils.toggle()
+    if &filetype ==# 'javascript'
+        echo 'js toggle'
+        call s:test_utils_js.toggle()
+    else
+        echo 'ts toggle'
+        call s:test_utils_ts.toggle()
+    endif
 endfunction
 
 function! lang#typescript#test_file()
-    call s:test_utils.test_file()
+    if &filetype ==# 'javascript'
+        echo 'js test file'
+        call s:test_utils_js.test_file()
+    else
+        echo 'ts test file'
+        call s:test_utils_ts.test_file()
+    endif
 endfunction
-
-call vmenu#commands([
-            \['t', 'Test - Impl', 'call lang#typescript#test_toggle()'],
-        \], {
-            \'parent': g:keybindings_jumps_jobs,
-            \'filetype': 'typescript'
-        \})
 
 " Formatteur Settings
 function! lang#typescript#format()
@@ -45,14 +101,6 @@ function! lang#typescript#format()
 endfunction
 
 " Run Settings
-call vmenu#commands([
-            \['t','Test File', 'call lang#typescript#test_file()'],
-            \['f','Format', 'call lang#typescript#format()'],
-        \], {
-            \'parent': g:keybindings_refactor_run,
-            \'filetype': 'typescript'
-        \})
-
 let g:repl_terminal_typescript = g:ReplTerminal.new('')
 call terminal#repl_setup('typescript', 'g:repl_terminal_typescript')
 
@@ -62,10 +110,27 @@ function! lang#typescript#test_watch()
     call g:repl_terminal_typescript.run(l:command)
 endfunction
 
-call vmenu#commands([
+function! RegisterKeybindingsTypescript(filetype)
+    call vmenu#commands([
+            \['t', 'Test - Impl', 'call lang#typescript#test_toggle()'],
+        \], {
+            \'parent': g:keybindings_jumps_jobs,
+            \'filetype': a:filetype
+        \})
+    call vmenu#commands([
+            \['t','Test File', 'call lang#typescript#test_file()'],
+            \['f','Format', 'call lang#typescript#format()'],
+        \], {
+            \'parent': g:keybindings_refactor_run,
+            \'filetype': a:filetype
+        \})
+    call vmenu#commands([
             \['w', 'REPL Watch Test', 'call lang#typescript#test_watch()'],
         \], {
             \'parent': g:keybindings_interactive,
-            \'filetype': 'typescript'
+            \'filetype': a:filetype
         \})
+endfunction
 
+call RegisterKeybindingsTypescript('typescript')
+call RegisterKeybindingsTypescript('javascript')
