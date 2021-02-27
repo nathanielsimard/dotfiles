@@ -10,7 +10,7 @@ endfunction
 call NativeBackground()
 
 let g:airline_theme='base16'
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 
 let g:colorscheme_dark='base16-brewer'
 let g:colorscheme_light='base16-default-light'
@@ -161,7 +161,7 @@ call vmenu#commands([
             \['d', 'Delete Files',  'call fzf#run({"sink": "silent !rm"})'],
             \['l', 'Find Lines',  'BLines'],
             \['x', 'Find Xdg Open',  'call fzf#run(fzf#wrap({"sink": "silent !xdg-open"}))'],
-            \['t', 'Focus Tree',  'NERDTreeFocus'],
+            \['t', 'Focus Tree',  'NERDTreeFind'],
             \['c', 'Close Tree',  'NERDTreeClose'],
             \['r', 'Refresh Tree',  'NERDTreeRefreshRoot'],
             \['n', 'New File',  'call NewFile()'],

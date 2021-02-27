@@ -15,8 +15,9 @@ augroup END
 
 function! RegisterKeybindingsLSP(filetype)
     call vmenu#commands([
-                \['j', 'Next', 'NextDiagnosticCycle'],
-                \['k', 'Prev', 'PrecDiagnosticCycle'],
+                \['s', 'Show', 'lua vim.lsp.diagnostic.show_line_diagnostics()'],
+                \['j', 'Next', 'lua vim.lsp.diagnostic.goto_next()'],
+                \['k', 'Prev', 'lua vim.lsp.diagnostic.goto_prev()'],
         \], {
             \'parent': g:keybindings_error,
             \'filetype': a:filetype
@@ -70,14 +71,6 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
-
-" Bug with this features :(
-" let g:completion_enable_auto_signature = 0
-" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-
-" Neomake Settings
-call neomake#configure#automake('w')
-let g:neomake_check_on_open = 1
 
 " Spelling Settings
 function! ToggleSpelling()

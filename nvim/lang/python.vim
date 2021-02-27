@@ -1,12 +1,5 @@
-" Neomake Settings
-let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'pydocstyle']
-
-" Diagnotic Lsp Setting
-let g:diagnostic_enable_virtual_text = 0
-let g:diagnostic_show_sign = 0
-let g:diagnostic_auto_popup_while_jump = 0
-
 " Language Serveur Settings
+"
 lua << EOF
 require'lspconfig'.pyright.setup{
     on_attach=require'completion'.on_attach,
@@ -15,6 +8,79 @@ require'lspconfig'.pyright.setup{
             analysis = {
                 useLibraryCodeForTypes = true,
                 typeCheckingMode = "off",
+            }
+        }
+    }
+}
+require'lspconfig'.diagnosticls.setup{
+    filetypes = { "python" },
+    init_options = {
+        filetypes = {
+            python = {
+                "flake8",
+                "mypy"
+            }
+        },
+        linters = {
+            flake8 = {
+                command = "flake8",
+                rootPatterns = {
+                    "environment.yml",
+                    "requirements.txt"
+                },
+                debounce = 100,
+                args = {
+                    "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
+                    "-",
+                },
+                offsetLine = 0,
+                offsetColumn = 0,
+                sourceName = "flake8",
+                formatLines = 1,
+                formatPattern = {
+                    "(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$",
+                    {
+                        line = 1,
+                        column = 2,
+                        security = 3,
+                        message = 4
+                    }
+                },
+                securities = {
+                    W = "warning",
+                    E = "error",
+                    F = "error",
+                    C = "error",
+                    N = "error"
+                }
+            },
+
+            mypy = {
+                sourceName = "mypy",
+                command = "mypy",
+                rootPatterns = {
+                    "environment.yml",
+                    "requirements.txt"
+                },
+                args = {
+                    "--no-color-output",
+                    "--no-error-summary",
+                    "--show-column-numbers",
+                    "--follow-imports=silent",
+                    "%file"
+                },
+                formatPattern = {
+                    "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",
+                    {
+                        line = 1,
+                        column = 2,
+                        security = 3,
+                        message = 4
+                    }
+                },
+                securities = {
+                    error ="error",
+                }
             }
         }
     }

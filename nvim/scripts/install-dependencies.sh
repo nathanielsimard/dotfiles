@@ -6,7 +6,10 @@ pip install neovim
 # VimL
 sudo npm install -g vim-language-server
 
-# Javscript / Typescript
+# Linters
+sudo npm install -g diagnostic-languageserver
+
+# Javascript / Typescript
 sudo npm install -g typescript-language-server typescript
 
 # Python

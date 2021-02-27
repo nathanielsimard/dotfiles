@@ -1,6 +1,3 @@
-let g:neomake_typescript_enabled_makers = []
-let g:neomake_javascript_enabled_makers = []
-
 lua << EOF
 require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.diagnosticls.setup{
