@@ -2,7 +2,7 @@ source ~/.config/nvim/layer.vim
 
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
-                \g:Plugin.new('scrooloose/nerdtree'),
+                \g:Plugin.new('ryanoasis/vim-devicons'),
                 \g:Plugin.new('nathanielsimard/vmenu'),
                 \g:Plugin.new('junegunn/fzf'),
                 \g:Plugin.new('junegunn/fzf.vim'),
@@ -14,6 +14,8 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('chriskempson/base16-vim'),
                 \g:Plugin.new('vim-airline/vim-airline'),
                 \g:Plugin.new('vim-airline/vim-airline-themes'),
+                \g:Plugin.new('scrooloose/nerdtree'),
+                \g:Plugin.new('tiagofumo/vim-nerdtree-syntax-highlight'),
                 \g:Plugin.new('mhinz/vim-startify'),
             \]))
 

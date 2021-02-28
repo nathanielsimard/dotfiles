@@ -203,6 +203,7 @@ endfunction
 
 call vmenu#commands([
             \[' ', 'Toggle Terminal', 'call g:main_terminal.toggle()'],
+            \['o', 'Open Terminal', 'terminal'],
         \])
 
 call vmenu#commands([

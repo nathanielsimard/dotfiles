@@ -3,12 +3,12 @@ window:
     columns: 200
     lines: 50
 font:
-  size: 13
+  size: 12
   normal:
-    family: 'Fira Code'
-    style: Regular
+    family: 'FiraCode Nerd Font Mono'
+    style: Medium
 colors:
   primary:
     background: '#181818'
     foreground: '#d8d8d8'
-background_opacity: 0.95
+background_opacity: 1.0
