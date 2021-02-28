@@ -1,3 +1,18 @@
+" Vim Startify
+function! s:projectDirectories()
+    let l:files = systemlist('cat ~/.projectdirs')
+    return map(l:files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+          \ { 'type': function('s:projectDirectories'), 'header': ['   Project'] },
+          \ { 'type': 'files',                          'header': ['   MRU']            },
+          \ { 'type': 'dir',                            'header': ['   MRU '. getcwd()] },
+          \ { 'type': 'sessions',                       'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks',                      'header': ['   Bookmarks']      },
+          \ { 'type': 'commands',                       'header': ['   Commands']       },
+          \]
+
 " Theming
 set termguicolors
 set noshowmode
