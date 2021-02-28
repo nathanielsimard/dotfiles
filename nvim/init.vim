@@ -17,6 +17,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('scrooloose/nerdtree'),
                 \g:Plugin.new('tiagofumo/vim-nerdtree-syntax-highlight'),
                 \g:Plugin.new('mhinz/vim-startify'),
+                \g:Plugin.new('lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }),
             \]))
 
 " IDE Layer

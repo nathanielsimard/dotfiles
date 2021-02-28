@@ -1,4 +1,11 @@
+" Indent Guide
+let g:indent_blankline_char = '┊'
+let g:indent_blankline_show_first_indent_level = v:false
+
 " Vim Startify
+let g:startify_change_to_dir=1
+let g:startify_change_cmd = 'cd'
+
 function! s:projectDirectories()
     let l:files = systemlist('cat ~/.projectdirs')
     return map(l:files, "{'line': v:val, 'path': v:val}")
@@ -79,6 +86,7 @@ set scrolloff=10
 set mouse+=a
 
 " NERDTree Settings
+let NERDTreeChDirMode=2
 let NERDTreeShowHidden=1
 
 function! NewFile()
