@@ -1,6 +1,7 @@
 " Indent Guide
 let g:indent_blankline_char = '┊'
 let g:indent_blankline_show_first_indent_level = v:false
+lua vim.g.indentLine_bufNameExclude = { "term:.*" }
 
 " Vim Startify
 let g:startify_change_to_dir=1
