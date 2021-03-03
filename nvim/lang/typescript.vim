@@ -69,20 +69,16 @@ let s:test_utils_js =  g:Test.new({
 
 function! lang#typescript#test_toggle()
     if &filetype ==# 'javascript'
-        echo 'js toggle'
         call s:test_utils_js.toggle()
     else
-        echo 'ts toggle'
         call s:test_utils_ts.toggle()
     endif
 endfunction
 
 function! lang#typescript#test_file()
     if &filetype ==# 'javascript'
-        echo 'js test file'
         call s:test_utils_js.test_file()
     else
-        echo 'ts test file'
         call s:test_utils_ts.test_file()
     endif
 endfunction

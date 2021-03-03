@@ -58,7 +58,9 @@ endfunction
 
 function g:Test._test_name(file)
     let l:test_file = a:file
-    let l:test_file = substitute(l:test_file, self.suffix_src, self.suffix_test, '')
+    let l:test_file = l:test_file[0:len(l:test_file) - len(self.suffix_src) - 1]
+    let l:test_file = l:test_file.self.suffix_test
+
     let l:test_file = substitute(l:test_file, self.root_src, self.root_test, '')
 
     return l:test_file
