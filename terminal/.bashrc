@@ -1,6 +1,3 @@
-source ~/.git-prompt.sh
-source ~/.npm-completion.sh
-
 if [ -f ~/.bash_local_config ]; then
     source ~/.bash_local_config
 fi
@@ -10,6 +7,10 @@ if [ -f /usr/share/bash-completion/bash_completion ]; then
 elif [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
 fi
+
+source ~/.git-prompt.sh
+source ~/.npm-completion.sh
+source ~/.python_env
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -82,7 +83,12 @@ reset_ps1() {
 
     if command -v conda &> /dev/null; then
         export VIRTUAL_ENV="conda:"$CONDA_DEFAULT_ENV
+    fi
+
+    if [[ -v VIRTUAL_ENV ]]; then
         PS1+='-[\[\e${BLUE1}\]${VIRTUAL_ENV##*/}\e\[${RESTORE}\]]' # Python Virtual Env
+    else
+        echo 'FUUUUUUUUUUUUU'
     fi
 
     PS1+='$(__git_ps1 "-[\[\e${RED1}\]%s\e\[${RESTORE}\]]")' # Git
@@ -96,6 +102,14 @@ reset_ps1() {
 conda_env() {
     name=$1
     conda activate $name
+    echo "conda activate "$name > ~/.python_env
+    reset_ps1
+}
+
+venv_env() {
+    name=$1
+    echo "source ~/pythonenv/"$name"/bin/activate" > ~/.python_env
+    source ~/.python_env
     reset_ps1
 }
 
@@ -105,8 +119,9 @@ nvm_env() {
     reset_ps1
 }
 
+alias plist='ls ~/pythonenv'
+alias penv='venv_env'
 alias cenv='conda_env'
 alias nenv='nvm_env'
 
 reset_ps1
-

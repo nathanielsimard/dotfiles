@@ -12,6 +12,7 @@ fi
 
 cp .bashrc ~/
 cp .inputrc ~/
+touch ~/.python_env
 
 if [ -e ~/.bash_profile ]; then
 	mkdir -p ~/.config.old

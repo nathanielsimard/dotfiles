@@ -88,7 +88,7 @@ function! lang#typescript#format()
     lua vim.lsp.buf.formatting()
     w
     let l:file = @%
-    let l:cmd = 'silent !./node_modules/.bin/eslint --fix '.l:file
+    let l:cmd = 'silent !./node_modules/.bin/eslint --fix --cache '.l:file
     execute l:cmd
     e
 endfunction

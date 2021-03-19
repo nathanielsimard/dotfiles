@@ -1,3 +1,6 @@
+" Set Host Prog
+let g:python3_host_prog = '~/pythonenv/neovim/bin/python'
+
 " Indent Guide
 let g:indent_blankline_char = '┊'
 let g:indent_blankline_show_first_indent_level = v:false
