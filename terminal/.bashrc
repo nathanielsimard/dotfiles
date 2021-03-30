@@ -87,8 +87,6 @@ reset_ps1() {
 
     if [[ -v VIRTUAL_ENV ]]; then
         PS1+='-[\[\e${BLUE1}\]${VIRTUAL_ENV##*/}\e\[${RESTORE}\]]' # Python Virtual Env
-    else
-        echo 'FUUUUUUUUUUUUU'
     fi
 
     PS1+='$(__git_ps1 "-[\[\e${RED1}\]%s\e\[${RESTORE}\]]")' # Git
@@ -113,6 +111,12 @@ venv_env() {
     reset_ps1
 }
 
+venv_env_create() {
+    name=$1
+    eval "python -m venv ~/pythonenv/"$name
+    venv_env $name
+}
+
 nvm_env() {
     name=$1
     nvm use $name
@@ -121,6 +125,7 @@ nvm_env() {
 
 alias plist='ls ~/pythonenv'
 alias penv='venv_env'
+alias penv_create='venv_env_create'
 alias cenv='conda_env'
 alias nenv='nvm_env'
 
