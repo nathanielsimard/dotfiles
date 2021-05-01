@@ -4,16 +4,16 @@
 pip install neovim
 
 # VimL
-sudo npm install -g vim-language-server
+npm install -g vim-language-server
 
 # Linters
-sudo npm install -g diagnostic-languageserver
+npm install -g diagnostic-languageserver
 
 # Javascript / Typescript
-sudo npm install -g typescript-language-server typescript
+npm install -g typescript-language-server typescript
 
 # Python
-sudo npm install -g pyright
+npm install -g pyright
 
 # LaTex
 pip install neovim-remote
