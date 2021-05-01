@@ -31,46 +31,76 @@ set encoding=UTF-8
 
 function! NativeBackground()
     augroup Background
+        autocmd!
         autocmd ColorScheme * hi Normal ctermbg=none guibg=none
     augroup END
 endfunction
-call NativeBackground()
 
 let g:airline_theme='base16'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 let g:colorscheme_dark='base16-darktooth'
-let g:colorscheme_light='base16-default-light'
+let g:colorscheme_light='base16-github'
 let g:colorscheme_current=g:colorscheme_dark
 
-execute 'colorscheme '.g:colorscheme_current
+function! WhiteColor()
+    augroup Background
+        autocmd!
+        autocmd ColorScheme * hi Normal guibg=#D0D0D0
+    augroup END
+    augroup ModifiedColor
+        autocmd!
+        autocmd VimEnter * hi airline_tabfill guibg=#F5F5F5
+        autocmd ColorScheme * hi VertSplit guibg=#F5F5F5
+        autocmd ColorScheme * hi LineNr guibg=#F5F5F5
+        autocmd ColorScheme * hi CursorLineNr guibg=#F5F5F5 guifg=#333333
+        autocmd ColorScheme * hi SignColumn guibg=#F5F5F5
+        autocmd ColorScheme * hi CursorColumn guibg=#F5F5F5
+        autocmd ColorScheme * hi CursorLine guibg=#F5F5F5
+        autocmd ColorScheme * hi ColorColumn guibg=#F5F5F5
+        autocmd ColorScheme * hi QuickFixLine guibg=#F5F5F5
+        autocmd ColorScheme * hi LspDiagnosticsSignError guibg=#F5F5F5 guifg=#FF0000
+        autocmd ColorScheme * hi LspDiagnosticsSignWarning guibg=#F5F5F5 guifg=#FFA500
+        autocmd ColorScheme * hi LspDiagnosticsSignInformation guibg=#F5F5F5 guifg=#D3D3D3
+        autocmd ColorScheme * hi LspDiagnosticsSignHint guibg=#F5F5F5 guifg=#D3D3D3
+    augroup END
+endfunction
 
-augroup ModifiedColor
-    autocmd VimEnter * hi airline_tabfill guibg=#2D2D2D
-    autocmd ColorScheme * hi VertSplit guibg=#2D2D2D
-    autocmd ColorScheme * hi LineNr guibg=#2D2D2D
-    autocmd ColorScheme * hi CursorLineNr guibg=#2D2D2D
-    autocmd ColorScheme * hi SignColumn guibg=#2D2D2D
-    autocmd ColorScheme * hi CursorColumn guibg=#2D2D2D
-    autocmd ColorScheme * hi CursorLine guibg=#2D2D2D
-    autocmd ColorScheme * hi ColorColumn guibg=#2;D2D2D
-    autocmd ColorScheme * hi QuickFixLine guibg=#2D2D2D
-    autocmd ColorScheme * hi LspDiagnosticsSignError guibg=#2D2D2D guifg=#FF0000
-    autocmd ColorScheme * hi LspDiagnosticsSignWarning guibg=#2D2D2D guifg=#FFA500
-    autocmd ColorScheme * hi LspDiagnosticsSignInformation guibg=#2D2D2D guifg=#D3D3D3
-    autocmd ColorScheme * hi LspDiagnosticsSignHint guibg=#2D2D2D guifg=#D3D3D3
-augroup END
+function! BlackColor()
+    call NativeBackground()
+    augroup ModifiedColor
+        autocmd!
+        autocmd VimEnter * hi airline_tabfill guibg=#2D2D2D
+        autocmd ColorScheme * hi VertSplit guibg=#2D2D2D
+        autocmd ColorScheme * hi LineNr guibg=#2D2D2D
+        autocmd ColorScheme * hi CursorLineNr guibg=#2D2D2D
+        autocmd ColorScheme * hi SignColumn guibg=#2D2D2D
+        autocmd ColorScheme * hi CursorColumn guibg=#2D2D2D
+        autocmd ColorScheme * hi CursorLine guibg=#2D2D2D
+        autocmd ColorScheme * hi ColorColumn guibg=#2D2D2D
+        autocmd ColorScheme * hi QuickFixLine guibg=#2D2D2D
+        autocmd ColorScheme * hi LspDiagnosticsSignError guibg=#2D2D2D guifg=#FF0000
+        autocmd ColorScheme * hi LspDiagnosticsSignWarning guibg=#2D2D2D guifg=#FFA500
+        autocmd ColorScheme * hi LspDiagnosticsSignInformation guibg=#2D2D2D guifg=#D3D3D3
+        autocmd ColorScheme * hi LspDiagnosticsSignHint guibg=#2D2D2D guifg=#D3D3D3
+    augroup END
+endfunction
 
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
 
+call BlackColor()
+execute 'colorscheme '.g:colorscheme_current
+
 function! ToggleLightDarkTheme()
     if g:colorscheme_current ==# g:colorscheme_dark
+        call WhiteColor()
         let g:colorscheme_current  = g:colorscheme_light
     else
+        call BlackColor()
         let g:colorscheme_current  = g:colorscheme_dark
     endif
 
