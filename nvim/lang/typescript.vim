@@ -1,11 +1,12 @@
 lua << EOF
 require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.diagnosticls.setup{
-  filetypes = { "javascript", "typescript" },
+  filetypes = { "javascript", "typescript", "vue" },
   init_options = {
     filetypes = {
       javascript = "eslint",
       typescript = "eslint",
+      vue = "eslint",
     },
     linters = {
       eslint = {
@@ -41,6 +42,7 @@ EOF
 
 call RegisterKeybindingsLSP('typescript')
 call RegisterKeybindingsLSP('javascript')
+call RegisterKeybindingsLSP('vue')
 
 " Test Utilities
 if !exists('g:typescript_project_root')
@@ -127,3 +129,4 @@ endfunction
 
 call RegisterKeybindingsTypescript('typescript')
 call RegisterKeybindingsTypescript('javascript')
+call RegisterKeybindingsTypescript('vue')
