@@ -40,7 +40,12 @@ let g:airline_theme='base16'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-let g:colorscheme_dark='base16-darktooth'
+let g:gruvbox_italic = 1
+let g:gruvbox_bold = 1
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_light = 'medium'
+
+let g:colorscheme_dark='gruvbox'
 let g:colorscheme_light='base16-github'
 let g:colorscheme_current=g:colorscheme_dark
 
