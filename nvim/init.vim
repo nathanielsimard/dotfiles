@@ -24,12 +24,16 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/statusline.vim', [
 
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
+                \g:Plugin.new('neovim/nvim-lspconfig'),
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
-                \g:Plugin.new('steelsojka/completion-buffers'),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
                 \g:Plugin.new('nvim-lua/plenary.nvim'),
-                \g:Plugin.new('nvim-lua/completion-nvim'),
-                \g:Plugin.new('neovim/nvim-lspconfig'),
+                \g:Plugin.new('L3MON4D3/LuaSnip'),
+                \g:Plugin.new('hrsh7th/nvim-cmp'),
+                \g:Plugin.new('hrsh7th/cmp-path'),
+                \g:Plugin.new('hrsh7th/cmp-buffer'),
+                \g:Plugin.new('hrsh7th/cmp-nvim-lsp'),
+                \g:Plugin.new('hrsh7th/cmp-cmdline'),
             \]))
 
 " Utils Layers
