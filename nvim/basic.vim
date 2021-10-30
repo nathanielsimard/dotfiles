@@ -1,5 +1,6 @@
 " Set Host Prog
 let g:python3_host_prog = '~/pythonenv/neovim/bin/python'
+lua require'nvim-tree'.setup()
 
 " Indent Guide
 let g:indent_blankline_char = '┊'
@@ -36,10 +37,6 @@ function! NativeBackground()
     augroup END
 endfunction
 
-let g:airline_theme='base16'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
 let g:gruvbox_italic = 1
 let g:gruvbox_bold = 1
 let g:gruvbox_contrast_dark = 'medium'
@@ -56,7 +53,7 @@ function! WhiteColor()
     augroup END
     augroup ModifiedColor
         autocmd!
-        autocmd VimEnter * hi airline_tabfill guibg=#F5F5F5
+        " autocmd VimEnter * hi airline_tabfill guibg=#F5F5F5
         autocmd ColorScheme * hi VertSplit guibg=#F5F5F5
         autocmd ColorScheme * hi LineNr guibg=#F5F5F5
         autocmd ColorScheme * hi CursorLineNr guibg=#F5F5F5 guifg=#333333
@@ -76,7 +73,7 @@ function! BlackColor()
     call NativeBackground()
     augroup ModifiedColor
         autocmd!
-        autocmd VimEnter * hi airline_tabfill guibg=#2D2D2D
+        " autocmd VimEnter * hi airline_tabfill guibg=#2D2D2D
         autocmd ColorScheme * hi VertSplit guibg=#2D2D2D
         autocmd ColorScheme * hi LineNr guibg=#2D2D2D
         autocmd ColorScheme * hi CursorLineNr guibg=#2D2D2D
@@ -124,10 +121,6 @@ set hidden
 set scrolloff=10
 set mouse+=a
 
-" NERDTree Settings
-let NERDTreeChDirMode=2
-let NERDTreeShowHidden=1
-
 function! NewFile()
   let curline = getline('.')
   call inputsave()
@@ -135,7 +128,7 @@ function! NewFile()
   call inputrestore()
   execute 'e '.l:name
   w
-  NERDTreeRefreshRoot
+  NvimTreeRefresh
 endfunction
 
 " Window Navigation Keybindings
@@ -188,6 +181,7 @@ endfunction
 
 let g:previous_buffer = -1
 let g:next_buffer = bufnr('%')
+
 function s:UpdateBuffers()
     let s:name = bufname('%')
     let s:num = bufnr('%')
@@ -196,7 +190,7 @@ function s:UpdateBuffers()
                 \s:name !=# 'vmenu' &&
                 \s:name[0:4] !=# 'term:' &&
                 \s:num !=# g:next_buffer &&
-                \s:name[:3] !=# 'NERD'
+                \s:name[:3] !=# 'NvimTree'
         let g:previous_buffer = g:next_buffer
         let g:next_buffer = s:num
     endif
@@ -230,13 +224,12 @@ let g:keybindings_file = vmenu#category('f', 'File/Find')
 
 " File Keybindings
 call vmenu#commands([
-            \['f', 'Find Files',  'Files'],
-            \['d', 'Delete Files',  'call fzf#run({"sink": "silent !rm"})'],
-            \['l', 'Find Lines',  'BLines'],
+            \['f', 'Find Files',  'Telescope find_files'],
+            \['l', 'Find Lines',  'Telescope live_grep'],
             \['x', 'Find Xdg Open',  'call fzf#run(fzf#wrap({"sink": "silent !xdg-open"}))'],
-            \['t', 'Focus Tree',  'NERDTreeFind'],
-            \['c', 'Close Tree',  'NERDTreeClose'],
-            \['r', 'Refresh Tree',  'NERDTreeRefreshRoot'],
+            \['t', 'Focus Tree',  'NvimTreeFindFile'],
+            \['c', 'Close Tree',  'NvimTreeClose'],
+            \['r', 'Refresh Tree',  'NvimTreeRefresh'],
             \['n', 'New File',  'call NewFile()'],
         \], {
             \'parent': g:keybindings_file
@@ -270,13 +263,12 @@ let g:tex_flavor = "latex"
 
 " Git Keybindings
 call vmenu#commands([
-            \['s', 'Status',  'GFiles?'],
-            \['d', 'Diff',  'Gdiffsplit'],
+            \['s', 'Status',  'Telescope git_status'],
+            \['t', 'Stash',  'Telescope git_stash'],
+            \['b', 'Show Branches',  'Telescope git_branches'],
             \['m', 'Checkout master',  'call terminal#run_command("git checkout master")'],
-            \['l', 'List Buffer Commits',  'BCommits'],
-            \['o', 'Open Browser',  'Gbrowse'],
+            \['l', 'List Buffer Commits',  'Telescope git_bcommits'],
             \['p', 'Pull',  'call terminal#run_command("git pull")'],
-            \['b', 'Show Branches',  'call terminal#run_command("git branch")'],
             \['S', 'Save All',  'call basic#git_save()'],
             \['A', 'Add All',  'call terminal#run_command("git add --all")'],
             \['C', 'Create Commits',  'call basic#git_commit()'],
@@ -316,9 +308,9 @@ call vmenu#commands([
             \['d', 'Delete Buffer', 'call DeleteBuffer()'],
             \['q', 'Delete Current Buffer', 'bd'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
-            \['f', 'Find In Buffer', 'call FindInBuffer()'],
             \['s', 'Find Word Under Cursor in Buffers', 'call FindWordUnderCursorInBuffers()'],
-            \['b', 'List All Buffers', 'Buffers'],
+            \['f', 'Find In Buffer', 'call FindInBuffer()'],
+            \['b', 'List All Buffers', 'Telescope buffers'],
             \['S', 'Save All Buffers', 'wa'],
             \['l', 'Next Buffer', 'bn'],
             \['k', 'Next Buffer', 'bn'],
@@ -342,10 +334,10 @@ call vmenu#commands([
 
 " Ui/Toggle Keybindings
 call vmenu#commands([
-            \['t', 'Tree', 'NERDTreeToggle'],
+            \['t', 'Tree', 'NvimTreeFindFile'],
             \['c', 'Theme Light/Dark', 'call ToggleLightDarkTheme()'],
         \], {
-            \'parent': keybindings_ui
+            \'parent': g:keybindings_ui
         \})
 
 " Simple Keybindings

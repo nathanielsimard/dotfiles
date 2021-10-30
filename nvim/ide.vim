@@ -32,7 +32,9 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 
     call vmenu#commands([
-                \['a', 'Code Action', 'lua vim.lsp.buf.code_action()'],
+                \['a', 'Code Action', 'Telescope lsp_code_actions'],
+                \['d', 'Diagnostics Document', 'Telescope lsp_document_diagnostics'],
+                \['D', 'Diagnostics Workspace', 'Telescope lsp_workspace_diagnostics'],
                 \['s', 'Signature', 'lua vim.lsp.buf.signature_help()'],
                 \['c', 'Completion', 'lua vim.lsp.buf.completion()'],
                 \['r', 'Highlight References', 'lua vim.lsp.buf.document_highlight()']
@@ -42,16 +44,18 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 
     call vmenu#commands([
-                \['d', 'Definition', 'lua vim.lsp.buf.definition()'],
-                \['i', 'Implementation', 'lua vim.lsp.buf.implementation()'],
-                \['r', 'References', 'lua vim.lsp.buf.references()'],
-                \['s', 'Symbol', 'lua vim.lsp.buf.document_symbol()']
+                \['d', 'Definition', 'Telescope lsp_definitions'],
+                \['i', 'Implementation', 'Telescope lsp_implementations'],
+                \['r', 'References', 'Telescope lsp_references'],
+                \['s', 'Symbols Document', 'Telescope lsp_document_symbols'],
+                \['S', 'Symbols Workspace', 'Telescope lsp_workspace_symbols']
         \], {
             \'parent': g:keybindings_jumps_jobs,
             \'filetype': a:filetype
         \})
 
     call vmenu#commands([
+                \['a', 'Code Action', 'Telescope lsp_code_actions'],
                 \['r', 'Rename', 'lua vim.lsp.buf.rename()'],
                 \['f', 'Format', 'lua vim.lsp.buf.formatting()'],
                 \['F', 'Range Format', 'lua vim.lsp.buf.range_formatting()']
@@ -70,7 +74,16 @@ let g:completion_chain_complete_list = [
     \{'mode': '<c-n>'}
 \]
 
-autocmd BufEnter * lua require'completion'.on_attach()
+" autocmd BufEnter 
+"             \*.rs
+"             \*.js
+"             \*.ts
+"             \*.py
+"             \*.md
+"             \*.toml
+"             \*.vim
+"             \*.tex
+"             \lua require'completion'.on_attach()
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
