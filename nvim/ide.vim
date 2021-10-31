@@ -78,7 +78,7 @@ cmp.setup({
   }),
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   sorting =  {
@@ -91,6 +91,7 @@ cmp.setup({
     }
   },
   mapping = {
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -109,27 +110,6 @@ cmp.setup({
   },
 })
 EOF
-
-
-" lua require'coq'.setup()
-" let g:completion_auto_change_source = 1
-" let g:completion_chain_complete_list = [
-"     \{'complete_items': ['lsp']},
-"     \{'complete_items': ['buffers']},
-"     \{'mode': '<c-p>'},
-"     \{'mode': '<c-n>'}
-" \]
-" 
-" autocmd BufEnter * lua require'completion'.on_attach()
-" " Use <Tab> and <S-Tab> to navigate through popup menu
-" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" 
-" " Set completeopt to have a better completion experience
-" set completeopt=menuone,noinsert,noselect
-" 
-" " Avoid showing message extra message when using completion
-" set shortmess+=c
 
 " Spelling Settings
 function! ToggleSpelling()

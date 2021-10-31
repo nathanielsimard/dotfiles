@@ -1,5 +1,7 @@
 source ~/.config/nvim/layer.vim
 
+                " \g:Plugin.new('rktjmp/lush.nvim'),
+                " \g:Plugin.new('ellisonleao/gruvbox.nvim'),
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('kyazdani42/nvim-web-devicons'),
@@ -9,6 +11,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('sheerun/vim-polyglot'),
                 \g:Plugin.new('morhetz/gruvbox'),
+                \g:Plugin.new('chriskempson/base16-vim'),
                 \g:Plugin.new('nvim-lualine/lualine.nvim'),
                 \g:Plugin.new('mhinz/vim-startify'),
                 \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
