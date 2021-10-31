@@ -1,7 +1,5 @@
 source ~/.config/nvim/layer.vim
 
-                " \g:Plugin.new('rktjmp/lush.nvim'),
-                " \g:Plugin.new('ellisonleao/gruvbox.nvim'),
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('kyazdani42/nvim-web-devicons'),
@@ -11,13 +9,11 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('sheerun/vim-polyglot'),
                 \g:Plugin.new('morhetz/gruvbox'),
-                \g:Plugin.new('chriskempson/base16-vim'),
-                \g:Plugin.new('nvim-lualine/lualine.nvim'),
                 \g:Plugin.new('mhinz/vim-startify'),
-                \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
-                \g:Plugin.new('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}),
+                \g:Plugin.new('nvim-lua/plenary.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope-fzf-native.nvim'),
+                \g:Plugin.new('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}),
             \]))
 
 " StatusLine
@@ -27,10 +23,10 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/statusline.vim', [
 
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
+                \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
-                \g:Plugin.new('nvim-lua/plenary.nvim'),
                 \g:Plugin.new('L3MON4D3/LuaSnip'),
                 \g:Plugin.new('hrsh7th/nvim-cmp'),
                 \g:Plugin.new('hrsh7th/cmp-path'),

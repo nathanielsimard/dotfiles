@@ -65,11 +65,31 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 endfunction
 
+" Spelling Settings
+function! ToggleSpelling()
+    if &spell ==# 1
+        setlocal nospell
+    else
+        setlocal spell
+    endif
+endfunction
+
+call vmenu#commands([
+            \['g', 'Check Grammar', 'GrammarousCheck  --preview'],
+            \['r', 'Reset Grammar', 'GrammarousReset'],
+            \['s', 'Toggle Spelling', 'call ToggleSpelling()'],
+            \['c', 'Correct Spelling', 'normal! z='],
+            \['n', 'Next Spelling Error', 'normal! [s'],
+            \['n', 'Previous Spelling Error', 'normal! ]s'],
+    \], {
+        \'parent': g:keybindings_spelling
+    \})
+
 " Completion Settings
 set completeopt=menu,menuone,noselect
-lua <<EOF
-local cmp = require'cmp'
 
+lua << EOF
+local cmp = require'cmp'
 cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -110,23 +130,3 @@ cmp.setup({
   },
 })
 EOF
-
-" Spelling Settings
-function! ToggleSpelling()
-    if &spell ==# 1
-        setlocal nospell
-    else
-        setlocal spell
-    endif
-endfunction
-
-call vmenu#commands([
-            \['g', 'Check Grammar', 'GrammarousCheck  --preview'],
-            \['r', 'Reset Grammar', 'GrammarousReset'],
-            \['s', 'Toggle Spelling', 'call ToggleSpelling()'],
-            \['c', 'Correct Spelling', 'normal! z='],
-            \['n', 'Next Spelling Error', 'normal! [s'],
-            \['n', 'Previous Spelling Error', 'normal! ]s'],
-    \], {
-        \'parent': g:keybindings_spelling
-    \})
