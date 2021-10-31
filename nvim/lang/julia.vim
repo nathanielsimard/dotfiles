@@ -3,7 +3,7 @@ let g:latex_to_unicode_auto = 1
 let g:default_julia_version = '1.3'
 
 " Language Serveur Settings
-lua require'lspconfig'.julials.setup{on_attach=require'completion'.on_attach}
+lua require'lspconfig'.julials.setup{}
 call RegisterKeybindingsLSP('julia')
 
 " Other Settings

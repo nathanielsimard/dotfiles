@@ -1,7 +1,6 @@
 " Language Serveur Settings
 lua << EOF
 require'lspconfig'.jsonls.setup {
-    on_attach=require'completion'.on_attach,
     commands = {
       Format = {
         function()
