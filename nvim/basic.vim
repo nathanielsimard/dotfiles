@@ -1,5 +1,6 @@
 " Set Host Prog
 let g:python3_host_prog = '~/pythonenv/neovim/bin/python'
+lua require'nvim-tree'.setup()
 
 " Indent Guide
 let g:indent_blankline_char = '┊'
@@ -36,10 +37,6 @@ function! NativeBackground()
     augroup END
 endfunction
 
-let g:airline_theme='base16'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
 let g:gruvbox_italic = 1
 let g:gruvbox_bold = 1
 let g:gruvbox_contrast_dark = 'medium'
@@ -49,53 +46,81 @@ let g:colorscheme_dark='gruvbox'
 let g:colorscheme_light='base16-github'
 let g:colorscheme_current=g:colorscheme_dark
 
+let g:custom_color_red='#CC241D'
+let g:custom_color_yellow='#FABD2F'
+let g:custom_color_white='#D3D3D3'
+let g:custom_color_backgound_dark='#2D2D2D'
+let g:custom_color_backgound_white='#F5F5F5'
+
+function! s:highlight(group, background, forground)
+    execute "autocmd ColorScheme * hi ".a:group." guibg=".a:background." guifg=".a:forground
+endfunction
+
+function! s:highlight_background(group, background)
+    execute "autocmd ColorScheme * hi ".a:group." guibg=".a:background
+endfunction
+
 function! WhiteColor()
+    set background=light 
     augroup Background
         autocmd!
         autocmd ColorScheme * hi Normal guibg=#D0D0D0
     augroup END
     augroup ModifiedColor
         autocmd!
-        autocmd VimEnter * hi airline_tabfill guibg=#F5F5F5
-        autocmd ColorScheme * hi VertSplit guibg=#F5F5F5
-        autocmd ColorScheme * hi LineNr guibg=#F5F5F5
-        autocmd ColorScheme * hi CursorLineNr guibg=#F5F5F5 guifg=#333333
-        autocmd ColorScheme * hi SignColumn guibg=#F5F5F5
-        autocmd ColorScheme * hi CursorColumn guibg=#F5F5F5
-        autocmd ColorScheme * hi CursorLine guibg=#F5F5F5
-        autocmd ColorScheme * hi ColorColumn guibg=#F5F5F5
-        autocmd ColorScheme * hi QuickFixLine guibg=#F5F5F5
-        autocmd ColorScheme * hi LspDiagnosticsSignError guibg=#F5F5F5 guifg=#FF0000
-        autocmd ColorScheme * hi LspDiagnosticsSignWarning guibg=#F5F5F5 guifg=#FFA500
-        autocmd ColorScheme * hi LspDiagnosticsSignInformation guibg=#F5F5F5 guifg=#D3D3D3
-        autocmd ColorScheme * hi LspDiagnosticsSignHint guibg=#F5F5F5 guifg=#D3D3D3
+        call s:highlight_background('VertSplit', g:custom_color_backgound_white)
+        call s:highlight_background('LineNr', g:custom_color_backgound_white)
+        call s:highlight_background('SignColumn', g:custom_color_backgound_white)
+        call s:highlight_background('CursorColumn', g:custom_color_backgound_white)
+        call s:highlight_background('CursorLine', g:custom_color_backgound_white)
+        call s:highlight_background('ColorColumn', g:custom_color_backgound_white)
+        call s:highlight_background('QuickFixLine', g:custom_color_backgound_white)
+        call s:highlight('CursorLineNr', g:custom_color_backgound_white, '#333333')
+        " Legacy
+        call s:highlight('LspDiagnosticsSignError', g:custom_color_backgound_white, g:custom_color_red)
+        call s:highlight('LspDiagnosticsSignWarning', g:custom_color_backgound_white, g:custom_color_yellow)
+        " New
+        call s:highlight('DiagnosticSignError', g:custom_color_backgound_white, g:custom_color_red)
+        call s:highlight('DiagnosticSignWarning', g:custom_color_backgound_white, g:custom_color_yellow)
     augroup END
 endfunction
 
 function! BlackColor()
+    set background=dark 
     call NativeBackground()
     augroup ModifiedColor
         autocmd!
-        autocmd VimEnter * hi airline_tabfill guibg=#2D2D2D
-        autocmd ColorScheme * hi VertSplit guibg=#2D2D2D
-        autocmd ColorScheme * hi LineNr guibg=#2D2D2D
-        autocmd ColorScheme * hi CursorLineNr guibg=#2D2D2D
-        autocmd ColorScheme * hi SignColumn guibg=#2D2D2D
-        autocmd ColorScheme * hi CursorColumn guibg=#2D2D2D
-        autocmd ColorScheme * hi CursorLine guibg=#2D2D2D
-        autocmd ColorScheme * hi ColorColumn guibg=#2D2D2D
-        autocmd ColorScheme * hi QuickFixLine guibg=#2D2D2D
-        autocmd ColorScheme * hi LspDiagnosticsSignError guibg=#2D2D2D guifg=#FF0000
-        autocmd ColorScheme * hi LspDiagnosticsSignWarning guibg=#2D2D2D guifg=#FFA500
-        autocmd ColorScheme * hi LspDiagnosticsSignInformation guibg=#2D2D2D guifg=#D3D3D3
-        autocmd ColorScheme * hi LspDiagnosticsSignHint guibg=#2D2D2D guifg=#D3D3D3
+        call s:highlight_background('VertSplit', g:custom_color_backgound_dark)
+        call s:highlight_background('LineNr', g:custom_color_backgound_dark)
+        call s:highlight_background('CursorLineNr', g:custom_color_backgound_dark)
+        call s:highlight_background('SignColumn', g:custom_color_backgound_dark)
+        call s:highlight_background('CursorColumn', g:custom_color_backgound_dark)
+        call s:highlight_background('CursorLine', g:custom_color_backgound_dark)
+        call s:highlight_background('ColorColumn', g:custom_color_backgound_dark)
+        call s:highlight_background('QuickFixLine', g:custom_color_backgound_dark)
+        " Legacy
+        call s:highlight('LspDiagnosticsSignError', '#2D2D2D', g:custom_color_red)
+        call s:highlight('LspDiagnosticsSignWarning', '#2D2D2D', g:custom_color_yellow)
+        call s:highlight('LspDiagnosticsSignInformation', '#2D2D2D', g:custom_color_white)
+        call s:highlight('LspDiagnosticsSignHint', '#2D2D2D', g:custom_color_white)
+        " New
+        call s:highlight('DiagnosticSignError', '#2D2D2D', g:custom_color_red)
+        call s:highlight('DiagnosticSignWarning', '#2D2D2D', g:custom_color_yellow)
+        call s:highlight('DiagnosticSignInformation', '#2D2D2D', g:custom_color_white)
+        call s:highlight('DiagnosticSignHint', '#2D2D2D', g:custom_color_white)
     augroup END
 endfunction
 
+" Legacy
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
+" New
+sign define DiagnosticSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
+sign define DiagnosticSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
+sign define DiagnosticSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
+sign define DiagnosticSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
 
 call BlackColor()
 execute 'colorscheme '.g:colorscheme_current
@@ -124,10 +149,6 @@ set hidden
 set scrolloff=10
 set mouse+=a
 
-" NERDTree Settings
-let NERDTreeChDirMode=2
-let NERDTreeShowHidden=1
-
 function! NewFile()
   let curline = getline('.')
   call inputsave()
@@ -135,7 +156,7 @@ function! NewFile()
   call inputrestore()
   execute 'e '.l:name
   w
-  NERDTreeRefreshRoot
+  NvimTreeRefresh
 endfunction
 
 " Window Navigation Keybindings
@@ -188,6 +209,7 @@ endfunction
 
 let g:previous_buffer = -1
 let g:next_buffer = bufnr('%')
+
 function s:UpdateBuffers()
     let s:name = bufname('%')
     let s:num = bufnr('%')
@@ -196,7 +218,7 @@ function s:UpdateBuffers()
                 \s:name !=# 'vmenu' &&
                 \s:name[0:4] !=# 'term:' &&
                 \s:num !=# g:next_buffer &&
-                \s:name[:3] !=# 'NERD'
+                \s:name[:3] !=# 'NvimTree'
         let g:previous_buffer = g:next_buffer
         let g:next_buffer = s:num
     endif
@@ -230,13 +252,12 @@ let g:keybindings_file = vmenu#category('f', 'File/Find')
 
 " File Keybindings
 call vmenu#commands([
-            \['f', 'Find Files',  'Files'],
-            \['d', 'Delete Files',  'call fzf#run({"sink": "silent !rm"})'],
-            \['l', 'Find Lines',  'BLines'],
+            \['f', 'Find Files',  'Telescope find_files'],
+            \['l', 'Find Lines',  'Telescope live_grep'],
             \['x', 'Find Xdg Open',  'call fzf#run(fzf#wrap({"sink": "silent !xdg-open"}))'],
-            \['t', 'Focus Tree',  'NERDTreeFind'],
-            \['c', 'Close Tree',  'NERDTreeClose'],
-            \['r', 'Refresh Tree',  'NERDTreeRefreshRoot'],
+            \['t', 'Focus Tree',  'NvimTreeFindFile'],
+            \['c', 'Close Tree',  'NvimTreeClose'],
+            \['r', 'Refresh Tree',  'NvimTreeRefresh'],
             \['n', 'New File',  'call NewFile()'],
         \], {
             \'parent': g:keybindings_file
@@ -270,13 +291,12 @@ let g:tex_flavor = "latex"
 
 " Git Keybindings
 call vmenu#commands([
-            \['s', 'Status',  'GFiles?'],
-            \['d', 'Diff',  'Gdiffsplit'],
+            \['s', 'Status',  'Telescope git_status'],
+            \['t', 'Stash',  'Telescope git_stash'],
+            \['b', 'Show Branches',  'Telescope git_branches'],
             \['m', 'Checkout master',  'call terminal#run_command("git checkout master")'],
-            \['l', 'List Buffer Commits',  'BCommits'],
-            \['o', 'Open Browser',  'Gbrowse'],
+            \['l', 'List Buffer Commits',  'Telescope git_bcommits'],
             \['p', 'Pull',  'call terminal#run_command("git pull")'],
-            \['b', 'Show Branches',  'call terminal#run_command("git branch")'],
             \['S', 'Save All',  'call basic#git_save()'],
             \['A', 'Add All',  'call terminal#run_command("git add --all")'],
             \['C', 'Create Commits',  'call basic#git_commit()'],
@@ -316,9 +336,9 @@ call vmenu#commands([
             \['d', 'Delete Buffer', 'call DeleteBuffer()'],
             \['q', 'Delete Current Buffer', 'bd'],
             \['D', 'Delete All Buffers', 'call DeleteAllBuffers()'],
-            \['f', 'Find In Buffer', 'call FindInBuffer()'],
             \['s', 'Find Word Under Cursor in Buffers', 'call FindWordUnderCursorInBuffers()'],
-            \['b', 'List All Buffers', 'Buffers'],
+            \['f', 'Find In Buffer', 'call FindInBuffer()'],
+            \['b', 'List All Buffers', 'Telescope buffers'],
             \['S', 'Save All Buffers', 'wa'],
             \['l', 'Next Buffer', 'bn'],
             \['k', 'Next Buffer', 'bn'],
@@ -342,10 +362,10 @@ call vmenu#commands([
 
 " Ui/Toggle Keybindings
 call vmenu#commands([
-            \['t', 'Tree', 'NERDTreeToggle'],
+            \['t', 'Tree', 'NvimTreeFindFile'],
             \['c', 'Theme Light/Dark', 'call ToggleLightDarkTheme()'],
         \], {
-            \'parent': keybindings_ui
+            \'parent': g:keybindings_ui
         \})
 
 " Simple Keybindings

@@ -1,3 +1,3 @@
 " Language Serveur Settings
-lua require'lspconfig'.vimls.setup{on_attach=require'completion'.on_attach}
+lua require'lspconfig'.vimls.setup{}
 call RegisterKeybindingsLSP('vim')

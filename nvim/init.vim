@@ -2,31 +2,37 @@ source ~/.config/nvim/layer.vim
 
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
-                \g:Plugin.new('ryanoasis/vim-devicons'),
-                \g:Plugin.new('nathanielsimard/vmenu'),
-                \g:Plugin.new('junegunn/fzf'),
-                \g:Plugin.new('junegunn/fzf.vim'),
-                \g:Plugin.new('tpope/vim-fugitive'),
-                \g:Plugin.new('tpope/vim-rhubarb'),
-                \g:Plugin.new('editorconfig/editorconfig-vim'),
+                \g:Plugin.new('kyazdani42/nvim-web-devicons'),
+                \g:Plugin.new('kyazdani42/nvim-tree.lua'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
+                \g:Plugin.new('nathanielsimard/vmenu'),
+                \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('sheerun/vim-polyglot'),
-                \g:Plugin.new('chriskempson/base16-vim'),
                 \g:Plugin.new('morhetz/gruvbox'),
-                \g:Plugin.new('vim-airline/vim-airline'),
-                \g:Plugin.new('vim-airline/vim-airline-themes'),
-                \g:Plugin.new('scrooloose/nerdtree'),
-                \g:Plugin.new('tiagofumo/vim-nerdtree-syntax-highlight'),
                 \g:Plugin.new('mhinz/vim-startify'),
-                \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
+                \g:Plugin.new('nvim-lua/plenary.nvim'),
+                \g:Plugin.new('nvim-telescope/telescope.nvim'),
+                \g:Plugin.new('nvim-telescope/telescope-fzf-native.nvim'),
+                \g:Plugin.new('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}),
+            \]))
+
+" StatusLine
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/statusline.vim', [
+                \g:Plugin.new('nvim-lualine/lualine.nvim'),
             \]))
 
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
-                \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
-                \g:Plugin.new('steelsojka/completion-buffers'),
-                \g:Plugin.new('nvim-lua/completion-nvim'),
+                \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
+                \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
+                \g:Plugin.new('nvim-lua/popup.nvim'),
+                \g:Plugin.new('L3MON4D3/LuaSnip'),
+                \g:Plugin.new('hrsh7th/nvim-cmp'),
+                \g:Plugin.new('hrsh7th/cmp-path'),
+                \g:Plugin.new('hrsh7th/cmp-buffer'),
+                \g:Plugin.new('hrsh7th/cmp-nvim-lsp'),
+                \g:Plugin.new('hrsh7th/cmp-cmdline'),
             \]))
 
 " Utils Layers
@@ -39,7 +45,9 @@ call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/mar
             \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', [
+                \g:Plugin.new('simrat39/rust-tools.nvim'),
+            \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))

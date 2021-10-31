@@ -1,5 +1,5 @@
 lua << EOF
-require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.tsserver.setup{}
 require'lspconfig'.diagnosticls.setup{
   filetypes = { "javascript", "typescript", "vue" },
   init_options = {
