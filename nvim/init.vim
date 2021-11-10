@@ -1,5 +1,12 @@
 source ~/.config/nvim/layer.vim
 
+function! Log(message)
+    let s:date = strftime('%Y/%m/%d %T')
+    let s:message = "[INFO - ".s:date."] ".a:message
+
+    exe "silent !echo ".s:message." >> ~/.nvim.log"
+endfunction
+
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('kyazdani42/nvim-web-devicons'),

@@ -30,6 +30,7 @@ function g:Layer.register()
 endfunction
 
 function g:Layer.configure(layer_id)
+    call Log("Configuring layer ".self.config)
     execute 'source '.self.config
 endfunction
 
@@ -53,6 +54,7 @@ endfunction
 
 function g:FileTypeLayer.load_config()
     if self.configured ==# 0
+        call Log("Configuring filetype layer ".self.config)
         execute 'source '.self.config
         let self.configured = 1
         e " Reload the file, needed by LSP :(

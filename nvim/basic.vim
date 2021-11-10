@@ -61,7 +61,6 @@ function! s:highlight_background(group, background)
 endfunction
 
 function! WhiteColor()
-    set background=light 
     augroup Background
         autocmd!
         autocmd ColorScheme * hi Normal guibg=#D0D0D0
@@ -86,7 +85,6 @@ function! WhiteColor()
 endfunction
 
 function! BlackColor()
-    set background=dark 
     call NativeBackground()
     augroup ModifiedColor
         autocmd!
