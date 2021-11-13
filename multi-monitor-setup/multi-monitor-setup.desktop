@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Multi Monitor Setup
+Comment=Multi Monitor Setup
+Exec=/home/nathaniel/.local/share/multi-monitor-setup/activate.sh %U
+Terminal=false
+Type=Application
+Categories=Application;
+Encoding=UTF-8
