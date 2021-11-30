@@ -15,6 +15,7 @@ augroup Autoformat
 augroup END
 
 function! RegisterKeybindingsLSP(filetype)
+    imap <C-Space> <C-O>:lua vim.lsp.buf.completion()<CR>
     call vmenu#commands([
                 \['s', 'Show', 'lua vim.lsp.diagnostic.show_line_diagnostics()'],
                 \['j', 'Next', 'lua vim.lsp.diagnostic.goto_next()'],
