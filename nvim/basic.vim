@@ -33,7 +33,7 @@ set encoding=UTF-8
 function! NativeBackground()
     augroup Background
         autocmd!
-        autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+        autocmd ColorScheme * hi Normal ctermbg=none guibg=#121212
     augroup END
 endfunction
 
@@ -372,4 +372,3 @@ call vmenu#commands([
             \['q', 'Quit', 'q'],
             \['S', 'Save All Files', 'wa'],
         \])
-

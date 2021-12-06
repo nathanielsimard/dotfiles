@@ -52,6 +52,7 @@ call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/mar
                 \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
             \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', [
                 \g:Plugin.new('simrat39/rust-tools.nvim'),
