@@ -33,7 +33,8 @@ set encoding=UTF-8
 function! NativeBackground()
     augroup Background
         autocmd!
-        autocmd ColorScheme * hi Normal ctermbg=none guibg=#121212
+        " autocmd ColorScheme * hi Normal ctermbg=none guibg=#121212
+        autocmd ColorScheme * hi Normal ctermbg=none guibg=none
     augroup END
 endfunction
 

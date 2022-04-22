@@ -12,9 +12,9 @@ function! lang#rust#format_file()
 endfunction
 
 " Run Settings
+" \['a', 'Code Actions', 'RustCodeAction'],
 call vmenu#commands([
             \['h', 'Hover Actions', 'RustHoverActions'],
-            \['a', 'Code Actions', 'RustCodeAction'],
             \['R','Show Runnables', 'RustRunnables'],
             \['d','Debug', 'RustDebuggables'],
             \['t','Run Test', 'RustTest'],

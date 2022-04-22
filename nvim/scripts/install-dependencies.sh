@@ -12,6 +12,9 @@ npm install -g diagnostic-languageserver
 # Javascript / Typescript
 npm install -g typescript-language-server typescript
 
+# Json
+npm install -g vscode-langservers-extracted
+
 # Python
 npm install -g pyright
 
