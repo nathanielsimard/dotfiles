@@ -1,8 +1,10 @@
 lua << EOF
+register_autocomplete_lsp('rust_analyzer')
 require'lspconfig'.rust_analyzer.setup{}
 require'rust-tools'.setup{}
 EOF
 call RegisterKeybindingsLSP('rust')
+
 
 function! lang#rust#format_file()
     let l:file = @%

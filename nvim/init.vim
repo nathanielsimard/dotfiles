@@ -35,12 +35,14 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('neovim/nvim-lspconfig'),
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
+                \g:Plugin.new('ray-x/lsp_signature.nvim'),
                 \g:Plugin.new('L3MON4D3/LuaSnip'),
-                \g:Plugin.new('hrsh7th/nvim-cmp'),
-                \g:Plugin.new('hrsh7th/cmp-path'),
-                \g:Plugin.new('hrsh7th/cmp-buffer'),
+                \g:Plugin.new('saadparwaiz1/cmp_luasnip'),
                 \g:Plugin.new('hrsh7th/cmp-nvim-lsp'),
+                \g:Plugin.new('hrsh7th/cmp-buffer'),
                 \g:Plugin.new('hrsh7th/cmp-cmdline'),
+                \g:Plugin.new('hrsh7th/cmp-path'),
+                \g:Plugin.new('hrsh7th/nvim-cmp'),
             \]))
 
 " Utils Layers

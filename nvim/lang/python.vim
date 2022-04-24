@@ -1,6 +1,7 @@
 " Language Serveur Settings
 
 lua << EOF
+register_autocomplete_lsp('pyright')
 require'lspconfig'.pyright.setup{
     settings = {
         python = {

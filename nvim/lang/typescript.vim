@@ -1,4 +1,5 @@
 lua << EOF
+register_autocomplete_lsp('tsserver')
 require'lspconfig'.tsserver.setup{}
 require'lspconfig'.diagnosticls.setup{
   filetypes = { "javascript", "typescript", "vue" },

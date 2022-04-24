@@ -14,6 +14,15 @@ augroup Autoformat
     autocmd BufWritePre * call FormatFiletype()
 augroup END
 
+lua << EOF
+function register_autocomplete_lsp(lsp_server_name)
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    require('lspconfig')[lsp_server_name].setup {
+        capabilities = capabilities
+    }
+end
+EOF
+
 function! RegisterKeybindingsLSP(filetype)
     imap <C-Space> <C-O>:lua vim.lsp.buf.completion()<CR>
     call vmenu#commands([
@@ -130,4 +139,5 @@ cmp.setup({
     end, { "i", "s" }),
   },
 })
+require "lsp_signature".setup({})
 EOF
