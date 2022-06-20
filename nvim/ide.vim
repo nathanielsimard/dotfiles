@@ -42,7 +42,7 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 
     call vmenu#commands([
-                \['a', 'Code Action', 'Telescope lsp_code_actions'],
+                \['a', 'Code Action', 'lua vim.lsp.buf.code_action()'],
                 \['d', 'Diagnostics Document', 'Telescope lsp_document_diagnostics'],
                 \['D', 'Diagnostics Workspace', 'Telescope lsp_workspace_diagnostics'],
                 \['s', 'Signature', 'lua vim.lsp.buf.signature_help()'],
@@ -65,7 +65,7 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 
     call vmenu#commands([
-                \['a', 'Code Action', 'Telescope lsp_code_actions'],
+                \['a', 'Code Action', 'lua vim.lsp.buf.code_action()'],
                 \['r', 'Rename', 'lua vim.lsp.buf.rename()'],
                 \['f', 'Format', 'lua vim.lsp.buf.formatting()'],
                 \['F', 'Range Format', 'lua vim.lsp.buf.range_formatting()']

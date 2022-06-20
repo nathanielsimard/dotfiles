@@ -45,13 +45,16 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('hrsh7th/nvim-cmp'),
             \]))
 
+" Neovide Layer
+call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/neovide.vim', []))
+
 " Utils Layers
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/terminal.vim', []))
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/test.vim', []))
 
 " Language Layers
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/markdown.vim', [
-                \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()' })
+                \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' })
             \]))
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', []))

@@ -1,6 +1,21 @@
 " Set Host Prog
 let g:python3_host_prog = '~/pythonenv/neovim/bin/python'
-lua require'nvim-tree'.setup()
+
+" Tree setup
+lua << EOF
+require'nvim-tree'.setup{
+    view = {
+        width = 30,
+        side = "left",
+    },
+    diagnostics = {
+        enable = true,
+    },
+    git = {
+        ignore = false,
+    },
+}
+EOF
 
 " Indent Guide
 let g:indent_blankline_char = '┊'
