@@ -35,8 +35,11 @@ cp alacritty.yml ~/.config/alacritty
 echo "Installing Fonts"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-unzip FiraCode.zip
 mkdir -p ~/.local/share
 mkdir -p ~/.local/share/fonts
-mv FiraCode ~/.local/share/fonts/
+
+mv FiraCode.zip ~/.local/share/fonts/
+cd ~/.local/share/fonts/
+unzip FiraCode.zip
+
 fc-cache -vf ~/.local/share/fonts/
