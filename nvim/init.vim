@@ -9,6 +9,7 @@ endfunction
 
 " Basic Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
+                \g:Plugin.new('rcarriga/nvim-notify'),
                 \g:Plugin.new('kyazdani42/nvim-web-devicons'),
                 \g:Plugin.new('kyazdani42/nvim-tree.lua'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
@@ -31,6 +32,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/statusline.vim', [
 
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
+                \g:Plugin.new('folke/trouble.nvim'),
                 \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
                 \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),

@@ -26,6 +26,7 @@ EOF
 function! RegisterKeybindingsLSP(filetype)
     imap <C-Space> <C-O>:lua vim.lsp.buf.completion()<CR>
     call vmenu#commands([
+                \['t', 'Toggle', 'TroubleToggle'],
                 \['s', 'Show', 'lua vim.lsp.diagnostic.show_line_diagnostics()'],
                 \['j', 'Next', 'lua vim.lsp.diagnostic.goto_next()'],
                 \['k', 'Prev', 'lua vim.lsp.diagnostic.goto_prev()'],
@@ -140,4 +141,9 @@ cmp.setup({
   },
 })
 require "lsp_signature".setup({})
+EOF
+
+" Diagnostics Settings
+lua << EOF
+require("trouble").setup {}
 EOF

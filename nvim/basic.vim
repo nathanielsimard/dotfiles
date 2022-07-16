@@ -232,7 +232,7 @@ function s:UpdateBuffers()
                 \s:name !=# 'vmenu' &&
                 \s:name[0:4] !=# 'term:' &&
                 \s:num !=# g:next_buffer &&
-                \s:name[:3] !=# 'NvimTree'
+                \s:name[0:7] !=# 'NvimTree'
         let g:previous_buffer = g:next_buffer
         let g:next_buffer = s:num
     endif
