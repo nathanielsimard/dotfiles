@@ -61,9 +61,7 @@ call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/mar
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', [
-                \g:Plugin.new('simrat39/rust-tools.nvim'),
-            \]))
+call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))

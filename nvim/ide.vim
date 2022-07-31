@@ -27,9 +27,9 @@ function! RegisterKeybindingsLSP(filetype)
     imap <C-Space> <C-O>:lua vim.lsp.buf.completion()<CR>
     call vmenu#commands([
                 \['t', 'Toggle', 'TroubleToggle'],
-                \['s', 'Show', 'lua vim.lsp.diagnostic.show_line_diagnostics()'],
-                \['j', 'Next', 'lua vim.lsp.diagnostic.goto_next()'],
-                \['k', 'Prev', 'lua vim.lsp.diagnostic.goto_prev()'],
+                \['s', 'Show', 'lua vim.diagnostic.open_float()'],
+                \['j', 'Next', 'lua vim.diagnostic.goto_next()'],
+                \['k', 'Prev', 'lua vim.diagnostic.goto_prev()'],
         \], {
             \'parent': g:keybindings_error,
             \'filetype': a:filetype

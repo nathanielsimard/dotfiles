@@ -2,6 +2,7 @@
 
 # General
 pip install neovim
+npm install -g neovim
 
 # VimL
 npm install -g vim-language-server
