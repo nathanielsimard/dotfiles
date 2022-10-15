@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # General
-pip install neovim
+# pip install neovim
 npm install -g neovim
 
 # VimL
@@ -23,8 +23,8 @@ npm install -g pyright
 npm install -g bash-language-server
 
 # LaTex
-pip install neovim-remote
-wget https://github.com/latex-lsp/texlab/releases/download/v1.9.0/texlab-x86_64-linux.tar.gz
-tar xvfz texlab-x86_64-linux.tar.gz
-mv texlab ~/.local/bin/
-rm texlab-x86_64-linux.tar.gz
+# pip install neovim-remote
+# wget https://github.com/latex-lsp/texlab/releases/download/v1.9.0/texlab-x86_64-linux.tar.gz
+# tar xvfz texlab-x86_64-linux.tar.gz
+# mv texlab ~/.local/bin/
+# rm texlab-x86_64-linux.tar.gz

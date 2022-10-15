@@ -12,8 +12,10 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('rcarriga/nvim-notify'),
                 \g:Plugin.new('kyazdani42/nvim-web-devicons'),
                 \g:Plugin.new('kyazdani42/nvim-tree.lua'),
+                \g:Plugin.new('ahmedkhalf/project.nvim'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
                 \g:Plugin.new('nathanielsimard/vmenu'),
+                \g:Plugin.new('lewis6991/gitsigns.nvim'),
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('sheerun/vim-polyglot'),
                 \g:Plugin.new('morhetz/gruvbox'),
@@ -21,7 +23,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('mhinz/vim-startify'),
                 \g:Plugin.new('nvim-lua/plenary.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope.nvim'),
-                \g:Plugin.new('nvim-telescope/telescope-fzf-native.nvim'),
+                \g:Plugin.new('nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }),
                 \g:Plugin.new('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}),
             \]))
 
@@ -58,11 +60,14 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/test.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/markdown.vim', [
                 \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' })
             \]))
+call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', [
+                \g:Plugin.new('mfussenegger/nvim-jdtls'),
+            \]))
+
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript,typescript', '~/.config/nvim/lang/typescript.vim', []))

@@ -23,6 +23,23 @@ let g:indent_blankline_show_first_indent_level = v:false
 lua vim.g.indentLine_bufNameExclude = { "term:.*" }
 
 " Vim Startify
+lua << EOF
+require("project_nvim").setup{
+    patterns = {
+        ".git", 
+        "_darcs",
+        ".hg",
+        ".bzr",
+        ".svn",
+        "Makefile",
+        "package.json",
+        "requirements.txt",
+        "pyproject.toml",
+        "Cargo.toml",
+    },
+}
+EOF
+
 let g:startify_change_to_dir=1
 let g:startify_change_cmd = 'cd'
 
@@ -48,8 +65,8 @@ set encoding=UTF-8
 function! NativeBackground()
     augroup Background
         autocmd!
-        " autocmd ColorScheme * hi Normal ctermbg=none guibg=#121212
-        autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+        autocmd ColorScheme * hi Normal ctermbg=none guibg=#181818
+        " autocmd ColorScheme * hi Normal ctermbg=none guibg=none
     augroup END
 endfunction
 
@@ -264,10 +281,26 @@ let g:keybindings_window = vmenu#category('w', 'Window')
 let g:keybindings_ui = vmenu#category('u', 'Ui/Toggle')
 let g:keybindings_file = vmenu#category('f', 'File/Find')
 
+lua << EOF
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+    }
+  }
+}
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('projects')
+EOF
+
 " File Keybindings
 call vmenu#commands([
             \['f', 'Find Files',  'Telescope find_files'],
             \['l', 'Find Lines',  'Telescope live_grep'],
+            \['p', 'Find Projects',  'Telescope projects'],
             \['x', 'Find Xdg Open',  'call fzf#run(fzf#wrap({"sink": "silent !xdg-open"}))'],
             \['t', 'Focus Tree',  'NvimTreeFindFile'],
             \['c', 'Close Tree',  'NvimTreeClose'],
@@ -303,10 +336,14 @@ endfunction
 " LATEX FIX
 let g:tex_flavor = "latex"
 
+" Git integration
+lua require('gitsigns').setup()
+
 " Git Keybindings
 call vmenu#commands([
             \['s', 'Status',  'Telescope git_status'],
             \['t', 'Stash',  'Telescope git_stash'],
+            \['T', 'Toggle Signs',  'Gitsigns toggle_signs'],
             \['b', 'Show Branches',  'Telescope git_branches'],
             \['m', 'Checkout master',  'call terminal#run_command("git checkout master")'],
             \['l', 'List Buffer Commits',  'Telescope git_bcommits'],
