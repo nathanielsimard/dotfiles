@@ -59,10 +59,12 @@ require'lspconfig'.diagnosticls.setup{
                 sourceName = "mypy",
                 command = "mypy",
                 rootPatterns = {
+                    "pyproject.yml",
                     "environment.yml",
                     "requirements.txt"
                 },
                 args = {
+                    "--ignore_missing_imports",
                     "--no-color-output",
                     "--no-error-summary",
                     "--show-column-numbers",

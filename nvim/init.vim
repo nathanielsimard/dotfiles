@@ -60,10 +60,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/utils/test.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/markdown.vim', [
                 \g:Plugin.new('iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' })
             \]))
-call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', [
-                \g:Plugin.new('mfussenegger/nvim-jdtls'),
-            \]))
-
+call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', [])) 
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
