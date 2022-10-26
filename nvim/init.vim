@@ -70,6 +70,9 @@ call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vi
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript,typescript', '~/.config/nvim/lang/typescript.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/lang/vim.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('clojure', '~/.config/nvim/lang/clojure.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('svelte', '~/.config/nvim/lang/svelte.vim', [
+                \g:Plugin.new('leafOfTree/vim-svelte-plugin'),
+            \]))
 
 " Configure Editor
 call g:Editor.configure()

@@ -13,6 +13,9 @@ npm install -g diagnostic-languageserver
 # Javascript / Typescript
 npm install -g typescript-language-server typescript
 
+# Svelte
+npm install -g svelte-language-server
+
 # Json
 npm install -g vscode-langservers-extracted
 
