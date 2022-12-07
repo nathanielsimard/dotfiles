@@ -22,7 +22,7 @@ function g:Test.new(...)
 endfunction
 
 function g:Test.toggle()
-    let l:file = @%
+    let l:file = expand("%:~:.")
     if self._is_test(l:file)
         let l:file = self._src_name(l:file)
     else
@@ -33,7 +33,7 @@ function g:Test.toggle()
 endfunction
 
 function g:Test.test_file()
-    let l:file = @%
+    let l:file = expand("%:~:.")
 
     if !self._is_test(l:file)
         let l:file = self._test_name(l:file)

@@ -68,8 +68,7 @@ function! RegisterKeybindingsLSP(filetype)
     call vmenu#commands([
                 \['a', 'Code Action', 'lua vim.lsp.buf.code_action()'],
                 \['r', 'Rename', 'lua vim.lsp.buf.rename()'],
-                \['f', 'Format', 'lua vim.lsp.buf.formatting()'],
-                \['F', 'Range Format', 'lua vim.lsp.buf.range_formatting()']
+                \['f', 'Format', 'lua vim.lsp.buf.format()'],
         \], {
             \'parent': g:keybindings_refactor_run,
             \'filetype': a:filetype

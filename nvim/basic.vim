@@ -23,23 +23,6 @@ let g:indent_blankline_show_first_indent_level = v:false
 lua vim.g.indentLine_bufNameExclude = { "term:.*" }
 
 " Vim Startify
-lua << EOF
-require("project_nvim").setup{
-    patterns = {
-        ".git", 
-        "_darcs",
-        ".hg",
-        ".bzr",
-        ".svn",
-        "Makefile",
-        "package.json",
-        "requirements.txt",
-        "pyproject.toml",
-        "Cargo.toml",
-    },
-}
-EOF
-
 let g:startify_change_to_dir=1
 let g:startify_change_cmd = 'cd'
 
@@ -293,14 +276,12 @@ require('telescope').setup {
   }
 }
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('projects')
 EOF
 
 " File Keybindings
 call vmenu#commands([
             \['f', 'Find Files',  'Telescope find_files'],
             \['l', 'Find Lines',  'Telescope live_grep'],
-            \['p', 'Find Projects',  'Telescope projects'],
             \['x', 'Find Xdg Open',  'call fzf#run(fzf#wrap({"sink": "silent !xdg-open"}))'],
             \['t', 'Focus Tree',  'NvimTreeFindFile'],
             \['c', 'Close Tree',  'NvimTreeClose'],

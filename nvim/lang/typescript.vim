@@ -88,10 +88,9 @@ endfunction
 
 " Formatteur Settings
 function! lang#typescript#format()
-    lua vim.lsp.buf.formatting()
     w
     let l:file = @%
-    let l:cmd = 'silent !./node_modules/.bin/eslint --fix --cache '.l:file
+    let l:cmd = 'silent !./node_modules/.bin/prettier --write '.l:file
     execute l:cmd
     e
 endfunction

@@ -12,7 +12,6 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('rcarriga/nvim-notify'),
                 \g:Plugin.new('kyazdani42/nvim-web-devicons'),
                 \g:Plugin.new('kyazdani42/nvim-tree.lua'),
-                \g:Plugin.new('ahmedkhalf/project.nvim'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
                 \g:Plugin.new('nathanielsimard/vmenu'),
                 \g:Plugin.new('lewis6991/gitsigns.nvim'),
