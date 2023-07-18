@@ -14,11 +14,8 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('kyazdani42/nvim-tree.lua'),
                 \g:Plugin.new('mileszs/ack.vim', { 'on': 'Ack' }),
                 \g:Plugin.new('nathanielsimard/vmenu'),
-                \g:Plugin.new('lewis6991/gitsigns.nvim'),
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
-                \g:Plugin.new('sheerun/vim-polyglot'),
                 \g:Plugin.new('morhetz/gruvbox'),
-                \g:Plugin.new('chriskempson/base16-vim/'),
                 \g:Plugin.new('mhinz/vim-startify'),
                 \g:Plugin.new('nvim-lua/plenary.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope.nvim'),
@@ -36,7 +33,6 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('folke/trouble.nvim'),
                 \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
-                \g:Plugin.new('rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
                 \g:Plugin.new('ray-x/lsp_signature.nvim'),
                 \g:Plugin.new('L3MON4D3/LuaSnip'),
@@ -62,16 +58,21 @@ call g:Editor.add_layer(g:FileTypeLayer.new('markdown', '~/.config/nvim/lang/mar
 call g:Editor.add_layer(g:FileTypeLayer.new('java', '~/.config/nvim/lang/java.vim', [])) 
 call g:Editor.add_layer(g:FileTypeLayer.new('julia', '~/.config/nvim/lang/julia.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('wgsl', '~/.config/nvim/lang/wgsl.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))
-call g:Editor.add_layer(g:FileTypeLayer.new('javascript,typescript', '~/.config/nvim/lang/typescript.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('javascript,typescript,typescriptreact,typescript.tsx,vue',
+            \'~/.config/nvim/lang/typescript.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('vim', '~/.config/nvim/lang/vim.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('clojure', '~/.config/nvim/lang/clojure.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('svelte', '~/.config/nvim/lang/svelte.vim', [
                 \g:Plugin.new('leafOfTree/vim-svelte-plugin'),
             \]))
+
+au BufRead,BufNewFile *.wgsl set filetype=wgsl
+au BufRead,BufNewFile *.wgsl TSEnable highlight
 
 " Configure Editor
 call g:Editor.configure()

@@ -2,7 +2,7 @@ lua << EOF
 register_autocomplete_lsp('tsserver')
 require'lspconfig'.tsserver.setup{}
 require'lspconfig'.diagnosticls.setup{
-  filetypes = { "javascript", "typescript", "vue" },
+  filetypes = { "javascript", "typescript", "vue", "typescript.tsx", "typescriptreact" },
   init_options = {
     filetypes = {
       javascript = "eslint",
@@ -40,10 +40,6 @@ require'lspconfig'.diagnosticls.setup{
   }
 }
 EOF
-
-call RegisterKeybindingsLSP('typescript')
-call RegisterKeybindingsLSP('javascript')
-call RegisterKeybindingsLSP('vue')
 
 " Test Utilities
 if !exists('g:typescript_project_root')
@@ -106,6 +102,8 @@ function! lang#typescript#test_watch()
 endfunction
 
 function! RegisterKeybindingsTypescript(filetype)
+    call RegisterKeybindingsLSP(a:filetype)
+
     call vmenu#commands([
             \['t', 'Test - Impl', 'call lang#typescript#test_toggle()'],
         \], {
@@ -129,4 +127,7 @@ endfunction
 
 call RegisterKeybindingsTypescript('typescript')
 call RegisterKeybindingsTypescript('javascript')
+call RegisterKeybindingsTypescript('typescript.tsx')
+call RegisterKeybindingsTypescript('typescriptreact')
+call RegisterKeybindingsTypescript('tsx')
 call RegisterKeybindingsTypescript('vue')

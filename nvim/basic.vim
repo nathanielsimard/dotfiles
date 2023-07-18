@@ -317,9 +317,6 @@ endfunction
 " LATEX FIX
 let g:tex_flavor = "latex"
 
-" Git integration
-lua require('gitsigns').setup()
-
 " Git Keybindings
 call vmenu#commands([
             \['s', 'Status',  'Telescope git_status'],

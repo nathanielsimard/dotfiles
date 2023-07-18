@@ -1,3 +1,5 @@
+export HISTSIZE=25000
+
 if [ -f ~/.bash_local_config ]; then
     source ~/.bash_local_config
 fi
