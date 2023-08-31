@@ -1,3 +1,6 @@
+" Register mason
+lua require("mason").setup()
+
 " Utilities
 let g:autoformat_on_save = {}
 function! FormatFiletype()

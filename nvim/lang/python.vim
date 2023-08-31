@@ -1,17 +1,19 @@
 " Language Serveur Settings
+" register_autocomplete_lsp('pyright')
+" require'lspconfig'.pyright.setup{
+"     settings = {
+"         python = {
+"             analysis = {
+"                 useLibraryCodeForTypes = true,
+"                 typeCheckingMode = "off",
+"             }
+"         }
+"     }
+" }
+
 
 lua << EOF
-register_autocomplete_lsp('pyright')
-require'lspconfig'.pyright.setup{
-    settings = {
-        python = {
-            analysis = {
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = "off",
-            }
-        }
-    }
-}
+require'lspconfig'.pylyzer.setup{}
 require'lspconfig'.diagnosticls.setup{
     filetypes = { "python" },
     init_options = {

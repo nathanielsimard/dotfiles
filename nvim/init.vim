@@ -31,6 +31,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/statusline.vim', [
 " IDE Layer
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('folke/trouble.nvim'),
+                \g:Plugin.new('williamboman/mason.nvim'),
                 \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
