@@ -32,8 +32,9 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/statusline.vim', [
 call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('folke/trouble.nvim'),
                 \g:Plugin.new('williamboman/mason.nvim'),
-                \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
+                \g:Plugin.new('williamboman/mason-lspconfig.nvim'),
                 \g:Plugin.new('neovim/nvim-lspconfig'),
+                \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
                 \g:Plugin.new('ray-x/lsp_signature.nvim'),
                 \g:Plugin.new('L3MON4D3/LuaSnip'),
@@ -62,6 +63,7 @@ call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', 
 call g:Editor.add_layer(g:FileTypeLayer.new('wgsl', '~/.config/nvim/lang/wgsl.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('astro', '~/.config/nvim/lang/astro.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('javascript,typescript,typescriptreact,typescript.tsx,vue',

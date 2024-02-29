@@ -1,0 +1,1 @@
+call RegisterKeybindingsLSP('astro')

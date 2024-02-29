@@ -17,6 +17,15 @@ require'nvim-tree'.setup{
 }
 EOF
 
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = { "rust", "astro", "css", "typescript", "tsx" },
+    highlight = {
+        enable = true,
+    }
+}
+EOF
+
 " Indent Guide
 let g:indent_blankline_char = '┊'
 let g:indent_blankline_show_first_indent_level = v:false
