@@ -29,7 +29,7 @@ EOF
 function! RegisterKeybindingsLSP(filetype)
     imap <C-Space> <C-O>:lua vim.lsp.buf.completion()<CR>
     call vmenu#commands([
-                \['t', 'Toggle', 'TroubleToggle'],
+                \['t', 'Toggle', 'Trouble diagnostics toggle'],
                 \['s', 'Show', 'lua vim.diagnostic.open_float()'],
                 \['j', 'Next', 'lua vim.diagnostic.goto_next()'],
                 \['k', 'Prev', 'lua vim.diagnostic.goto_prev()'],
