@@ -63,6 +63,7 @@ call g:Editor.add_layer(g:FileTypeLayer.new('sh', '~/.config/nvim/lang/sh.vim', 
 call g:Editor.add_layer(g:FileTypeLayer.new('wgsl', '~/.config/nvim/lang/wgsl.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('python', '~/.config/nvim/lang/python.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('rust', '~/.config/nvim/lang/rust.vim', []))
+call g:Editor.add_layer(g:FileTypeLayer.new('toml', '~/.config/nvim/lang/toml.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('astro', '~/.config/nvim/lang/astro.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('tex', '~/.config/nvim/lang/tex.vim', []))
 call g:Editor.add_layer(g:FileTypeLayer.new('json', '~/.config/nvim/lang/json.vim', []))

@@ -1,6 +1,10 @@
 lua << EOF
 register_autocomplete_lsp('rust_analyzer')
-require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.rust_analyzer.setup{
+    diagnostic = {
+        enable = true;
+    }
+}
 EOF
 
 call RegisterKeybindingsLSP('rust')
