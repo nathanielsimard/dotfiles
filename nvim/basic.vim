@@ -54,106 +54,28 @@ set termguicolors
 set noshowmode
 set encoding=UTF-8
 
-function! NativeBackground()
-    augroup Background
-        autocmd!
-        autocmd ColorScheme * hi Normal ctermbg=none guibg=#181818
-        " autocmd ColorScheme * hi Normal ctermbg=none guibg=none
-    augroup END
-endfunction
-
-let g:gruvbox_italic = 1
-let g:gruvbox_bold = 1
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_contrast_light = 'medium'
-
-let g:colorscheme_dark='gruvbox'
-let g:colorscheme_light='base16-github'
+let g:colorscheme_dark='kanagawa-wave'
+let g:colorscheme_light='kanagawa-lotus'
 let g:colorscheme_current=g:colorscheme_dark
-
-let g:custom_color_red='#CC241D'
-let g:custom_color_yellow='#FABD2F'
-let g:custom_color_white='#D3D3D3'
-let g:custom_color_backgound_dark='#2D2D2D'
-let g:custom_color_backgound_white='#F5F5F5'
-
-function! s:highlight(group, background, forground)
-    execute "autocmd ColorScheme * hi ".a:group." guibg=".a:background." guifg=".a:forground
-endfunction
-
-function! s:highlight_background(group, background)
-    execute "autocmd ColorScheme * hi ".a:group." guibg=".a:background
-endfunction
-
-function! WhiteColor()
-    augroup Background
-        autocmd!
-        autocmd ColorScheme * hi Normal guibg=#D0D0D0
-    augroup END
-    augroup ModifiedColor
-        autocmd!
-        call s:highlight_background('VertSplit', g:custom_color_backgound_white)
-        call s:highlight_background('LineNr', g:custom_color_backgound_white)
-        call s:highlight_background('SignColumn', g:custom_color_backgound_white)
-        call s:highlight_background('CursorColumn', g:custom_color_backgound_white)
-        call s:highlight_background('CursorLine', g:custom_color_backgound_white)
-        call s:highlight_background('ColorColumn', g:custom_color_backgound_white)
-        call s:highlight_background('QuickFixLine', g:custom_color_backgound_white)
-        call s:highlight('CursorLineNr', g:custom_color_backgound_white, '#333333')
-        " Legacy
-        call s:highlight('LspDiagnosticsSignError', g:custom_color_backgound_white, g:custom_color_red)
-        call s:highlight('LspDiagnosticsSignWarning', g:custom_color_backgound_white, g:custom_color_yellow)
-        " New
-        call s:highlight('DiagnosticSignError', g:custom_color_backgound_white, g:custom_color_red)
-        call s:highlight('DiagnosticSignWarning', g:custom_color_backgound_white, g:custom_color_yellow)
-    augroup END
-endfunction
-
-function! BlackColor()
-    call NativeBackground()
-    augroup ModifiedColor
-        autocmd!
-        call s:highlight_background('VertSplit', g:custom_color_backgound_dark)
-        call s:highlight_background('LineNr', g:custom_color_backgound_dark)
-        call s:highlight_background('CursorLineNr', g:custom_color_backgound_dark)
-        call s:highlight_background('SignColumn', g:custom_color_backgound_dark)
-        call s:highlight_background('CursorColumn', g:custom_color_backgound_dark)
-        call s:highlight_background('CursorLine', g:custom_color_backgound_dark)
-        call s:highlight_background('ColorColumn', g:custom_color_backgound_dark)
-        call s:highlight_background('QuickFixLine', g:custom_color_backgound_dark)
-        " Legacy
-        call s:highlight('LspDiagnosticsSignError', '#2D2D2D', g:custom_color_red)
-        call s:highlight('LspDiagnosticsSignWarning', '#2D2D2D', g:custom_color_yellow)
-        call s:highlight('LspDiagnosticsSignInformation', '#2D2D2D', g:custom_color_white)
-        call s:highlight('LspDiagnosticsSignHint', '#2D2D2D', g:custom_color_white)
-        " New
-        call s:highlight('DiagnosticSignError', '#2D2D2D', g:custom_color_red)
-        call s:highlight('DiagnosticSignWarning', '#2D2D2D', g:custom_color_yellow)
-        call s:highlight('DiagnosticSignInformation', '#2D2D2D', g:custom_color_white)
-        call s:highlight('DiagnosticSignHint', '#2D2D2D', g:custom_color_white)
-    augroup END
-endfunction
 
 " Legacy
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
+
 " New
 sign define DiagnosticSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define DiagnosticSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define DiagnosticSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define DiagnosticSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
 
-call BlackColor()
 execute 'colorscheme '.g:colorscheme_current
 
 function! ToggleLightDarkTheme()
     if g:colorscheme_current ==# g:colorscheme_dark
-        call WhiteColor()
         let g:colorscheme_current  = g:colorscheme_light
     else
-        call BlackColor()
         let g:colorscheme_current  = g:colorscheme_dark
     endif
 

@@ -2,13 +2,13 @@ lua << EOF
 local colors = {
   blue   = '#80a0ff',
   cyan   = '#79dac8',
-  darkgrey  = '#2D2D2D',
+  darkgrey  = '#2a2a37',
   black  = '#141414',
-  lightgrey = '#504945',
+  lightgrey = '#1f1f28',
   white  = '#EBDBB2',
   red    = '#ff5189',
   green = '#68895D',
-  grey   = '#303030',
+  grey   = '#2a2a37',
 }
 
 local theme = {

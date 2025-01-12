@@ -16,6 +16,8 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('nathanielsimard/vmenu'),
                 \g:Plugin.new('editorconfig/editorconfig-vim'),
                 \g:Plugin.new('morhetz/gruvbox'),
+                \g:Plugin.new('catppuccin/nvim', { 'as': 'catppuccin' }),
+                \g:Plugin.new('rebelot/kanagawa.nvim'),
                 \g:Plugin.new('mhinz/vim-startify'),
                 \g:Plugin.new('nvim-lua/plenary.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope.nvim'),
