@@ -38,6 +38,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/ide.vim', [
                 \g:Plugin.new('neovim/nvim-lspconfig'),
                 \g:Plugin.new('lukas-reineke/indent-blankline.nvim'),
                 \g:Plugin.new('nvim-lua/popup.nvim'),
+                \g:Plugin.new('lewis6991/hover.nvim'),
                 \g:Plugin.new('ray-x/lsp_signature.nvim'),
                 \g:Plugin.new('L3MON4D3/LuaSnip'),
                 \g:Plugin.new('saadparwaiz1/cmp_luasnip'),

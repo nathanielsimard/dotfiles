@@ -1,5 +1,29 @@
 " Register mason
-lua require("mason").setup()
+lua require('mason').setup()
+
+" Register hover
+lua << EOF
+require('hover').config({
+  providers = {
+    'hover.providers.lsp',
+    'hover.providers.diagnostic',
+    'hover.providers.dap',
+    'hover.providers.man',
+    'hover.providers.dictionary',
+  },
+  preview_opts = {
+    border = 'single'
+  },
+  -- Whether the contents of a currently open hover window should be moved
+  -- to a :h preview-window when pressing the hover keymap.
+  preview_window = false,
+  title = true,
+  mouse_providers = {
+    'hover.providers.lsp',
+  },
+  mouse_delay = 1000
+})
+EOF
 
 " Utilities
 let g:autoformat_on_save = {}
@@ -39,7 +63,8 @@ function! RegisterKeybindingsLSP(filetype)
         \})
 
     call vmenu#commands([
-                \['d', 'Show Documentation', 'lua vim.lsp.buf.hover()']
+                \['d', 'Show Hover', "lua require('hover').open()"],
+                \['e', 'Enter Hover', "lua require('hover').enter()"],
         \], {
             \'parent': g:keybindings_documentation,
             \'filetype': a:filetype
