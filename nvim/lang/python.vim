@@ -13,8 +13,9 @@
 
 
 lua << EOF
-require'lspconfig'.pylyzer.setup{}
-require'lspconfig'.diagnosticls.setup{
+vim.lsp.config('pylyzer', {})
+vim.lsp.enable('pylyzer')
+vim.lsp.config('diagnosticls', {
     filetypes = { "python" },
     init_options = {
         filetypes = {
@@ -88,7 +89,8 @@ require'lspconfig'.diagnosticls.setup{
             }
         }
     }
-}
+})
+vim.lsp.enable('diagnosticls')
 EOF
 
 let g:autoformat_on_save['python'] = 0

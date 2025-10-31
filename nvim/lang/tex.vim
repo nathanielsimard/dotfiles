@@ -1,5 +1,6 @@
 " Language Serveur Settings
-lua require'lspconfig'.texlab.setup{}
+lua vim.lsp.config('texlab', {})
+lua vim.lsp.enable('texlab')
 call RegisterKeybindingsLSP('tex')
 
 " Fix linting issues

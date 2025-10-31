@@ -3,7 +3,8 @@ let g:latex_to_unicode_auto = 1
 let g:default_julia_version = '1.3'
 
 " Language Serveur Settings
-lua require'lspconfig'.julials.setup{}
+lua vim.lsp.config('julials', {})
+lua vim.lsp.enable('julials')
 call RegisterKeybindingsLSP('julia')
 
 " Other Settings

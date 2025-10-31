@@ -1,5 +1,6 @@
 " Language Serveur Settings
-lua require'lspconfig'.marksman.setup{}
+lua vim.lsp.config('marksman', {})
+lua vim.lsp.enable('marksman')
 call RegisterKeybindingsLSP('markdown')
 
 " Formatteur Settings

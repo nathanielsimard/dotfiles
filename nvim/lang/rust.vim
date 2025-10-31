@@ -1,10 +1,11 @@
 lua << EOF
 register_autocomplete_lsp('rust_analyzer')
-require'lspconfig'.rust_analyzer.setup{
+vim.lsp.config('rust_analyzer', {
     diagnostic = {
         enable = true;
     }
-}
+})
+vim.lsp.enable('rust_analyzer')
 EOF
 
 call RegisterKeybindingsLSP('rust')

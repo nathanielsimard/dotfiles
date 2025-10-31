@@ -1,5 +1,6 @@
 " Language Serveur Settings
 lua << EOF
-require'lspconfig'.bashls.setup {}
+vim.lsp.config('bashls', {})
+vim.lsp.enable('bashls')
 EOF
 call RegisterKeybindingsLSP('sh')

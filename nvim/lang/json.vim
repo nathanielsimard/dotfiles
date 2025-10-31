@@ -1,6 +1,6 @@
 " Language Serveur Settings
 lua << EOF
-require'lspconfig'.jsonls.setup {
+vim.lsp.config('jsonls', {
     commands = {
       Format = {
         function()
@@ -8,6 +8,7 @@ require'lspconfig'.jsonls.setup {
         end
       }
     }
-}
+})
+vim.lsp.enable('jsonls')
 EOF
 call RegisterKeybindingsLSP('json')

@@ -1,6 +1,7 @@
 lua << EOF
 register_autocomplete_lsp('taplo')
-require'lspconfig'.taplo.setup{}
+vim.lsp.config('taplo', {})
+vim.lsp.enable('taplo')
 EOF
 
 call RegisterKeybindingsLSP('toml')

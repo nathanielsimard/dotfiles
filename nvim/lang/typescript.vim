@@ -1,7 +1,9 @@
 lua << EOF
 register_autocomplete_lsp('ts_ls')
-require'lspconfig'.ts_ls.setup{}
-require'lspconfig'.diagnosticls.setup{
+vim.lsp.config('ts_ls', {})
+vim.lsp.enable('ts_ls')
+
+vim.lsp.config('diagnosticls', {
   filetypes = { "javascript", "typescript", "vue", "typescript.tsx", "typescriptreact" },
   init_options = {
     filetypes = {
@@ -38,7 +40,9 @@ require'lspconfig'.diagnosticls.setup{
       }
     }
   }
-}
+})
+vim.lsp.enable('diagnosticls')
+
 EOF
 
 " Test Utilities

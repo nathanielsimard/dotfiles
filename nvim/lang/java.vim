@@ -1,5 +1,6 @@
 call RegisterKeybindingsLSP('java')
-lua require'lspconfig'.jdtls.setup{}
+lua vim.lsp.config('jdtls', {})
+lua vim.lsp.enable('jdtls')
 
 " Test Utilities
 if !exists('g:java_project_root')
