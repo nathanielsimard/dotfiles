@@ -22,6 +22,7 @@ call g:Editor.add_layer(g:SimpleLayer.new('~/.config/nvim/basic.vim', [
                 \g:Plugin.new('nvim-lua/plenary.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope.nvim'),
                 \g:Plugin.new('nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }),
+                \g:Plugin.new('nvim-telescope/telescope-media-files.nvim'),
                 \g:Plugin.new('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}),
             \]))
 
